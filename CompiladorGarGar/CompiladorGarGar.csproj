@@ -1,0 +1,1566 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{EF449AF2-CD1C-418C-BC22-4BC5AD269F19}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CompiladorGargar</RootNamespace>
+    <AssemblyName>Compilador</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <TargetFrameworkProfile />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CommandLine">
+      <HintPath>..\DLLs\CommandLine.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Auxiliares\AF\AFD.cs" />
+    <Compile Include="Auxiliares\AF\Estado.cs" />
+    <Compile Include="Auxiliares\AF\FuncionTransicion.cs" />
+    <Compile Include="EjecucionManager.cs" />
+    <Compile Include="Auxiliares\EnumUtils.cs" />
+    <Compile Include="Compilador.cs" />
+    <Compile Include="ErrorCompilacionException.cs" />
+    <Compile Include="ErrorCompiladorEventArgs.cs" />
+    <Compile Include="GeneracionCodigoHelpers.cs" />
+    <Compile Include="GlobalesCompilador.cs" />
+    <Compile Include="Identador.cs" />
+    <Compile Include="Lexicografico\AnalizadorLexicografico.cs" />
+    <Compile Include="Lexicografico\CharBuffer.cs" />
+    <Compile Include="Lexicografico\ComponenteLexico.cs" />
+    <Compile Include="Lexicografico\AnalizadorLexicograficoConArchEnMemoriaYComentarios.cs" />
+    <Compile Include="Lexicografico\ErrorLexicoException.cs" />
+    <Compile Include="Log.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoVariablesIni.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoConstantesIni.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoReferencia.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoMostrarOp.cs" />
+    <Compile Include="Sintactico\ErroresManager\Errores\MensajeErrorFactory.cs" />
+    <Compile Include="Sintactico\ErroresManager\Errores\MensajeError.cs" />
+    <Compile Include="Sintactico\TerminalesHelpers.cs" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="app.config" />
+    <None Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\ginstall.exe.manifest">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\patch.exe.manifest">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\a52.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\a52.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\activex.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\activex.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\archresultadomanager.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\archresultadomanager.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\ascii85.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\ascii85.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\avl_tree.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\avl_tree.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\base64.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\base64.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\blowfish.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\blowfish.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\bufstream.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\bufstream.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\buildfppkg.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\buildfppkg.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\buildrtl.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\buildrtl.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\cachecls.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\cachecls.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\charset.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\charset.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\classes.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\classes.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\cmem.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\cmem.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\comconst.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\comconst.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\commctrl.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\commctrl.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\commdlg.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\commdlg.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\comobj.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\comobj.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\comserv.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\comserv.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\contnrs.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\contnrs.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\convutils.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\convutils.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\cpu.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\cpu.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\crt.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\crt.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\ctypes.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\ctypes.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\custapp.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\custapp.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\dateutils.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\dateutils.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\dom.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\dom.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\dom_html.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\dom_html.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\dos.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\dos.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\dwmapi.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\dwmapi.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\dynlibs.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\dynlibs.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\eventlog.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\eventlog.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\exeinfo.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\exeinfo.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\fastcgi.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\fastcgi.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\fclel.res">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\fftw_s.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\fftw_s.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\fgl.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\fgl.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\fileinfo.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\fileinfo.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\flatsb.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\flatsb.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\fmtbcd.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\fmtbcd.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\fpexprpars.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\fpexprpars.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\fpintres.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\fpintres.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\fpmkunit.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\fpmkunit.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\fprepos.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\fprepos.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\fptemplate.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\fptemplate.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\fptimer.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\fptimer.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\fpxmlrep.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\fpxmlrep.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\gdbcon.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\gdbcon.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\gdbint.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\gdbint.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\getopts.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\getopts.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\gettext.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\gettext.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\heaptrc.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\heaptrc.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\htmldefs.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\htmldefs.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\htmlelements.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\htmlelements.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\htmlhelp.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\htmlhelp.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\htmlwriter.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\htmlwriter.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\htmwrite.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\htmwrite.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\idea.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\idea.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\imagehlp.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\imagehlp.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\inicol.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\inicol.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\inifiles.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\inifiles.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\initc.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\initc.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\iostream.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\iostream.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\keyboard.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\keyboard.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\lexlib.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\lexlib.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\libimpa52.a">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\libimpactivex.a">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\libimpcmem.a">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\libimpcommctrl.a">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\libimpcommdlg.a">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\libimpdos.a">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\libimpfftw_s.a">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\libimpfpintres.a">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\libimpgdbint.a">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\libimpheaptrc.a">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\libimphtmlhelp.a">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\libimpimagehlp.a">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\libimpinitc.a">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\libimpmmsystem.a">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\libimppcap.a">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\libimpsharemem.a">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\libimpshellapi.a">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\libimpshfolder.a">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\libimpshlobj.a">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\libimpsignals.a">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\libimpsysinitcyg.a">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\libimpsysinitgprof.a">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\libimpsysinitpas.a">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\libimpsystem.a">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\libimpsysutils.a">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\libimptcl80.a">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\libimpvarutils.a">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\libimpwindows.a">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\libimpwininet.a">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\libimpwinsock.a">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\libimpwinsock2.a">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\libimpxmliconv_windows.a">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\libtar.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\libtar.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\lineinfo.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\lineinfo.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\lnfodwrf.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\lnfodwrf.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\macpas.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\macpas.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\maskutils.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\maskutils.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\math.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\math.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\matrix.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\matrix.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\messages.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\messages.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\mmsystem.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\mmsystem.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\mmx.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\mmx.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\mouse.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\mouse.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\multimon.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\multimon.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\objects.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\objects.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\objpas.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\objpas.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\ole2.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\ole2.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\oleserver.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\oleserver.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\pcap.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\pcap.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\pkgcommands.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\pkgcommands.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\pkgdownload.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\pkgdownload.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\pkgfpmake.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\pkgfpmake.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\pkgglobals.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\pkgglobals.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\pkghandler.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\pkghandler.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\pkglnet.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\pkglnet.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\pkgmessages.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\pkgmessages.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\pkgmkconv.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\pkgmkconv.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\pkgoptions.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\pkgoptions.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\pkgrepos.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\pkgrepos.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\pkgwget.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\pkgwget.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\pooledmm.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\pooledmm.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\printer.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\printer.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\pxlib.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\pxlib.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\richedit.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\richedit.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\rsvg.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\rsvg.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\rtfpars.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\rtfpars.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\rtlconsts.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\rtlconsts.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\rttiutils.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\rttiutils.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\sax.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\sax.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\sax_html.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\sax_html.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\sax_xml.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\sax_xml.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\sharemem.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\sharemem.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\shellapi.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\shellapi.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\shfolder.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\shfolder.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\shlobj.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\shlobj.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\signals.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\signals.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\sockets.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\sockets.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\stdconvs.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\stdconvs.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\streamcoll.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\streamcoll.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\streamex.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\streamex.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\streamio.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\streamio.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\strings.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\strings.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\strutils.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\strutils.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\syncobjs.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\syncobjs.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\sysconst.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\sysconst.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\sysinitcyg.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\sysinitcyg.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\sysinitgprof.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\sysinitgprof.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\sysinitpas.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\sysinitpas.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\system.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\system.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\sysutils.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\sysutils.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\tcl80.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\tcl80.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\types.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\types.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\typinfo.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\typinfo.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\ucomplex.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\ucomplex.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\uriparser.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\uriparser.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\uxtheme.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\uxtheme.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\variants.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\variants.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\varutils.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\varutils.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\video.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\video.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\wformat.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\wformat.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\whtml.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\whtml.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\windows.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\windows.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\winevent.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\winevent.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\wininet.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\wininet.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\winsock.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\winsock.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\winsock2.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\winsock2.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\winsysut.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\winsysut.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\winutils.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\winutils.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\winver.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\winver.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\wtex.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\wtex.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\xhtml.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\xhtml.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\xmlcfg.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\xmlcfg.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\xmlconf.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\xmlconf.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\xmliconv_windows.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\xmliconv_windows.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\xmlread.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\xmlread.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\xmlstreaming.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\xmlstreaming.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\xmlutils.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\xmlutils.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\xmlwrite.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\xmlwrite.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\xpath.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\xpath.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\yacclib.o">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\extra\yacclib.ppu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\msg\errorct.msg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\msg\errord.msg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\msg\errorda.msg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\msg\errordu.msg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\msg\errore.msg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\msg\errores.msg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\msg\errorf.msg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\msg\errorfi.msg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\msg\errorhe.msg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\msg\errorheu.msg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\msg\errorid.msg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\msg\errorn.msg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\msg\errorpl.msg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\msg\errorpli.msg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\msg\errorptd.msg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\msg\errorptw.msg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\msg\errorr.msg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\msg\errorrw.msg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\msg\errorues.msg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="Configuracion\validacionesSemanticasCorrectas.gar" />
+    <None Include="Configuracion\testEjecucion.gar" />
+    <None Include="Configuracion\validacionesSemanticasIncorrectas.gar" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Resultado\Auxiliares\PasoAnalizadorSintactico.cs" />
+    <Compile Include="Resultado\Auxiliares\PasoDebugTiempos.cs" />
+    <Compile Include="Resultado\Auxiliares\PasoCompilacion.cs" />
+    <Compile Include="Resultado\Auxiliares\ResultadoCompilacionPascal.cs" />
+    <Compile Include="Resultado\ResultadoCompilacion.cs" />
+    <Compile Include="Semantico\Arbol\ArbolSemantico.cs" />
+    <Compile Include="Semantico\Arbol\Interfases\ITipificable.cs" />
+    <Compile Include="Semantico\Arbol\Interfases\IValorizable.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\Auxiliares\Firma.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\Auxiliares\Variable.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoOpBooleanas.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoValorConst.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoMaxArregloDec.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoExprBooleanas.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoBool.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoDeclaracionesIni.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoExprBoolExtra.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoIdProc.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoTexto.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoTipoDatoConArreglo.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoArbolSemantico.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoAsignacion.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoBloque.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoBloqueMientras.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoBloqueSi.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoBloqueSiCont.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoBlq.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoC.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoConstantes.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoDeclaraciones.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoEx.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoExp.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoExpr.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoExprBool.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoExprProc.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoExprProced.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoF.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoFir.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoFirma.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoFS.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoId.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoIdAsign.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoIdAsignacion.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoIdDeclaracion.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoIdent.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoIds.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoIDSolo.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoL.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoLectura.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoLinea.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoLite.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoLiterales.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoLlamadaProc.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoMult.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoMults.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoNomProc.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoNumero.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoOpMultDiv.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoOpSumRes.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoPasaManos.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoProc.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoProced.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoProcedimientos.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoProcs.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoStart.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoT.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoTerminal.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoTipoDato.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoV.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoVariables.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoVis.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoVisualizar.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoY.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoYDec.cs" />
+    <Compile Include="Semantico\ErrorSemanticoException.cs" />
+    <Compile Include="Semantico\PilaAtributos\NodoPilaProduccionesAtributos.cs" />
+    <Compile Include="Semantico\PilaAtributos\PilaProduccionesAtributos.cs" />
+    <Compile Include="Semantico\RecorredorArbol\ColaIndices.cs" />
+    <Compile Include="Semantico\RecorredorArbol\NodoPilaRecorredor.cs" />
+    <Compile Include="Semantico\RecorredorArbol\PilaRecorredor.cs" />
+    <Compile Include="Semantico\TablaDeSimbolos\FirmaProc.cs" />
+    <Compile Include="Semantico\TablaDeSimbolos\NodoTablaSimbolos.cs" />
+    <Compile Include="Semantico\TablaDeSimbolos\TablaSimbolos.cs" />
+    <Compile Include="Semantico\TablaDeSimbolos\NodoTipoArreglo.cs" />
+    <Compile Include="Settings.cs" />
+    <Compile Include="Sintactico\AnalizadorSintactico.cs" />
+    <Compile Include="Sintactico\CadenaEntrada.cs" />
+    <Compile Include="Sintactico\ErroresManager\AnalizadorErroresSintacticos.cs" />
+    <Compile Include="Sintactico\ErroresManager\AnalizadorErroresException.cs" />
+    <Compile Include="Sintactico\ErroresManager\TipoFactory.cs" />
+    <Compile Include="Sintactico\ErroresManager\Tipos\Asignacion.cs" />
+    <Compile Include="Sintactico\ErroresManager\Tipos\Si.cs" />
+    <Compile Include="Sintactico\ErroresManager\Tipos\DeclaracionFuncion.cs" />
+    <Compile Include="Sintactico\ErroresManager\Tipos\DeclaracionProc.cs" />
+    <Compile Include="Sintactico\ErroresManager\Tipos\Mostrar.cs" />
+    <Compile Include="Sintactico\ErroresManager\Tipos\FinFuncion.cs" />
+    <Compile Include="Sintactico\ErroresManager\Tipos\DeclaracionVariable.cs" />
+    <Compile Include="Sintactico\ErroresManager\Tipos\DeclaracionConstante.cs" />
+    <Compile Include="Sintactico\ErroresManager\Tipos\FinProc.cs" />
+    <Compile Include="Sintactico\ErroresManager\Tipos\FinSi.cs" />
+    <Compile Include="Sintactico\ErroresManager\Tipos\FinMientras.cs" />
+    <Compile Include="Sintactico\ErroresManager\Tipos\Leer.cs" />
+    <Compile Include="Sintactico\ErroresManager\Tipos\LlamadoProc.cs" />
+    <Compile Include="Sintactico\ErroresManager\Tipos\Mientras.cs" />
+    <Compile Include="Sintactico\ErroresManager\Tipos\TipoBase.cs" />
+    <Compile Include="Sintactico\ErroresManager\Validacion.cs" />
+    <Compile Include="Sintactico\ErroresManager\ValidacionesFactory.cs" />
+    <Compile Include="Sintactico\ErroresManager\ValidacionException.cs" />
+    <Compile Include="Sintactico\ErrorSintacticoException.cs" />
+    <Compile Include="Sintactico\EstadoSintactico.cs" />
+    <Compile Include="Sintactico\Gramatica\ElementoGramatica.cs" />
+    <Compile Include="Sintactico\Gramatica\Gramatica.cs" />
+    <Compile Include="Sintactico\Gramatica\NoTerminal.cs" />
+    <Compile Include="Sintactico\Gramatica\Produccion.cs" />
+    <Compile Include="Sintactico\Gramatica\Terminal.cs" />
+    <Compile Include="Sintactico\PilaGramatica.cs" />
+    <Compile Include="Sintactico\TablaGramatica\NodoTablaAnalisisGramatica.cs" />
+    <Compile Include="Sintactico\TablaGramatica\TablaAnalisisGramatica.cs" />
+    <Compile Include="Sintactico\TablaPrimerosSiguientes\NodoTablaPrimeros.cs" />
+    <Compile Include="Sintactico\TablaPrimerosSiguientes\RetornoPrimeros.cs" />
+    <Compile Include="Sintactico\TablaPrimerosSiguientes\TablaPrimeros.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Configuracion\AFD_GARGAR.txt" />
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\ar.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\as.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\bin2obj.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\chmcmd.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\chmls.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\cmp.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\cp.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\cpp.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\cygiconv-2.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\cygncurses-8.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\cygwin1.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\data2inc.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\delp.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\diff.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\dlltool.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\fp32.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\fpc.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\fpclasschart.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\fpcmake.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\fpcmkcfg.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\fpcres.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\fpcsubst.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\fpdoc.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\fpmc.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\fppkg.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\fprcp.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\gcc.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\gdate.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\gecho.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\ginstall.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\gmkdir.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\GoRC.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\grep.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\h2pas.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\h2paspp.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\ld.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\make.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\makeskel.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\mkarmins.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\mkx86ins.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\mv.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\objdump.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\patch.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\plex.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\postw32.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\ppc386.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\ppdep.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\ppudump.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\ppufiles.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\ppumove.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\ptop.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\pwd.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\pyacc.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\rm.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\rmcvsdir.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\rstconv.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\strip.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\unblockchm.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\unitdiff.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\unzip.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\upx.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\windres.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\windres.h">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\yylex.cod">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\yyparse.cod">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\zip.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\Gramatica.xml">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Utilidades\Utilidades.csproj">
+      <Project>{e49532c0-201d-45c9-a5b5-5b7589fd4123}</Project>
+      <Name>Utilidades</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,817 @@
+<Gramatica>
+	<!--red-->
+	<NoTerminales>
+		<NoTerminal>START</NoTerminal>
+		<NoTerminal>DECLARACIONESINI</NoTerminal>
+		<NoTerminal>CONSTANTESINI</NoTerminal>
+		<NoTerminal>VARIABLESINI</NoTerminal>
+		<NoTerminal>DECLARACIONES</NoTerminal>
+		<NoTerminal>PROCEDIMIENTOS</NoTerminal>
+		<NoTerminal>CONSTANTES</NoTerminal>
+		<NoTerminal>VARIABLES</NoTerminal>
+		<NoTerminal>C</NoTerminal>
+		<NoTerminal>TIPODATO</NoTerminal>
+		<NoTerminal>NUMERO</NoTerminal>		
+		<NoTerminal>V</NoTerminal>
+		<NoTerminal>IDENT</NoTerminal>
+		<NoTerminal>ID</NoTerminal>
+		<NoTerminal>IDS</NoTerminal>		
+		<NoTerminal>PROCS</NoTerminal>
+		<NoTerminal>PROCED</NoTerminal>
+		<NoTerminal>PROC</NoTerminal>
+		<NoTerminal>FIRMA</NoTerminal>		
+		<NoTerminal>BLOQUE</NoTerminal>
+		<NoTerminal>EXPR</NoTerminal>
+		<NoTerminal>FIR</NoTerminal>
+		<NoTerminal>F</NoTerminal>
+		<NoTerminal>FS</NoTerminal>		
+		<NoTerminal>LINEA</NoTerminal>		
+		<NoTerminal>BLQ</NoTerminal>		
+		<NoTerminal>ASIGNACION</NoTerminal>		
+		<NoTerminal>LLAMADAPROC</NoTerminal>
+		<NoTerminal>EXPRPROCED</NoTerminal>
+		<NoTerminal>EXPRPROC</NoTerminal>
+		<NoTerminal>LECTURA</NoTerminal>		
+		<NoTerminal>VISUALIZAR</NoTerminal>		
+		<NoTerminal>BLOQUEMIENTRAS</NoTerminal>		
+		<NoTerminal>BLOQUESI</NoTerminal>
+		<NoTerminal>BLOQUESICONT</NoTerminal>
+		<NoTerminal>VIS</NoTerminal>		
+		<NoTerminal>LITERALES</NoTerminal>		
+		<NoTerminal>LITE</NoTerminal>
+		<NoTerminal>L</NoTerminal>
+		<NoTerminal>EXPRBOOL</NoTerminal>	
+		<NoTerminal>EXPRBOOLEXTRA</NoTerminal>
+		<NoTerminal>EXPRBOOLEANAS</NoTerminal>	
+		<NoTerminal>MULTS</NoTerminal>		
+		<NoTerminal>EXP</NoTerminal>
+		<NoTerminal>OPSUMRES</NoTerminal>		
+		<NoTerminal>MULT</NoTerminal>		
+		<NoTerminal>OPMULTDIV</NoTerminal>		
+		<NoTerminal>T</NoTerminal>		
+		<NoTerminal>Y</NoTerminal>
+		<NoTerminal>EX</NoTerminal>
+		<NoTerminal>IDASIGNACION</NoTerminal>
+		<NoTerminal>IDASIGN</NoTerminal>
+		<NoTerminal>IDDECLARACION</NoTerminal>	
+		<NoTerminal>IDPROC</NoTerminal>	
+		<NoTerminal>TIPODATOCONARREGLO</NoTerminal>	
+			
+		<NoTerminal>TEXTO</NoTerminal>
+		<NoTerminal>BOOL</NoTerminal>
+		<NoTerminal>MAXARREGLODEC</NoTerminal>
+		<NoTerminal>VALORCONST</NoTerminal>
+		<NoTerminal>OPBOOLEANAS</NoTerminal>
+		
+		<NoTerminal>MOSTRAROP</NoTerminal>
+		
+		<NoTerminal>IDSOLO</NoTerminal>
+		
+		
+	</NoTerminales>
+	
+	
+	<Producciones>
+		<Produccion>
+			<Izq>START</Izq>
+			<Ders>
+				<Der>
+					<Expresion>DECLARACIONESINI PROCEDIMIENTOS</Expresion>
+				</Der>
+			</Ders>
+		</Produccion>
+		<!---->
+		<Produccion>
+			<Izq>DECLARACIONESINI</Izq>
+			<Ders>
+				<Der>
+					<Expresion>CONSTANTESINI VARIABLESINI</Expresion>
+				</Der>
+				<Der>
+					<Expresion>lambda</Expresion>
+				</Der>
+			</Ders>
+		</Produccion>
+		<!---->
+		<Produccion>
+			<Izq>CONSTANTESINI</Izq>
+			<Ders>
+				<Der>
+					<Expresion>constantes CONSTANTES</Expresion>
+				</Der>
+				<Der>
+					<Expresion>lambda</Expresion>
+				</Der>
+			</Ders>
+		</Produccion>
+		<!---->
+		<Produccion>
+			<Izq>VARIABLESINI</Izq>
+			<Ders>
+				<Der>
+					<Expresion>variables VARIABLES</Expresion>
+				</Der>
+				<Der>
+					<Expresion>lambda</Expresion>
+				</Der>
+			</Ders>
+		</Produccion>
+		<!---->
+		<Produccion>
+			<Izq>DECLARACIONES</Izq>
+			<Ders>
+				<Der>
+					<Expresion>VARIABLES</Expresion>
+				</Der>
+			</Ders>
+		</Produccion>	
+		<Produccion>
+			<Izq>CONSTANTES</Izq>
+			<Ders>
+				<Der>
+					<Expresion>var V ; CONSTANTES</Expresion>
+	
+				</Der>
+				<Der>
+					<Expresion>const C ; CONSTANTES</Expresion>
+					
+				</Der>
+				<Der>
+					<Expresion>lambda</Expresion>
+				</Der>
+			</Ders>
+		</Produccion>
+
+		
+		<Produccion>
+			<Izq>C</Izq>
+			<Ders>
+				<Der>
+					<Expresion>id : TIPODATO = VALORCONST</Expresion>
+	
+				</Der>
+			</Ders>
+		</Produccion>
+		<!---->
+		
+		<Produccion>
+			<Izq>VARIABLES</Izq>
+			<Ders>
+				<Der>
+					<Expresion>var V ; VARIABLES</Expresion>
+	
+				</Der>
+				<Der>
+					<Expresion>const C ; VARIABLES</Expresion>
+					
+				</Der>
+				<Der>
+					<Expresion>lambda</Expresion>
+				</Der>
+			</Ders>
+		</Produccion>		
+		
+		<Produccion>
+			<Izq>V</Izq>
+			<Ders>
+				<Der>
+					<Expresion>IDENT : TIPODATOCONARREGLO</Expresion>
+				</Der>
+			</Ders>
+		</Produccion>
+		<Produccion>
+			<Izq>IDENT</Izq>
+			<Ders>
+				<Der>
+					<Expresion>IDDECLARACION IDS</Expresion>
+				</Der>
+			</Ders>
+		</Produccion>
+		<Produccion>
+			<Izq>IDS</Izq>
+			<Ders>
+				<Der>
+					<Expresion>, IDDECLARACION IDS</Expresion>
+				</Der>
+				<Der>
+					<Expresion>lambda</Expresion>
+				</Der>
+			</Ders>
+		</Produccion>
+		<Produccion>
+			<Izq>IDDECLARACION</Izq>
+			<Ders>
+				<Der>
+					<Expresion>id</Expresion>
+				</Der>
+			</Ders>
+		</Produccion>	
+	
+		<Produccion>
+			<Izq>TIPODATOCONARREGLO</Izq>
+			<Ders>
+				<Der>
+					<Expresion>TIPODATO</Expresion>
+				</Der>
+				<Der>
+					<Expresion>arreglo [ MAXARREGLODEC ] de TIPODATO</Expresion>
+				</Der>			
+			</Ders>
+		</Produccion>		
+		
+		<Produccion>
+			<Izq>MAXARREGLODEC</Izq>
+			<Ders>
+				<Der>
+					<Expresion>id</Expresion>
+				</Der>
+				<Der>
+					<Expresion>int</Expresion>
+				</Der>
+				<Der>
+					<Expresion>literal</Expresion>
+				</Der>
+				<Der>
+					<Expresion>verdadero</Expresion>
+				</Der>
+				<Der>
+					<Expresion>falso</Expresion>
+				</Der>
+			</Ders>
+		</Produccion>				
+		<Produccion>
+			<Izq>TIPODATO</Izq>
+			<Ders>
+				<Der>
+					<Expresion>texto</Expresion>
+				</Der>
+				<Der>
+					<Expresion>numero</Expresion>
+				</Der>
+				<Der>
+					<Expresion>booleano</Expresion>
+				</Der>				
+			</Ders>
+		</Produccion>
+		<Produccion>
+			<Izq>NUMERO</Izq>
+			<Ders>
+				<Der>
+					<Expresion>int</Expresion>
+				</Der>				
+			</Ders>
+		</Produccion>
+		<Produccion>
+			<Izq>VALORCONST</Izq>
+			<Ders>
+				<Der>
+					<Expresion>NUMERO</Expresion>
+				</Der>		
+				<Der>
+					<Expresion>TEXTO</Expresion>
+				</Der>	
+				<Der>
+					<Expresion>BOOL</Expresion>
+				</Der>					
+			</Ders>
+		</Produccion>
+		<!---->
+		<Produccion>
+			<Izq>PROCEDIMIENTOS</Izq>
+			<Ders>
+				<Der>
+					<Expresion>PROCS PROCED</Expresion>
+				</Der>
+			</Ders>
+		</Produccion>
+		
+		<Produccion>
+			<Izq>PROCED</Izq>
+			<Ders>
+				<Der>
+					<Expresion>PROCS PROCED</Expresion>
+				</Der>
+				<Der>
+					<Expresion>lambda</Expresion>
+				</Der>
+			</Ders>
+		</Produccion>
+		<Produccion>
+			<Izq>PROCS</Izq>
+			<Ders>
+				<Der>
+					<Expresion>PROC</Expresion>
+				</Der>
+				<Der>
+					<Expresion>lambda</Expresion>
+				</Der>
+			</Ders>
+		</Produccion>
+		<Produccion>
+			<Izq>PROC</Izq>
+			<Ders>
+				<Der>
+					<Expresion>procedimiento IDPROC ( FIRMA ) DECLARACIONES comenzar BLOQUE finproc ;</Expresion>
+				</Der>
+				<Der>
+					<Expresion>funcion IDPROC ( FIRMA ) : TIPODATO DECLARACIONES comenzar BLOQUE finfunc EXPRBOOLEANAS ;</Expresion>
+				</Der>
+			</Ders>
+		</Produccion>
+		<Produccion>
+			<Izq>IDPROC</Izq>
+			<Ders>				
+				<Der>
+					<Expresion>principal</Expresion>
+				</Der>
+				<Der>
+					<Expresion>id</Expresion>
+				</Der>
+			</Ders>
+		</Produccion>
+
+		
+		<!---->
+		<Produccion>
+			<Izq>FIRMA</Izq>
+			<Ders>
+				<Der>
+					<Expresion>FIR</Expresion>
+				</Der>
+				<Der>
+					<Expresion>lambda</Expresion>
+				</Der>
+			</Ders>
+		</Produccion>
+		<Produccion>
+			<Izq>FIR</Izq>
+			<Ders>
+				<Der>
+					<Expresion>F FS</Expresion>
+				</Der>
+			</Ders>
+		</Produccion>
+		<Produccion>
+			<Izq>FS</Izq>
+			<Ders>
+				<Der>
+					<Expresion>, F FS</Expresion>
+				</Der>
+				<Der>
+					<Expresion>lambda</Expresion>
+				</Der>
+			</Ders>
+		</Produccion>
+		<Produccion>
+			<Izq>F</Izq>
+			<Ders>
+				<Der>
+					<Expresion>ref IDSOLO : TIPODATOCONARREGLO</Expresion>
+				</Der>
+				<Der>
+					<Expresion>id : TIPODATOCONARREGLO</Expresion>
+				</Der>
+			</Ders>
+		</Produccion>
+
+		<Produccion>
+			<Izq>IDSOLO</Izq>
+			<Ders>
+				<Der>
+					<Expresion>id</Expresion>
+				</Der>				
+			</Ders>
+		</Produccion>
+		
+		
+		
+		<!---->
+		<Produccion>
+			<Izq>BLOQUE</Izq>
+			<Ders>
+				<Der>
+					<Expresion>LINEA BLQ</Expresion>
+				</Der>
+				<Der>
+					<Expresion>lambda</Expresion>
+				</Der>
+			</Ders>
+		</Produccion>
+		<Produccion>
+			<Izq>BLQ</Izq>
+			<Ders>
+				<Der>
+					<Expresion>LINEA BLQ</Expresion>
+				</Der>
+				<Der>
+					<Expresion>lambda</Expresion>
+				</Der>
+			</Ders>
+		</Produccion>
+		<!---->
+		<Produccion>
+			<Izq>LINEA</Izq>
+			<Ders>
+				<Der>
+					<Expresion>ASIGNACION</Expresion>
+				</Der>
+				<Der>
+					<Expresion>LLAMADAPROC</Expresion>
+				</Der>
+				<Der>
+					<Expresion>LECTURA</Expresion>
+				</Der>
+				<Der>
+					<Expresion>VISUALIZAR</Expresion>
+				</Der>
+				<Der>
+					<Expresion>BLOQUEMIENTRAS</Expresion>
+				</Der>
+				<Der>
+					<Expresion>BLOQUESI</Expresion>
+				</Der>
+			</Ders>
+		</Produccion>
+		<!---->
+		<Produccion>
+			<Izq>ASIGNACION</Izq>
+			<Ders>
+				<Der>
+					<Expresion>IDASIGNACION = EXPRBOOLEANAS ;</Expresion>
+				</Der>
+			</Ders>
+		</Produccion>
+		<Produccion>
+			<Izq>IDASIGNACION</Izq>
+			<Ders>
+				<Der>
+					<Expresion>id IDASIGN</Expresion>
+				</Der>
+			</Ders>
+		</Produccion>
+		<Produccion>
+			<Izq>IDASIGN</Izq>
+			<Ders>
+				<Der>
+					<Expresion>[ EXPRBOOLEANAS ]</Expresion>
+				</Der>
+				<Der>
+					<Expresion>lambda</Expresion>
+				</Der>
+			</Ders>
+		</Produccion>
+		<!---->
+		<Produccion>
+			<Izq>LLAMADAPROC</Izq>
+			<Ders>
+				<Der>
+					<Expresion>llamar IDPROC ( EXPRPROCED ) ;</Expresion>
+				</Der>
+			</Ders>
+		</Produccion>
+		<Produccion>
+			<Izq>EXPRPROCED</Izq>
+			<Ders>
+				<Der>
+					<Expresion>EXPRBOOLEANAS EXPRPROC</Expresion>
+				</Der>
+				<Der>
+					<Expresion>lambda</Expresion>
+				</Der>
+			</Ders>
+		</Produccion>
+		<Produccion>
+			<Izq>EXPRPROC</Izq>
+			<Ders>
+				<Der>
+					<Expresion>, EXPRBOOLEANAS EXPRPROC</Expresion>
+				</Der>
+				<Der>
+					<Expresion>lambda</Expresion>
+				</Der>
+			</Ders>
+		</Produccion>
+		<!---->
+		<Produccion>
+			<Izq>LECTURA</Izq>
+			<Ders>
+				<Der>
+					<Expresion>leer IDASIGNACION ;</Expresion>
+				</Der>
+			</Ders>
+		</Produccion>			
+		<!---->
+		<Produccion>
+			<Izq>VISUALIZAR</Izq>
+			<Ders>
+				<Der>
+					<Expresion>MOSTRAROP ( LITERALES ) ;</Expresion>
+				</Der>
+			</Ders>
+		</Produccion>	
+
+		<Produccion>
+			<Izq>MOSTRAROP</Izq>
+			<Ders>
+				<Der>
+					<Expresion>mostrar</Expresion>
+				</Der>
+				<Der>
+					<Expresion>mostrarp</Expresion>
+				</Der>
+			</Ders>
+		</Produccion>	
+
+		<Produccion>
+			<Izq>LITERALES</Izq>
+			<Ders>
+				<Der>
+					<Expresion>L LITE</Expresion>
+				</Der>
+			</Ders>
+		</Produccion>
+		<Produccion>
+			<Izq>LITE</Izq>
+			<Ders>
+				<Der>
+					<Expresion>, L LITE</Expresion>
+				</Der>
+				<Der>
+					<Expresion>lambda</Expresion>
+				</Der>
+			</Ders>
+		</Produccion>
+		<Produccion>
+			<Izq>L</Izq>
+			<Ders>
+				<Der>
+					<Expresion>EXPRBOOLEANAS</Expresion>
+				</Der>
+			</Ders>
+		</Produccion>
+		<!---->
+		<Produccion>
+			<Izq>BLOQUEMIENTRAS</Izq>
+			<Ders>
+				<Der>
+					<Expresion>mientras ( EXPRBOOLEANAS ) hacer BLOQUE finmientras ;</Expresion>
+				</Der>
+			</Ders>
+		</Produccion>
+		<!---->
+		<Produccion>
+			<Izq>BLOQUESI</Izq>
+			<Ders>
+				<Der>
+					<Expresion>si ( EXPRBOOLEANAS ) entonces BLOQUE BLOQUESICONT</Expresion>
+				</Der>
+			</Ders>
+		</Produccion>
+		<Produccion>
+			<Izq>BLOQUESICONT</Izq>
+			<Ders>
+				<Der>
+					<Expresion>finsi ;</Expresion>
+				</Der>
+				<Der>
+					<Expresion>sino BLOQUE finsi ;</Expresion>
+				</Der>
+			</Ders>
+		</Produccion>
+		<!---->
+		
+		
+		
+		<Produccion>
+			<Izq>EXPRBOOLEANAS</Izq>
+			<Ders>
+				<Der>
+					<Expresion>EXPRBOOL EXPRBOOLEXTRA</Expresion>
+				</Der>				
+			</Ders>
+		</Produccion>
+		
+		<Produccion>
+			<Izq>EXPRBOOLEXTRA</Izq>
+			<Ders>
+				<Der>
+					<Expresion>OPBOOLEANAS EXPRBOOL EXPRBOOLEXTRA</Expresion>
+				</Der>
+				<Der>
+					<Expresion>lambda</Expresion>
+				</Der>
+			</Ders>
+		</Produccion>
+		<Produccion>
+			<Izq>EXPRBOOL</Izq>
+			<Ders>
+				<Der>
+					<Expresion>EXPR EX</Expresion>
+				</Der>				
+			</Ders>
+		</Produccion>
+		<Produccion>
+			<Izq>EX</Izq>
+			<Ders>
+				<Der>
+					<Expresion>= EXPR</Expresion>
+				</Der>
+				<Der>
+					<Expresion>&lt;&gt; EXPR</Expresion>
+				</Der>
+				<Der>
+					<Expresion>&lt;= EXPR</Expresion>
+				</Der>
+				<Der>
+					<Expresion>&gt;= EXPR</Expresion>
+				</Der>
+				<Der>
+					<Expresion>&lt; EXPR</Expresion>
+				</Der>
+				<Der>
+					<Expresion>&gt; EXPR</Expresion>
+				</Der>
+				<Der>
+					<Expresion>lambda</Expresion>
+				</Der>
+			</Ders>
+		</Produccion>
+		<!---->
+		
+		<Produccion>
+			<Izq>EXPR</Izq>
+			<Ders>
+				<Der>
+					<Expresion>MULTS EXP</Expresion>
+				</Der>
+			</Ders>
+		</Produccion>
+		<Produccion>
+			<Izq>EXP</Izq>
+			<Ders>
+				<Der>
+					<Expresion>OPSUMRES MULTS EXP</Expresion>
+				</Der>
+				<Der>
+					<Expresion>lambda</Expresion>
+				</Der>
+			</Ders>
+		</Produccion>
+		<Produccion>
+			<Izq>MULTS</Izq>
+			<Ders>
+				<Der>
+					<Expresion>T MULT</Expresion>
+				</Der>
+			</Ders>
+		</Produccion>
+		<Produccion>
+			<Izq>MULT</Izq>
+			<Ders>
+				<Der>
+					<Expresion>OPMULTDIV T MULT</Expresion>
+				</Der>
+				<Der>
+					<Expresion>lambda</Expresion>
+				</Der>
+			</Ders>
+		</Produccion>
+		<Produccion>
+			<Izq>T</Izq>
+			<Ders>
+				<Der>
+					<Expresion>ID</Expresion>
+				</Der>
+				<Der>
+					<Expresion>NUMERO</Expresion>
+				</Der>
+				<Der>
+					<Expresion>TEXTO</Expresion>
+				</Der>
+				<Der>
+					<Expresion>BOOL</Expresion>
+				</Der>
+				<Der>
+					<Expresion>( EXPRBOOLEANAS )</Expresion>
+				</Der>
+				<!--
+				<Der>
+					<Expresion>- EXPRBOOLEANAS</Expresion>
+				</Der>
+				-->
+				<Der>
+					<Expresion>! ( EXPRBOOLEANAS )</Expresion>
+				</Der>
+				
+			</Ders>
+		</Produccion>
+		<Produccion>
+			<Izq>TEXTO</Izq>
+			<Ders>
+				<Der>
+					<Expresion>literal</Expresion>
+				</Der>				
+			</Ders>
+		</Produccion>
+		<Produccion>
+			<Izq>BOOL</Izq>
+			<Ders>
+				<Der>
+					<Expresion>verdadero</Expresion>
+				</Der>
+				<Der>
+					<Expresion>falso</Expresion>
+				</Der>
+			</Ders>
+		</Produccion>
+		<Produccion>
+			<Izq>ID</Izq>
+			<Ders>
+				<Der>
+					<Expresion>id Y</Expresion>
+				</Der>
+				
+			</Ders>
+		</Produccion>
+		<Produccion>
+			<Izq>Y</Izq>
+			<Ders>
+				<Der>
+					<Expresion>[ EXPRBOOLEANAS ]</Expresion>
+				</Der>
+				<Der>
+					<Expresion>( EXPRPROCED )</Expresion>
+				</Der>
+				<Der>
+					<Expresion>lambda</Expresion>
+				</Der>
+			</Ders>
+		</Produccion>	
+		<!-- -->
+		<Produccion>
+			<Izq>OPSUMRES</Izq>
+			<Ders>
+				<Der>
+					<Expresion>+</Expresion>
+				</Der>
+				
+				<Der>
+					<Expresion>-</Expresion>
+				</Der>
+				<!--
+				<Der>
+					<Expresion>or</Expresion>
+				</Der>
+				-->
+				<Der>
+					<Expresion>&amp;</Expresion>
+				</Der>
+				
+				
+				
+			</Ders>
+		</Produccion>
+		<Produccion>
+			<Izq>OPMULTDIV</Izq>
+			<Ders>
+				<Der>
+					<Expresion>*</Expresion>
+				</Der>
+				
+				<Der>
+					<Expresion>/</Expresion>
+				</Der>
+				
+				<!--
+				<Der>
+					<Expresion>and</Expresion>
+				</Der>
+				-->
+			</Ders>
+		</Produccion>
+		<Produccion>
+			<Izq>OPBOOLEANAS</Izq>
+			<Ders>
+				<Der>
+					<Expresion>and</Expresion>
+				</Der>
+				
+				<Der>
+					<Expresion>or</Expresion>
+				</Der>
+				
+				<!--
+				<Der>
+					<Expresion>and</Expresion>
+				</Der>
+				-->
+			</Ders>
+		</Produccion>
+		<!---->
+		<!---->
+	</Producciones>
+	<SimboloInicial>
+		<NoTerminal>START</NoTerminal>
+	</SimboloInicial>
+</Gramatica>
+
