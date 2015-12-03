@@ -91,7 +91,7 @@
     <Compile Include="Lexicografico\AnalizadorLexicografico.cs" />
     <Compile Include="Lexicografico\CharBuffer.cs" />
     <Compile Include="Lexicografico\ComponenteLexico.cs" />
-    <Compile Include="Lexicografico\AnalizadorLexicograficoConArchEnMemoriaYComentarios.cs" />
+    <Compile Include="Lexicografico\AnalizadorLexicograficoParaIdentar.cs" />
     <Compile Include="Lexicografico\ErrorLexicoException.cs" />
     <Compile Include="Log.cs" />
     <Compile Include="Program.cs" />
@@ -100,7 +100,6 @@
     <Compile Include="Semantico\Arbol\Nodos\NodoConstantesIni.cs" />
     <Compile Include="Semantico\Arbol\Nodos\NodoReferencia.cs" />
     <Compile Include="Semantico\Arbol\Nodos\NodoMostrarOp.cs" />
-    <Compile Include="Sintactico\ErroresManager\Errores\MensajeErrorFactory.cs" />
     <Compile Include="Sintactico\ErroresManager\Errores\MensajeError.cs" />
     <Compile Include="Sintactico\TerminalesHelpers.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">

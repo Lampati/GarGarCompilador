@@ -12,6 +12,7 @@ using CompiladorGargar.Auxiliares;
 using CompiladorGargar.Semantico;
 using CompiladorGargar.Semantico.Arbol;
 using CompiladorGargar.Resultado.Auxiliares;
+using CompiladorGargar.Sintactico.ErroresManager.Errores;
 
 
 namespace CompiladorGargar.Sintactico
@@ -77,12 +78,10 @@ namespace CompiladorGargar.Sintactico
         internal void CargarAnalizadorLexicografico(string texto)
         {
             AnalizadorLexico.CargarTexto(texto);
-            RellenarCadenaEntrada();
         }
 
         public bool EsFinAnalisisSintactico()
         {
-            //return !(!cadenaEntrada.esFinDeCadena() && !pila.esFinDePila());
             return (CadenaEntrada.EsFinDeCadena() && Pila.EsFinDePila());
         }      
 
@@ -96,57 +95,9 @@ namespace CompiladorGargar.Sintactico
             catch (ErrorLexicoException ex)
             {
                 cantErroresSintacticos++;
-                retorno.Add(new PasoAnalizadorSintactico(ex.Descripcion, GlobalesCompilador.TipoError.Sintactico, ex.Fila, ex.Columna, false));
+                retorno.Add(new PasoAnalizadorSintactico(ex.Message, GlobalesCompilador.TipoError.Sintactico, ex.Fila, ex.Columna, false, new ErrorLexemaInvalido(ex.Message)));
                 //MostrarError(new ErrorCompiladorEventArgs(ex.Tipo, ex.Descripcion, ex.Fila, ex.Columna, false));
-            }
-            //catch (ErrorLexicoException ex)
-            //{
-              
-            //    string mensajeAMostrar = ex.Descripcion;
-            //    int filaAMostrar = ex.Fila;
-            //    int colAMostrar = ex.Columna;
-
-            //    try
-            //    {
-            //        ErroresManager.AnalizadorErroresSintacticos analizador = new ErroresManager.AnalizadorErroresSintacticos(
-            //                                                                       EstadoSintactico.ListaLineaActual,
-            //                                                                       EstadoSintactico.ContextoGlobal,
-            //                                                                       EstadoSintactico.ContextoLinea,
-            //                                                                       CadenaEntrada.CadenaEntera);
-            //        try
-            //        {
-            //            analizador.Validar();
-            //        }
-            //        catch (CompiladorGargar.Sintactico.ErroresManager.ValidacionException excepVal)
-            //        {
-            //            mensajeAMostrar = excepVal.Message;
-            //            filaAMostrar = excepVal.Fila != -1 ? excepVal.Fila : filaAMostrar;
-            //            colAMostrar = excepVal.Columna != -1 ? excepVal.Columna : colAMostrar;
-            //            habilitarSemantico = false;
-
-            //            retorno.Add(new PasoAnalizadorSintactico(mensajeAMostrar, GlobalesCompilador.TipoError.Sintactico, filaAMostrar, colAMostrar, true, excepVal.MensjError));
-            //        }
-            //    }
-            //    catch (ErroresManager.AnalizadorErroresException exAnaliz)
-            //    {
-            //        mensajeAMostrar = exAnaliz.Message;
-            //        filaAMostrar = exAnaliz.Fila != -1 ? exAnaliz.Fila : filaAMostrar;
-            //        colAMostrar = exAnaliz.Columna != -1 ? exAnaliz.Columna : colAMostrar;
-
-            //        CompiladorGargar.Sintactico.ErroresManager.Errores.MensajeError mensErr = new CompiladorGargar.Sintactico.ErroresManager.Errores.ErrorVacio();
-            //        mensErr.MensajeModoTexto = exAnaliz.Message;
-            //        mensErr.MensajeModoGrafico = exAnaliz.MensajeModoGrafico;
-            //        mensErr.EsErrorBienDefinido = false;
-
-            //        retorno.Add(new PasoAnalizadorSintactico(mensajeAMostrar, GlobalesCompilador.TipoError.Sintactico, filaAMostrar, colAMostrar, true, mensErr)); //siempre paro la compilacion al primer error
-            //    }
-
-          
-            //    if (cantErroresSintacticos >= GlobalesCompilador.CANT_MAX_ERRORES_SINTACTICOS)
-            //    {
-            //        retorno.Add(new PasoAnalizadorSintactico("Se paró la compilacion por la cantidad de errores.", GlobalesCompilador.TipoError.Sintactico, 0, 0, true));
-            //    }
-            //}
+            }            
             catch (ErrorSintacticoException ex)
             {
                 if (ex.Mostrar)
@@ -154,7 +105,7 @@ namespace CompiladorGargar.Sintactico
                     cantErroresSintacticos++;
                 }
 
-                string mensajeAMostrar = ex.Descripcion;
+                string mensajeAMostrar = ex.Message;
                 int filaAMostrar = ex.Fila;
                 int colAMostrar = ex.Columna;
 
@@ -198,70 +149,8 @@ namespace CompiladorGargar.Sintactico
                     retorno.Add(new PasoAnalizadorSintactico(mensajeAMostrar, GlobalesCompilador.TipoError.Sintactico, filaAMostrar, colAMostrar, pararCompilacion, mensErr)); //siempre paro la compilacion al primer error
                 }
 
-                #region Parte Vieja maneja excepciones sintacticas
 
-                //if (ex.DescartarTopeCadena)
-                //{
-                //    if (!CadenaEntrada.EsFinDeCadena())
-                //    {
-                //        CadenaEntrada.EliminarPrimerTerminal();
-                //    }
-                //    try
-                //    {
-                //        RellenarCadenaEntrada();
-                //    }
-                //    catch (ErrorLexicoException exx)
-                //    {
-                //        retorno.Add(new PasoAnalizadorSintactico(exx.Descripcion, GlobalesCompilador.TipoError.Sintactico, exx.Fila, exx.Columna, false));
-                //        //MostrarError(new ErrorCompiladorEventArgs(exx.Tipo, exx.Descripcion, exx.Fila, exx.Columna, false));
-                //    }
-                //    if (ex.Mostrar)
-                //    {
-                //        retorno.Add(new PasoAnalizadorSintactico(mensajeAMostrar, GlobalesCompilador.TipoError.Sintactico, filaAMostrar, colAMostrar, pararCompilacion));
-                //    }
-                //    //MostrarError(new ErrorCompiladorEventArgs(ex.Tipo, ex.Descripcion, ex.Fila, ex.Columna, ex.pararAnalisis));
-                //}
-
-                //if (ex.DescartarTopePila)
-                //{
-                //    if (ex.TerminalHastaDondeDescartarPila != null)
-                //    {
-                //        bool parar = false;
-                //        while (!Pila.esFinDePila() && !parar)
-                //        {
-                //            if (Pila.ObtenerTope().GetType() != typeof(Terminal))
-                //            {
-                //                Pila.DescartarTope();
-                //            }
-                //            else if (!(((Terminal)Pila.ObtenerTope()).Equals(Terminal.ElementoFinSentencia())))
-                //            {
-                //                Pila.DescartarTope();
-                //            }
-                //            else
-                //            {
-                //                Pila.DescartarTope();
-                //                parar = true;
-                //            }
-                //        }
-                //    }
-                //    else
-                //    {
-                //        if (!Pila.esFinDePila())
-                //        {
-                //            Pila.DescartarTope();
-                //        }
-                //    }
-
-                //    if (ex.Mostrar)
-                //    {
-                //        retorno.Add(new PasoAnalizadorSintactico(mensajeAMostrar, GlobalesCompilador.TipoError.Sintactico, filaAMostrar, colAMostrar, pararCompilacion));
-                //    }
-                //    //MostrarError(new ErrorCompiladorEventArgs(ex.Tipo, ex.Descripcion, ex.Fila, ex.Columna, ex.pararAnalisis));
-                //}
-
-                #endregion
-
-                if (cantErroresSintacticos >= GlobalesCompilador.CantMaxErroresSintacticos)
+                if (cantErroresSintacticos >= GlobalesCompilador.CANT_MAX_ERRORES_SINTACTICOS)
                 {
                     retorno.Add(new PasoAnalizadorSintactico("Se paró la compilacion por la cantidad de errores.", GlobalesCompilador.TipoError.Sintactico, 0, 0, true));
                 }

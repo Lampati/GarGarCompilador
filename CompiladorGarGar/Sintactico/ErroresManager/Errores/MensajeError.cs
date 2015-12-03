@@ -48,6 +48,8 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
         }
     }
 
+
+
     public class ErrorDeclaracionConstanteGenerico : MensajeError
     {
         public ErrorDeclaracionConstanteGenerico()
@@ -570,6 +572,17 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
             MensajeModoTexto = "La llamada a leer puede estar acompañada unicamente de una variable o una posición de un arreglo";
             MensajeModoGrafico = "La llamada a leer puede estar acompañada unicamente de una variable o una posición de un arreglo";
             SentenciasQueTienenElError.Add(Sentencias.Leer);
+        }
+    }
+
+    public class ErrorLexemaInvalido : MensajeError
+    {
+        public ErrorLexemaInvalido(string mensaje) 
+            : base()
+        {
+            CodigoGlobal = 43;
+            MensajeModoTexto = mensaje;
+            MensajeModoGrafico = mensaje;
         }
     }
 }

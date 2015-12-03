@@ -9,20 +9,19 @@ namespace CompiladorGargar
     internal class ErrorCompilacionException : Exception
     {
         public string Tipo { get; set; }
-        public string Descripcion { get; set; }
         public int Fila { get; set; }
         public int Columna { get; set; }
 
-        public ErrorCompilacionException(string desc, int f, int c )
+        public ErrorCompilacionException(string desc, int f, int c ) 
+            : base(desc)
         {
             this.Fila = f;
             this.Columna = c;
-            this.Descripcion = desc;
         }
 
         public ErrorCompilacionException(string desc)
-        {          
-            this.Descripcion = desc;
+            : base(desc)
+        {
         }
     }
 }

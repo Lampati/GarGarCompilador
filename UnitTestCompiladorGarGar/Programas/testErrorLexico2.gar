@@ -1,0 +1,23 @@
+﻿
+
+procedimiento PRINCIPAL()
+var X: numero;
+var A: arreglo[3] de numero;
+comenzar
+	
+	X = 6 + 10 - 10 - 10 ;
+	X = 100 - X - (X);
+ 
+  X = ╩;
+
+  
+  A[1] = VALABSOLUTO(5);
+  A[2] = VALABSOLUTO(-2);
+  A[3] = VALABSOLUTO(55 * -1);
+  
+  
+
+
+finproc;
+
+

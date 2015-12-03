@@ -15,21 +15,15 @@ namespace CompiladorGargar.Resultado
     {
         public bool CompilacionGarGarCorrecta { get; set; }
         public bool GeneracionEjectuableCorrecto { get; set; }
-        public string Error { get; set; }
 
         public List<PasoAnalizadorSintactico> ListaErrores { get; set; }
         public List<PasoCompilacion> ListaDebugSintactico { get; set; }
         internal ArbolSemantico ArbolSemanticoResultado { get; set; }
         public TablaSimbolos TablaSimbolos { get; set; }
-        public List<int> ListaLineasValidas { get; set; }
-        public List<int> ListaLineasContenidoProcSalida { get; set; }
 
-        public string CodigoGarGar { get; set; }
         public string CodigoPascal { get; set; }
         public string ArchTemporalCodigoPascal { get; set; }
         public string ArchTemporalCodigoPascalConRuta { get; set; }
-
-        public string ArchTemporalResultadosEjecucionConRuta { get; set; }
 
         public string ArchEjecutable { get; set; }
         public string ArchEjecutableConRuta { get; set; }
@@ -49,8 +43,6 @@ namespace CompiladorGargar.Resultado
             ListaDebugSintactico = new List<PasoCompilacion>();
             ListaErrores = new List<PasoAnalizadorSintactico>();
             CompilacionGarGarCorrecta = false;
-
-            
         }
 
         public string ArmarArbol()

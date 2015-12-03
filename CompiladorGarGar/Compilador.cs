@@ -10,6 +10,7 @@ using CompiladorGargar.Resultado.Auxiliares;
 using CompiladorGargar.Resultado;
 using CompiladorGargar.Lexicografico;
 using CompiladorGargar.Sintactico.ErroresManager;
+using CompiladorGargar.Sintactico.ErroresManager.Errores;
 
 namespace CompiladorGargar
 {
@@ -63,7 +64,6 @@ namespace CompiladorGargar
             {
                 try
                 {
-
                     long timeStamp = Stopwatch.GetTimestamp();
                     long timeStampPaso;
 
@@ -78,120 +78,89 @@ namespace CompiladorGargar
                     long timeStampLex = Stopwatch.GetTimestamp();
                     CargarAnalizadorLexico(texto);
                     float tiempoCargarLexico = ((float)(Stopwatch.GetTimestamp() - timeStampLex)) / ((float)Stopwatch.Frequency);
-                    try
+                   
+                    bool pararComp = false;
+                    GlobalesCompilador.TipoError tipoError = GlobalesCompilador.TipoError.Ninguno;
+
+                    while (!this.analizadorSintactico.EsFinAnalisisSintactico() && !pararComp)
                     {
-                        bool pararComp = false;
-                        GlobalesCompilador.TipoError tipoError = GlobalesCompilador.TipoError.Ninguno;
 
-                        while (!this.analizadorSintactico.EsFinAnalisisSintactico() && !pararComp)
+                        timeStampPaso = Stopwatch.GetTimestamp();
+                        List<PasoAnalizadorSintactico> retorno = this.analizadorSintactico.AnalizarSintacticamenteUnPaso();
+                        float tiempoAnalizSint = ((float)(Stopwatch.GetTimestamp() - timeStampPaso)) / ((float)Stopwatch.Frequency);
+
+                        if (retorno.Count > 0)
                         {
-
-                            timeStampPaso = Stopwatch.GetTimestamp();
-                            List<PasoAnalizadorSintactico> retorno = this.analizadorSintactico.AnalizarSintacticamenteUnPaso();
-                            float tiempoAnalizSint = ((float)(Stopwatch.GetTimestamp() - timeStampPaso)) / ((float)Stopwatch.Frequency);
-
-                            if (retorno.Count > 0)
+                            foreach (var item in retorno)
                             {
-                                foreach (var item in retorno)
+                                switch (item.TipoError)
                                 {
-                                    switch (item.TipoError)
-                                    {
-                                        case GlobalesCompilador.TipoError.Sintactico:
-                                            tipoError = item.TipoError;
-                                            res.ListaErrores.Add(item);
-                                            pararComp = pararComp || item.PararCompilacion;
-                                            break;
-                                        case GlobalesCompilador.TipoError.Semantico:
-                                            tipoError = item.TipoError;
-                                            res.ListaErrores.Add(item);
-                                            pararComp = pararComp || item.PararCompilacion;
-                                            break;
-                                        case GlobalesCompilador.TipoError.Ninguno:
-                                            tipoError = item.TipoError;
-                                            break;
+                                    case GlobalesCompilador.TipoError.Sintactico:
+                                        tipoError = item.TipoError;
+                                        res.ListaErrores.Add(item);
+                                        pararComp = pararComp || item.PararCompilacion;
+                                        break;
+                                    case GlobalesCompilador.TipoError.Semantico:
+                                        tipoError = item.TipoError;
+                                        res.ListaErrores.Add(item);
+                                        pararComp = pararComp || item.PararCompilacion;
+                                        break;
+                                    case GlobalesCompilador.TipoError.Ninguno:
+                                        tipoError = item.TipoError;
+                                        break;
 
-                                    }
                                 }
                             }
-
-                            if (modoDebug)
-                            {
-
-                                PasoCompilacion paso = new PasoCompilacion(this.analizadorSintactico.Pila.ToString(),
-                                    this.analizadorSintactico.CadenaEntrada.ToString(),
-                                    tipoError);
-
-                                res.ListaDebugSintactico.Add(paso);
-                            }
-
-                            float numPaso = ((float)(Stopwatch.GetTimestamp() - timeStampPaso)) / ((float)Stopwatch.Frequency);
-
-                            tiempos.Add(new PasoDebugTiempos() { NumPaso = i, TiempoAnalizadorSint = tiempoAnalizSint, TiempoAnalizadorTot = numPaso }); ;
-                            i++;
                         }
 
-                        if (this.analizadorSintactico.EsFinAnalisisSintactico() && res.ListaErrores.Count == 0)
+                        if (modoDebug)
                         {
-                            res.CompilacionGarGarCorrecta = true;
+
+                            PasoCompilacion paso = new PasoCompilacion(this.analizadorSintactico.Pila.ToString(),
+                                this.analizadorSintactico.CadenaEntrada.ToString(),
+                                tipoError);
+
+                            res.ListaDebugSintactico.Add(paso);
                         }
+
+                        float numPaso = ((float)(Stopwatch.GetTimestamp() - timeStampPaso)) / ((float)Stopwatch.Frequency);
+
+                        tiempos.Add(new PasoDebugTiempos() { NumPaso = i, TiempoAnalizadorSint = tiempoAnalizSint, TiempoAnalizadorTot = numPaso }); ;
+                        i++;
                     }
-                    catch (Exception ex)
+
+                    if (this.analizadorSintactico.EsFinAnalisisSintactico() && res.ListaErrores.Count == 0)
                     {
-                        res.CompilacionGarGarCorrecta = false;
-
-                        if (this.modoDebug)
-                        {
-                            res.Error = string.Format("{0}: \r\n {1}", ex.Message, ex.StackTrace);
-                        }
-                        else
-                        {
-                            res.Error = "Ha habido un error en la compilacion. Por favor reporte el problema";
-                        }
+                        res.CompilacionGarGarCorrecta = true;
                     }
-
-                    res.TiempoGeneracionAnalizadorLexico = tiempoCargarLexico;
 
                     CompilarCodigoIntermedio(res);
-                }
-                catch (ErrorLexicoException ex)
-                {
-                    res.ListaErrores.Add(new PasoAnalizadorSintactico(
-                        ex.Descripcion,
-                        GlobalesCompilador.TipoError.Sintactico,
-                        ex.Fila,
-                        ex.Columna));
-                }             
-
+                }          
                 catch (Exception ex)
                 {
+                    string error = "Ha habido un error en la compilacion. Por favor reporte el problema" ;
+
+                    if (modoDebug)
+                    {
+                        error = string.Format("{0}: \r\n {1}", ex.Message, ex.StackTrace);
+                    }
+
                     res.CompilacionGarGarCorrecta = false;
-
-                    if (this.modoDebug)
-                    {
-                        res.Error = ex.Message;
-                    }
-                    else
-                    {
-                        res.Error = "Ha habido un error en la compilacion. Por favor reporte el problema";
-                    }
+                    res.ListaErrores.Add(new PasoAnalizadorSintactico(error,GlobalesCompilador.TipoError.Ninguno,0,0));
                 }
-
                 
                 res.TiempoCompilacionTotal = temporizador.Elapsed.TotalSeconds;
-
             }
             else
             {
                 //No hay nada para compilar
                 res.ListaErrores.Add(new PasoAnalizadorSintactico(
                     "No se ha ingresado programa para compilar",
-                    GlobalesCompilador.TipoError.Semantico,
+                    GlobalesCompilador.TipoError.Sintactico,
                     GlobalesCompilador.UltFila,
                     GlobalesCompilador.UltCol,
                     false)
                 );
-                
-                    
             }
             
             return res;
@@ -213,15 +182,10 @@ namespace CompiladorGargar
                 res.ArbolSemanticoResultado = this.analizadorSintactico.ArbolSemantico;
                 res.TablaSimbolos = res.ArbolSemanticoResultado.TablaDeSimbolos;
 
-                res.ListaLineasValidas = EstadoSintactico.ListaLineasValidasParaInsertarCodigo;
-                res.ListaLineasContenidoProcSalida = EstadoSintactico.ListaLineasContenidoProcSalida;
-
                 long timeStampCod = Stopwatch.GetTimestamp();
                 res.CodigoPascal = res.ArbolSemanticoResultado.CalcularCodigo();
 
                 Dictionary<int, int> bindeoLineasEntrePascalYGarGar = BindearLineas(res.CodigoPascal.Split(new string[] { "\r\n" }, StringSplitOptions.None));
-
-                //Esto se usa en la parte de los test de ejecucion. Le agrego que marque el valor de las var de entrada en la linea.
 
 
                 res.TiempoGeneracionCodigo = ((float)(Stopwatch.GetTimestamp() - timeStampCod)) / ((float)Stopwatch.Frequency);
@@ -242,7 +206,6 @@ namespace CompiladorGargar
                     res.ResultadoCompPascal = resPas;
                     res.ArchEjecutable = resPas.NombreEjecutable;
                     res.ArchEjecutableConRuta = Path.Combine(DirectorioEjecutables, res.ArchEjecutable);
-                    res.ArchTemporalResultadosEjecucionConRuta = GeneracionCodigoHelpers.ArchivoTemporalEstaEjecucion;
                     res.TiempoGeneracionEjecutable = ((float)(Stopwatch.GetTimestamp() - timeStampCod)) / ((float)Stopwatch.Frequency);
 
                     res.GeneracionEjectuableCorrecto = resPas.CompilacionPascalCorrecta;
@@ -331,7 +294,6 @@ namespace CompiladorGargar
             {
                 res = new ResultadoCompilacionPascal();
                 res.CompilacionPascalCorrecta = false;
-                //res.ListaErrores.Add("Error fatal al intentar ejecutar el compilador de codigo intermedio.");
             }
 
             return res;

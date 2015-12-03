@@ -16,9 +16,6 @@ namespace CompiladorGargar
 
         public const string NOMBRE_APLICACION = @"GarGar Dev";
 
-        //public const string EXTENSION_EJERCICIO = @"gej";
-        //public const string EXTENSION_RESOLUCION = @"gres";
-
         private static string pathEjecucionAplicacion = null;
         public static string PathEjecucionAplicacion
         {
@@ -42,15 +39,13 @@ namespace CompiladorGargar
         internal const double MAX_LONG_CADENA = 250;
 
 
-        //internal const int CANT_MAX_ITERACIONES = 32000;
+        internal const int CANT_MAX_ITERACIONES = 1000000;
 
-        //internal const short CANT_MAX_ERRORES_SINTACTICOS = 5;
+        internal const short CANT_MAX_ERRORES_SINTACTICOS = 5;
 
         internal static int UltFila;
         internal static int UltCol;
 
-        public static int CantMaxIteraciones { get; set; }
-        public static int CantMaxErroresSintacticos { get; set; }
 
         public enum TipoError
         {
@@ -69,13 +64,10 @@ namespace CompiladorGargar
         public static string ObtenerProgramaConEstructuraVacia()
         {
             StringBuilder strBldr = new StringBuilder();
-            strBldr.AppendLine("procedimiento SALIDA()");
-            strBldr.AppendLine("comenzar");
-            strBldr.AppendLine("finproc;");
-            strBldr.AppendLine();
+       
             strBldr.AppendLine("procedimiento PRINCIPAL()");
             strBldr.AppendLine("comenzar");
-            strBldr.AppendLine("llamar SALIDA();");
+            strBldr.AppendLine();
             strBldr.AppendLine("finproc;");
             
 

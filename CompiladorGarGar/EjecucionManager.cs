@@ -14,6 +14,11 @@ namespace CompiladorGargar
             return Ejecutar(archConRuta, new List<string>(), ProcessWindowStyle.Normal);   
         }
 
+        public static string EjecutarSinVentana(string archConRuta)
+        {
+            return Ejecutar(archConRuta, new List<string>(), ProcessWindowStyle.Hidden);
+        }
+
         public static string EjecutarSinVentana(string archConRuta, List<string> argumentos)
         {
             return Ejecutar(archConRuta, argumentos, ProcessWindowStyle.Hidden);   

@@ -140,6 +140,24 @@ namespace UnitTestCompiladorGarGar
 
 
          [TestMethod]
+         public void CompilacionMenorTresSegundos()
+         {
+             Compilador compilador = new Compilador();
+
+             string resourceName = "UnitTestCompiladorGarGar.Programas.validacionesSemanticasCorrectas.gar";
+             string programa = Utilidades.FileManager.LeerArchivoEnteroDeAssembly(Assembly.GetExecutingAssembly(), resourceName);
+
+             ResultadoCompilacion res = compilador.Compilar(programa);
+
+
+             Assert.IsTrue(res.CompilacionGarGarCorrecta, ObtenerErrores(res));
+
+             Assert.IsTrue(res.ResultadoCompPascal.CompilacionPascalCorrecta);
+
+             Assert.IsTrue(res.TiempoCompilacionTotal < 3);
+         }
+
+         [TestMethod]
          public void CompilacionCorrectaSinProcSalida()
          {
              Compilador compilador = new Compilador();
@@ -155,6 +173,36 @@ namespace UnitTestCompiladorGarGar
              Assert.IsTrue(res.ResultadoCompPascal.CompilacionPascalCorrecta);
          }
 
+        [TestMethod]
+         public void CompilacionErrorLexico()
+         {
+             Compilador compilador = new Compilador();
 
+             string resourceName = "UnitTestCompiladorGarGar.Programas.testErrorLexico2.gar";
+             string programa = Utilidades.FileManager.LeerArchivoEnteroDeAssembly(Assembly.GetExecutingAssembly(), resourceName);
+
+             ResultadoCompilacion res = compilador.Compilar(programa);
+
+             
+
+             Assert.IsTrue(res.ListaErrores[0].MensajeError.CodigoGlobal == 43);
+         }
+
+
+        [TestMethod]
+        public void CompilacionErrorLexicoPrimerCaracter()
+        {
+            Compilador compilador = new Compilador();
+
+            string resourceName = "UnitTestCompiladorGarGar.Programas.testErrorLexico.gar";
+            string programa = Utilidades.FileManager.LeerArchivoEnteroDeAssembly(Assembly.GetExecutingAssembly(), resourceName);
+
+            ResultadoCompilacion res = compilador.Compilar(programa);
+
+
+
+            Assert.IsTrue(res.ListaErrores[0].MensajeError.CodigoGlobal == 43);
+        }
+        
     }
 }

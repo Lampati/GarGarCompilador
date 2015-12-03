@@ -1,0 +1,8 @@
+﻿PROCEDIMIENTO SALIDA()
+comenzar 
+finproc; 
+
+PROCEDIMIENTO PRINCIPAL() 
+comenzar  
+llamar SALIDA(); 
+finproc;

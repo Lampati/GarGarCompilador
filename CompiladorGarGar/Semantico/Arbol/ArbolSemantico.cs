@@ -60,8 +60,8 @@ namespace CompiladorGargar.Semantico.Arbol
                     }
                     catch (ErrorSemanticoException ex)
                     {
-                       
-                        retorno.Add(new PasoAnalizadorSintactico(ex.Descripcion, GlobalesCompilador.TipoError.Semantico, ex.Fila, ex.Columna, false));
+
+                        retorno.Add(new PasoAnalizadorSintactico(ex.Message, GlobalesCompilador.TipoError.Semantico, ex.Fila, ex.Columna, false));
 
                         //this.MostrarError(new ErrorCompiladorEventArgs(ex.Tipo, ex.Descripcion, ex.Fila, ex.Columna, false));
                         nodo = nodo.SalvarAtributosParaContinuar();
@@ -72,7 +72,7 @@ namespace CompiladorGargar.Semantico.Arbol
 
                         foreach (ErrorSemanticoException ex in exs.InnerExceptions)
                         {
-                            retorno.Add(new PasoAnalizadorSintactico(ex.Descripcion, GlobalesCompilador.TipoError.Semantico, ex.Fila, ex.Columna, false));
+                            retorno.Add(new PasoAnalizadorSintactico(ex.Message, GlobalesCompilador.TipoError.Semantico, ex.Fila, ex.Columna, false));
                             //this.MostrarError(new ErrorCompiladorEventArgs(ex.Tipo, ex.Descripcion, ex.Fila, ex.Columna, false));
                         }
                         nodo = nodo.SalvarAtributosParaContinuar();
