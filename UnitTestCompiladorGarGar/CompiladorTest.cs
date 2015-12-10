@@ -230,21 +230,6 @@ namespace UnitTestCompiladorGarGar
         }
 
 
-        [TestMethod]
-        public void CompilarEjecucionCompuesta()
-        {
-            Compilador compilador = new Compilador("testEjecucion");
-
-            string resourceName = "UnitTestCompiladorGarGar.Programas.testEjecucion.gar";
-            string programa = Utilidades.FileManager.LeerArchivoEnteroDeAssembly(Assembly.GetExecutingAssembly(), resourceName);
-
-            ResultadoCompilacion res = compilador.Compilar(programa);
-
-            Assert.IsTrue(res.CompilacionGarGarCorrecta, ObtenerErrores(res));
-
-            Assert.IsTrue(res.ResultadoCompPascal.CompilacionPascalCorrecta);
-
-        }
         
     }
 }
