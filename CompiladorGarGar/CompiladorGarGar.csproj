@@ -1187,8 +1187,6 @@
     <Content Include="Configuracion\CompiladorPascal\Compilador\msg\errorues.msg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="Configuracion\validacionesSemanticasCorrectas.gar" />
-    <None Include="Configuracion\testEjecucion.gar" />
     <None Include="Configuracion\validacionesSemanticasIncorrectas.gar" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -1207,7 +1205,6 @@
     <Compile Include="Resultado\ResultadoCompilacion.cs" />
     <Compile Include="Semantico\Arbol\ArbolSemantico.cs" />
     <Compile Include="Semantico\Arbol\Interfases\ITipificable.cs" />
-    <Compile Include="Semantico\Arbol\Interfases\IValorizable.cs" />
     <Compile Include="Semantico\Arbol\Nodos\Auxiliares\Firma.cs" />
     <Compile Include="Semantico\Arbol\Nodos\Auxiliares\Variable.cs" />
     <Compile Include="Semantico\Arbol\Nodos\NodoOpBooleanas.cs" />
@@ -1275,9 +1272,6 @@
     <Compile Include="Semantico\Arbol\Nodos\NodoY.cs" />
     <Compile Include="Semantico\Arbol\Nodos\NodoYDec.cs" />
     <Compile Include="Semantico\ErrorSemanticoException.cs" />
-    <Compile Include="Semantico\PilaAtributos\NodoPilaProduccionesAtributos.cs" />
-    <Compile Include="Semantico\PilaAtributos\PilaProduccionesAtributos.cs" />
-    <Compile Include="Semantico\RecorredorArbol\ColaIndices.cs" />
     <Compile Include="Semantico\RecorredorArbol\NodoPilaRecorredor.cs" />
     <Compile Include="Semantico\RecorredorArbol\PilaRecorredor.cs" />
     <Compile Include="Semantico\TablaDeSimbolos\FirmaProc.cs" />

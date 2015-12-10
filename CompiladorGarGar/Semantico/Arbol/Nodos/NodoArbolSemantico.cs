@@ -81,7 +81,6 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
         public string ValorConstanteTexto { get; set; }
         public bool NoEsAptaPasajeReferencia { get; set; }
 
-        public bool EsProcSalida { get; set; }
         public bool ModificaParametros { get; set; }
         public bool AsignaParametros { get; set; }
         public bool LlamaProcs { get; set; }
@@ -100,8 +99,6 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
         public string VariablesGlobales { get; set; }
         public string ConstantesGlobales { get; set; }
         
-        public bool NecesitaTemporal { get; set; }
-
         public List<string> ListaElementosVisualizar { get; set; }
         public TipoComparacion Comparacion { get; set; }
         public bool EsSino { get; set; }
@@ -140,39 +137,10 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
 
         }
 
-        public bool CalculadoTemporalesHijos
-        {
-            get
-            {
-                return ChequeoDeCalculadosEnNodo(temporalesCalculados);
-            }
-
-        }
-
-        public bool CalculadoLabelsHijos
-        {
-            get
-            {
-                return ChequeoDeCalculadosEnNodo(labelsCalculados);
-            }
-
-        }
-
-        public bool CalculadoCodigoHijos
-        {
-            get
-            {
-                return ChequeoDeCalculadosEnNodo(codigoCalculado);
-            }
-
-        }
 
         //public bool ChequeoDeCalculadosEnNodo
 
         protected bool[] atributosCalculados;
-        protected bool[] temporalesCalculados;
-        protected bool[] labelsCalculados;
-        protected bool[] codigoCalculado;
 
         public int ObtenerCantidadHijos()
         {
@@ -234,7 +202,6 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
 
             //Heredados
             this.DeclaracionesPermitidas = TipoDeclaracionesPermitidas.Ninguno;
-            this.EsProcSalida = false;
             this.EsFirma = false;
             this.EsPasajeParametrosAProcOFunc = false;
 
@@ -247,7 +214,6 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
                 this.ProcPrincipalYaCreadoyCorrecto = nodoPadre.ProcPrincipalYaCreadoyCorrecto;
                 this.ProcPrincipalCrearUnaVez = nodoPadre.ProcPrincipalCrearUnaVez;
                 this.DeclaracionesPermitidas = nodoPadre.DeclaracionesPermitidas;
-                this.EsProcSalida = nodoPadre.EsProcSalida;
                 this.EsPasajeParametrosAProcOFunc = nodoPadre.EsPasajeParametrosAProcOFunc;
             }
         }

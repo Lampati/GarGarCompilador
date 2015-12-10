@@ -87,6 +87,8 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             strBldr.AppendLine("EMatematicaTangenteException = class(Exception);");      
             strBldr.AppendLine(ArmarTiposDeArreglo(this.TablaSimbolos.ListaTiposArreglos));
             strBldr.AppendLine("Var");
+            strBldr.AppendLine("UserFile : Text;");
+            
             strBldr.AppendLine(string.Format("{0} : integer;",GeneracionCodigoHelpers.VariableContadoraLineas));
             strBldr.AppendLine(this.hijosNodo[0].VariablesGlobales);
             strBldr.AppendLine(GeneracionCodigoHelpers.DefinirVariablesAuxiliares(this.TablaSimbolos));
@@ -108,6 +110,11 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
 
             strBldr.AppendLine("begin");
             strBldr.AppendLine(GeneracionCodigoHelpers.CrearArchivoDeResultados());
+            strBldr.AppendLine(@"Assign(UserFile,'resultado.txt');");
+            strBldr.AppendLine("Rewrite(UserFile);");
+             
+            
+
             strBldr.Append(GeneracionCodigoHelpers.InicializarVariablesGlobales(this.TablaSimbolos));
             strBldr.AppendLine("try");       
             strBldr.Append("\t").AppendLine(string.Format("{0}PRINCIPAL();",GlobalesCompilador.PREFIJO_VARIABLES));            
@@ -154,7 +161,8 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             strBldr.AppendLine(GeneracionCodigoHelpers.CrearProcedimientoResultadoIncorrectoEnArchivo());
             strBldr.AppendLine("end;");
             strBldr.AppendLine("end;");
-            strBldr.AppendLine(string.Format("WriteLn('<<presione cualquier tecla para finalizar el programa>>');")); 
+            strBldr.AppendLine(string.Format("WriteLn('<<presione cualquier tecla para finalizar el programa>>');"));
+            strBldr.AppendLine("Close(UserFile);"); 
             strBldr.AppendLine(GeneracionCodigoHelpers.PausarHastaEntradaTeclado());
             strBldr.AppendLine("end.");
             

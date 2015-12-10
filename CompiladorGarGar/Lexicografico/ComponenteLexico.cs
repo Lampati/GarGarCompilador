@@ -175,8 +175,7 @@ namespace CompiladorGargar.Lexicografico
 
             //Llamar, //llamar
             //Leer,
-            //Visualizar,
-            //VisualizarLN,
+            
         }
 
         #region Properties

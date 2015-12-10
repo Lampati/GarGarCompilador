@@ -1,0 +1,443 @@
+﻿constantes
+const M : numero = 7; 
+const R : numero = 90;
+
+variables
+var N, S : numero;
+var A : arreglo[10] de numero;
+
+
+
+procedimiento PROC1(XJ1 : numero, XJ2 : numero, XJ3 : numero, XJ4 : numero)
+var A : numero;
+var B : numero;
+
+comenzar
+  
+  B = M;
+  A = 20;
+  mientras B > 0 hacer
+    si espar(B) entonces
+      A = A + 1;
+    fin_si;
+    visualizarLN 'Visualizacion', B, ' ', A,5,38;
+    B = B - 1n;
+  fin_mientras;
+fin_proc;
+
+
+funcion FUN1(T: numero, N2 : numero) : numero
+var N: numero;
+comenzar
+  si T > 0 entonces
+    N = 45;
+  sino
+    N = 70;
+  fin_si;
+fin_func N * 2;
+
+funcion POTENCIA(P: numero) : numero
+var N: numero;
+comenzar  
+N = 1;
+fin_func P * P;
+
+procedimiento BUCLES()
+var A : numero;
+var B : numero;
+comenzar
+  A = 2; 
+  B = 10n;
+  
+  mientras B > 0n hacer    
+    B = B - 1n;
+  fin_mientras;
+  
+  si B = 0n entonces
+    visualizarLN 'Bucle mientras descendente FUNCIONA';
+ sino	
+    visualizarLN 'Bucle mientras descendente FALLO';	
+ fin_si;
+ 
+ B = 0n;
+ mientras B < 10n hacer    
+    B = B + 1n;
+  fin_mientras;
+  
+  si B = 10n entonces
+    visualizarLN 'Bucle mientras ascendente FUNCIONA';
+ sino	
+    visualizarLN 'Bucle mientras ascendente FALLO';	
+ fin_si;
+ 
+ B = 0n;
+ mientras B+0n+0n < 40n/2n/2n hacer    
+    B = B + 1n;
+  fin_mientras;
+  
+  si B = 10n entonces
+    visualizarLN 'Bucle mientras expresion compuesta FUNCIONA';
+ sino	
+    visualizarLN 'Bucle mientras expresion compuesta FALLO';	
+ fin_si;
+ 
+  A[1n] = 5n;
+ A[2n] = 10n;
+ A[3n] = 15n;
+ A[4n] = 20n;
+ 
+
+fin_proc;
+
+procedimiento CAMBIOTIPO()
+var A : numero;
+var B : numero;
+comenzar
+  A = 2; 
+  B = ANATURAL(2);
+  
+  si B = 2n entonces
+    visualizarLN 'Pasaje a numero FUNCIONA';
+ sino	
+    visualizarLN 'Pasaje a numero FALLO';	
+ fin_si;
+ 
+ A = AENTERO(2n);
+ B = 2n;  
+  
+  si A = 2 entonces
+    visualizarLN 'Pasaje a numero FUNCIONA';
+ sino	
+    visualizarLN 'Pasaje a numero FALLO';	
+ fin_si;
+ 
+fin_proc;
+
+procedimiento EXPRESIONES()
+var A : numero;
+var B : numero;
+var C : numero;
+var D : numero;
+var E : numero;
+comenzar
+  A = 2;
+  B = 3;
+
+  A= A+1;
+
+ si A = B entonces
+    visualizarLN 'Calculo de expresion simple FUNCIONA';
+ sino	
+    visualizarLN 'Calculo de expresion simple FALLO';	
+ fin_si;
+ 
+ A= 16;
+ si A = POTENCIA(4) entonces
+    visualizarLN 'Calculo de expresion con funcion en if FUNCIONA';
+ sino	
+    visualizarLN 'Calculo de expresion con funcion en if FALLO';	
+ fin_si;
+ 
+ A= POTENCIA(1)+POTENCIA(2)-POTENCIA(3)+POTENCIA(4);
+ si A = 12 entonces
+    visualizarLN 'Calculo de expresion con funciones FUNCIONA';
+ sino	
+    visualizarLN 'Calculo de expresion con funciones FALLO';	
+ fin_si;
+ 
+ 
+ A= POTENCIA(4);
+ si A = 16 entonces
+    visualizarLN 'Calculo de expresion con funcion en asignacion FUNCIONA';
+ sino	
+    visualizarLN 'Calculo de expresion con funcion en asignacion FALLO';	
+ fin_si;
+ 
+
+ A = 32*2/8/2*2+32*2/8/2*2-2*2/2/2-4*15-5*80/2-4-32*2/8/2*2;
+ 
+ si A = 0-257 entonces
+    visualizarLN 'Calculo de expresion compuesta FUNCIONA';
+ sino	
+    visualizarLN 'Calculo de expresion compuesta FALLO';	
+ fin_si;
+ 
+ A = 2*((4+2)+2);
+ 
+ si A = 16 entonces
+    visualizarLN 'Calculo de expresion simple con parentesis(mult) FUNCIONA';
+ sino	
+    visualizarLN 'Calculo de expresion simple con parentesis(mult) FALLO';	
+ fin_si;
+ 
+  A = 2-((4+2)+2);
+ 
+ si A = 0-6 entonces
+    visualizarLN 'Calculo de expresion simple con parentesis(resta) FUNCIONA';
+ sino	
+    visualizarLN 'Calculo de expresion simple con parentesis(resta) FALLO';	
+ fin_si;
+ 
+ A = 2*((4+2)+(4/2/2*4)/2);
+ 
+ si A = 16 entonces
+    visualizarLN 'Calculo de expresion media con parentesis FUNCIONA';
+ sino	
+    visualizarLN 'Calculo de expresion media con parentesis FALLO';	
+ fin_si;
+ 
+  A = 2*((4+2)+(4/2/2*4)/2)+(((3-2)*3)+2*4);
+ 
+ si A = 27 entonces
+    visualizarLN 'Calculo de expresion media con muchos parentesis FUNCIONA';
+ sino	
+    visualizarLN 'Calculo de expresion media con muchos parentesis FALLO';	
+ fin_si;
+ 
+ A = (4-2*(2-74))*15-5;
+ 
+ si A = 2215 entonces
+    visualizarLN 'Calculo de expresion media con parentesis primero FUNCIONA';
+ sino	
+    visualizarLN 'Calculo de expresion media con parentesis primero FALLO';	
+ fin_si;
+ 
+  A = (4-2*(2-74))*15-5*80/2-4-32*2/8/2*2;
+ 
+ si A = 2008 entonces
+    visualizarLN 'Calculo de expresion compuesta con parentesis FUNCIONA';
+ sino	
+    visualizarLN 'Calculo de expresion compuesta con parentesis FALLO';	
+ fin_si;
+ 
+ 
+  A = 32*2/8/2*2+32*2/8/2*(2-2*2)*2/2/2-(4-2*(2-74))*15-5*80/2-4-32*2/8/2*2;
+ 
+ si A = 0-2428 entonces
+    visualizarLN 'Calculo de expresion super compuesta con parentesis FUNCIONA';
+ sino	
+    visualizarLN 'Calculo de expresion super compuesta con parentesis FALLO';	
+ fin_si;
+ 
+ A[1n] = 5n;
+ A[2n] = 10n;
+ A[3n] = 15n;
+ A[4n] = 20n;
+ 
+ 
+ D = 1n;
+ E = 0n;
+ mientras D <= 4n hacer
+    E = E + A[D];
+    D = D + 1n;
+  fin_mientras;
+  
+  si E = 50n entonces
+    visualizarLN 'Calculo de expresion con expresion en subindice de arreglo FUNCIONA';
+ sino	
+    visualizarLN 'Calculo de expresion con expresion en subindice de arreglos FALLO';	
+ fin_si;
+  
+fin_proc;
+
+procedimiento COMPARACIONESCOMPUESTAS();
+var A : numero;
+var B : numero;
+comenzar
+A = 20;
+B = 30n;
+
+ si AENTERO(B) > A+1 entonces
+    visualizarLN 'Comparacion compuesta mayor FUNCIONA';
+ sino	
+    visualizarLN 'Comparacion compuesta mayor FALLO';
+ fin_si;
+ 
+ si AENTERO(B) >= A+1 entonces
+    visualizarLN 'Comparacion compuesta mayorigual FUNCIONA';
+ sino	
+    visualizarLN 'Comparacion compuesta mayorigual FALLO';
+ fin_si;
+ 
+  si AENTERO(B) < A+15 entonces
+    visualizarLN 'Comparacion compuesta menor FUNCIONA';
+ sino	
+    visualizarLN 'Comparacion compuesta menor FALLO';
+ fin_si;
+ 
+  si AENTERO(B) <= A+15 entonces
+    visualizarLN 'Comparacion compuesta menorigual FUNCIONA';
+ sino	
+    visualizarLN 'Comparacion compuesta menorigual FALLO';
+ fin_si;
+ 
+ si AENTERO(B) <> A+15 entonces
+    visualizarLN 'Desigualdad compuesta FUNCIONA';
+ sino	
+    visualizarLN 'Desigualdad compuesta FALLO';
+ fin_si;
+ 
+ si AENTERO(B) = A+10 entonces
+    visualizarLN 'Igualdad compuesta FUNCIONA';
+ sino	
+    visualizarLN 'Igualdad compuesta FALLO';
+ fin_si;
+ 
+  si POTENCIA(3)+POTENCIA(2)*2 = POTENCIA(1)+POTENCIA(4) entonces
+    visualizarLN 'Igualdad compuesta con funciones FUNCIONA';
+ sino	
+    visualizarLN 'Igualdad compuesta con funciones FALLO';	
+ fin_si;
+fin_proc;
+
+procedimiento COMPARACIONESSIMPLES();
+comenzar
+ si 1 > 0 entonces
+    visualizarLN 'Comparacion simple mayor FUNCIONA';
+ sino	
+    visualizarLN 'Comparacion simple mayor FALLO';
+ fin_si;
+ 
+ si 1 >= 0 entonces
+    visualizarLN 'Comparacion simple mayorigual(mayor) FUNCIONA';
+ sino	
+    visualizarLN 'Comparacion simple mayorigual(mayor) FALLO';
+ fin_si;
+ 
+ si 1 >= 1 entonces
+    visualizarLN 'Comparacion simple mayorigual(igual) FUNCIONA';
+ sino	
+    visualizarLN 'Comparacion simple mayorigual(igual) FALLO';
+ fin_si;
+ 
+  si 1 < 2 entonces
+    visualizarLN 'Comparacion simple menor FUNCIONA';
+ sino	
+    visualizarLN 'Comparacion simple menor FALLO';
+ fin_si;
+ 
+  si 1 <= 3 entonces
+    visualizarLN 'Comparacion simple menorigual(menor) FUNCIONA';
+ sino	
+    visualizarLN 'Comparacion simple menorigual(menor) FALLO';
+ fin_si;
+ 
+ si 3 <= 3 entonces
+    visualizarLN 'Comparacion simple menorigual(igual) FUNCIONA';
+ sino	
+    visualizarLN 'Comparacion simple menorigual(igual) FALLO';
+ fin_si;
+ 
+ si 1 <> 0 entonces
+    visualizarLN 'Desigualdad simple FUNCIONA';
+ sino	
+    visualizarLN 'Desigualdad simple FALLO';
+ fin_si;
+ 
+ si 1 = 1 entonces
+    visualizarLN 'Igualdad simple FUNCIONA';
+ sino	
+    visualizarLN 'Igualdad simple FALLO';
+ fin_si;
+ 
+ si espar(2) entonces
+    visualizarLN 'espar positivo FUNCIONA';
+ sino	
+    visualizarLN 'espar positivo FALLO';
+ fin_si;
+ 
+ si esimpar(1) entonces
+    visualizarLN 'esimpar positivo FUNCIONA';
+ sino	
+    visualizarLN 'esimpar positivo FALLO';
+ fin_si;
+ 
+  si espar(0-2) entonces
+    visualizarLN 'espar negativo FUNCIONA';
+ sino	
+    visualizarLN 'espar negativo FALLO';
+ fin_si;
+ 
+ si esimpar(0-1) entonces
+    visualizarLN 'esimpar negativo FUNCIONA';
+ sino	
+    visualizarLN 'esimpar negativo FALLO';
+ fin_si;
+ 
+ si espar(2n) entonces
+    visualizarLN 'espar numero FUNCIONA';
+ sino	
+    visualizarLN 'espar numero FALLO';
+ fin_si;
+ 
+ si esimpar(1n) entonces
+    visualizarLN 'esimpar numero FUNCIONA';
+ sino	
+    visualizarLN 'esimpar numero FALLO';
+ fin_si;
+ 
+fin_proc;
+
+procedimiento VECTORES()
+var B : numero;
+var C : numero;
+comenzar
+
+	B = 3n;
+	C = 10n;
+	
+	A[B] = C;
+	si A[B] = 10n entonces
+		visualizarLN 'asignacion arreglo FUNCIONA';
+	sino
+		visualizarLN 'asignacion arreglo FALLO';
+	fin_si;
+	
+	C = A[9n];
+	si C = 0n entonces
+		visualizarLN 'obtencion posicion no asignada FUNCIONA';
+	sino
+		visualizarLN 'obtencion posicion no asignada FALLO';
+	fin_si;
+	
+	C = 2n;
+	A[B+C] = 8n+2n;
+	si A[5n] = 10n entonces
+		visualizarLN 'obtencion posicion de arreglo con suma FUNCIONA';
+	sino
+		visualizarLN 'obtencion posicion de arreglo con suma FALLO';
+	fin_si;
+fin_proc;
+
+
+procedimiento PRINCIPAL()
+{var X: numero;
+var X43: numero;
+var XNAT: numero;}
+var A:numero;
+var C:numero;
+comenzar
+
+
+  llamar ERRORARREGLO();
+  llamar ERRORARERRORDIVISIONPORCEROREGLO();
+  llamar ERRORCONVERSIONILEGALNATURAL();
+ 
+ 
+  llamar COMPARACIONESSIMPLES();
+  llamar CAMBIOTIPO();  
+  llamar EXPRESIONES();
+  llamar BUCLES();
+  llamar COMPARACIONESCOMPUESTAS();
+  llamar VECTORES();
+
+  X = 2;
+  llamar PROC1(5,X*2+1,X,54);
+  S = AENTERO(5);
+  X = FUN1(5, 8);
+  XNAT = ANATURAL(X);
+  visualizarLN XNAT;
+  X = 32*2/8/2*2+32*2/8/2*2-2*2/2/2-4*15-5*80/2-4-32*2/8/2*2;
+  visualizarLN X;
+
+fin_proc;

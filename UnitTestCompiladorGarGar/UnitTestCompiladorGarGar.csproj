@@ -54,7 +54,6 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="CodedUITest1.cs" />
     <Compile Include="EjecucionTest.cs" />
     <Compile Include="CompiladorTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -94,6 +93,8 @@
     <EmbeddedResource Include="Programas\basico.gar" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Programas\pruebaLecturaCinco.gar" />
+    <EmbeddedResource Include="Programas\testEjecucion.gar" />
     <None Include="UIMap.uitest" />
   </ItemGroup>
   <Choose>

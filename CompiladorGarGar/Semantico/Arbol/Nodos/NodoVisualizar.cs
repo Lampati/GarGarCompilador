@@ -9,7 +9,6 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
 {
     class NodoVisualizar : NodoArbolSemantico
     {
-        public bool ConSaltoLinea { get; set; }
 
         public bool ConPausa { get; set; }
 
@@ -47,6 +46,8 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             strBldr.Append(this.hijosNodo[2].Codigo);
             strBldr.Append(") ");
             strBldr.Append(";");
+
+            strBldr.AppendLine(string.Format("Writeln(UserFile,{0});", this.hijosNodo[2].Codigo));
 
             if (ConPausa)
             {

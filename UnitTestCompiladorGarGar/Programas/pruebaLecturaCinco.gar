@@ -1,0 +1,13 @@
+﻿
+PROCEDIMIENTO PRINCIPAL() 
+var x : numero;
+comenzar  
+
+leer x;
+
+si (x = 5) entonces
+	mostrar('OK');
+sino
+	mostrar('ERROR');
+finsi;
+finproc;

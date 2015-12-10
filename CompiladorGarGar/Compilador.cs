@@ -32,6 +32,12 @@ namespace CompiladorGargar
 
         }
 
+        public Compilador(string fileName)
+            : this(false, Path.GetTempPath(), Path.GetTempPath(), fileName)
+        {
+
+        }
+
         public Compilador(bool modo, string dirTemp, string dirEjec, string nombre)
         {
             modoDebug = modo;
