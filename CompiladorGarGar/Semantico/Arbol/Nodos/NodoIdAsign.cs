@@ -54,7 +54,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             return this;
         }
 
-        public override void CalcularCodigo()
+        public override void CalcularCodigo(bool modoDebug)
         {
             StringBuilder strBldr = new StringBuilder();
 

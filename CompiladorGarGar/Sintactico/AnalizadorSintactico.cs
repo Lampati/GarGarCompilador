@@ -39,6 +39,8 @@ namespace CompiladorGargar.Sintactico
       
         public bool HabilitarSemantico  {get; set;}
 
+        public bool ModoDebug { get; set; }
+
      
         public AnalizadorSintactico(string path)
         {
@@ -586,6 +588,8 @@ namespace CompiladorGargar.Sintactico
             }
         }
 
-     
+
+
+        
     }
 }

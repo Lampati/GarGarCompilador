@@ -35,7 +35,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
         }
 
       
-        public override void CalcularCodigo()
+        public override void CalcularCodigo(bool modoDebug)
         {
             this.VariablesProcPrincipal = this.hijosNodo[0].VariablesProcPrincipal;
             this.Codigo = this.hijosNodo[0].Codigo;

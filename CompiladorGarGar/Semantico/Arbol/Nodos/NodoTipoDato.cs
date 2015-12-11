@@ -20,7 +20,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             this.TipoDato = hijoASintetizar.TipoDato;
         }
 
-        public override void CalcularCodigo()
+        public override void CalcularCodigo(bool modoDebug)
         {
             StringBuilder strBldr = new StringBuilder();
             string tipoDato;

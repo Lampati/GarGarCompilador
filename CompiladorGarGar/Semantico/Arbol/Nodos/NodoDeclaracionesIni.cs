@@ -22,7 +22,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
         }
 
 
-        public override void CalcularCodigo()
+        public override void CalcularCodigo(bool modoDebug)
         {
             // esto es asi pq las variables del proc, tienen que ser globales
             if (this.hijosNodo.Count > 1)

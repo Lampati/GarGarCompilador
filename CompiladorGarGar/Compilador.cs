@@ -38,6 +38,12 @@ namespace CompiladorGargar
 
         }
 
+        public Compilador(bool modo, string fileName)
+            : this(modo, Path.GetTempPath(), Path.GetTempPath(), fileName)
+        {
+
+        }
+
         public Compilador(bool modo, string dirTemp, string dirEjec, string nombre)
         {
             modoDebug = modo;
@@ -53,6 +59,7 @@ namespace CompiladorGargar
 
             analizadorSintactico = new AnalizadorSintactico(GlobalesCompilador.NOMBRE_ARCH_GRAMATICA);
             analizadorSintactico.HabilitarSemantico = true;
+            analizadorSintactico.ModoDebug = modoDebug;
         }
       
 
@@ -189,7 +196,7 @@ namespace CompiladorGargar
                 res.TablaSimbolos = res.ArbolSemanticoResultado.TablaDeSimbolos;
 
                 long timeStampCod = Stopwatch.GetTimestamp();
-                res.CodigoPascal = res.ArbolSemanticoResultado.CalcularCodigo();
+                res.CodigoPascal = res.ArbolSemanticoResultado.CalcularCodigo(modoDebug);
 
                 Dictionary<int, int> bindeoLineasEntrePascalYGarGar = BindearLineas(res.CodigoPascal.Split(new string[] { "\r\n" }, StringSplitOptions.None));
 

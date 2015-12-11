@@ -109,7 +109,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
 
        
 
-        public override void CalcularCodigo()
+        public override void CalcularCodigo(bool modoDebug)
         {
             StringBuilder strBldr = new StringBuilder();
 

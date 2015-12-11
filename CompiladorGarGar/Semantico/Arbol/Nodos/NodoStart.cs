@@ -26,7 +26,6 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             
         }
 
-        public string MemoriaGlobal { get; set; }
 
         public override void ChequearAtributos(Terminal t)
         {
@@ -54,7 +53,6 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
    
         public override NodoArbolSemantico CalcularAtributos(Terminal t)
         {
-            //if (this.hijosNodo.Count > 1)
             //{
             //    ArmarActividadViewModel();
             //}
@@ -62,7 +60,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
         }
 
      
-        public override void CalcularCodigo()
+        public override void CalcularCodigo(bool modoDebug)
         {
 			// flanzani 15/11/2012
             // IDC_APP_6
@@ -71,7 +69,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             StringBuilder strBldr = new StringBuilder();
 
             strBldr.AppendLine("program temporal;");
-            strBldr.AppendLine("uses crt, Sysutils, ArchResultadoManager;");
+            strBldr.AppendLine("uses crt, Sysutils;");
             strBldr.AppendLine("");
 
             if (!string.IsNullOrWhiteSpace(this.hijosNodo[0].ConstantesGlobales))
@@ -101,15 +99,12 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             // Agregar funciones por defecto en el framework
             // Agrego la definicion de las funciones del framework para que aparezcan en pascal
             strBldr.AppendLine(GeneracionCodigoHelpers.DefinirFuncionesFramework(this.TablaSimbolos));       
-     
-            strBldr.AppendLine(GeneracionCodigoHelpers.ArmarProcedimientoMarcarEntradaEnArchivo(this.TablaSimbolos));
-            strBldr.AppendLine(GeneracionCodigoHelpers.ArmarProcedimientoResFinalEnArchivo(this.TablaSimbolos));
+
 
             
             strBldr.AppendLine(this.hijosNodo[1].Codigo);
 
             strBldr.AppendLine("begin");
-            strBldr.AppendLine(GeneracionCodigoHelpers.CrearArchivoDeResultados());
             strBldr.AppendLine(@"Assign(UserFile,'resultado.txt');");
             strBldr.AppendLine("Rewrite(UserFile);");
              
@@ -121,44 +116,30 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             strBldr.AppendLine("except");
             strBldr.AppendLine("on E: SysUtils.EDivByZero do");
             strBldr.AppendLine("begin");
-            strBldr.AppendLine(string.Format("WriteLn('Error Fatal: Se intento dividir por cero en la linea ',{0});",GeneracionCodigoHelpers.VariableContadoraLineas));
-            strBldr.AppendLine(GeneracionCodigoHelpers.CrearErrorEnArch("Division Por Cero", "Se intento dividir por cero. Dicha operacion no esta permitida" ));
-            strBldr.AppendLine(GeneracionCodigoHelpers.CrearProcedimientoResultadoIncorrectoEnArchivo());
+            strBldr.AppendLine(string.Format("WriteLn('ERROR FATAL: Se intento dividir por cero en la linea ',{0});",GeneracionCodigoHelpers.VariableContadoraLineas));
             strBldr.AppendLine("end;");
             strBldr.AppendLine("on EIteracion: EIteracionInfinitaException do");
             strBldr.AppendLine("begin");
-            strBldr.AppendLine(string.Format("WriteLn('Error Fatal: Iteracion infinita posible encontrada en la linea ',{0});", GeneracionCodigoHelpers.VariableContadoraLineas));
-            strBldr.AppendLine(GeneracionCodigoHelpers.CrearErrorEnArch("Iteracion Infinita", "La iteracion parece no terminar. Por favor revise la condicion para que se cumpla."));
-            strBldr.AppendLine(GeneracionCodigoHelpers.CrearProcedimientoResultadoIncorrectoEnArchivo());
+            strBldr.AppendLine(string.Format("WriteLn('ERROR FATAL: Iteracion infinita posible encontrada en la linea ',{0});", GeneracionCodigoHelpers.VariableContadoraLineas));
             strBldr.AppendLine("end;");
             strBldr.AppendLine("on ERango: SysUtils.ERangeError do");
             strBldr.AppendLine("begin");
             strBldr.AppendLine(string.Format("WriteLn('Error Fatal: Se intento acceder a una posicion invalida de un arreglo en la linea ',{0});", GeneracionCodigoHelpers.VariableContadoraLineas));
-            strBldr.AppendLine(GeneracionCodigoHelpers.CrearErrorEnArch("Posicion invalida de arreglo", "Se intento acceder a una posicion invalida de un arreglo. Por favor revise que no se este intentando acceder al arreglo por fuera de sus limites."));
-            strBldr.AppendLine(GeneracionCodigoHelpers.CrearProcedimientoResultadoIncorrectoEnArchivo());
             strBldr.AppendLine("end;");
             strBldr.AppendLine("on EIndiceInvalido: EIndiceArregloInvalido do");
             strBldr.AppendLine("begin");
             strBldr.AppendLine("WriteLn(EIndiceInvalido.Message);");
-            strBldr.AppendLine(GeneracionCodigoHelpers.CrearErrorEnArchConVariable("Indice invalido de arreglo", "EIndiceInvalido.Message"));
-            strBldr.AppendLine(GeneracionCodigoHelpers.CrearProcedimientoResultadoIncorrectoEnArchivo());
             strBldr.AppendLine("end;");
             strBldr.AppendLine("on ERaiz: EMatematicaRaizException do");
             strBldr.AppendLine("begin");
             strBldr.AppendLine("WriteLn(ERaiz.Message);");
-            strBldr.AppendLine(GeneracionCodigoHelpers.CrearErrorEnArchConVariable("Error al operar con una raiz", "ERaiz.Message"));
-            strBldr.AppendLine(GeneracionCodigoHelpers.CrearProcedimientoResultadoIncorrectoEnArchivo());
             strBldr.AppendLine("end;");            
             strBldr.AppendLine("on ETangente: EMatematicaTangenteException do");
             strBldr.AppendLine("begin");
             strBldr.AppendLine("WriteLn(ETangente.Message);");
-            strBldr.AppendLine(GeneracionCodigoHelpers.CrearErrorEnArchConVariable("Error al operar con una tangente", "ETangente.Message"));
-            strBldr.AppendLine(GeneracionCodigoHelpers.CrearProcedimientoResultadoIncorrectoEnArchivo());
             strBldr.AppendLine("end;"); 
             strBldr.AppendLine("on ETotal: Exception do");
             strBldr.AppendLine("begin");
-            strBldr.AppendLine(GeneracionCodigoHelpers.CrearErrorEnArch("Error fatal", "Error fatal no controlable al ejecutar la aplicacion."));
-            strBldr.AppendLine(GeneracionCodigoHelpers.CrearProcedimientoResultadoIncorrectoEnArchivo());
             strBldr.AppendLine("end;");
             strBldr.AppendLine("end;");
             strBldr.AppendLine(string.Format("WriteLn('<<presione cualquier tecla para finalizar el programa>>');"));

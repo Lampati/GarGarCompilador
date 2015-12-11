@@ -57,6 +57,8 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
         public bool ProcPrincipalCrearUnaVez { get; set; }
         public bool ProcPrincipalYaCreadoyCorrecto {get; set;}
 
+        
+
         public string LexemaVariable
         {
             get
@@ -91,9 +93,6 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
 
         public TipoDeclaracionesPermitidas DeclaracionesPermitidas { get; set; }
 
-        //Entrega 4
-
-        //sintetizado
         public bool EsFirma { get; set; }
         public string VariablesProcPrincipal { get; set; }
         public string VariablesGlobales { get; set; }
@@ -176,6 +175,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             this.elemento = elem;
             this.padreNodo = nodoPadre;
             this.hijosNodo = new List<NodoArbolSemantico>();
+
 
             inicializado = false;
 
@@ -371,9 +371,11 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             return this.elemento.ToString();
         }
         
-        public virtual void CalcularCodigo()
+        public virtual void CalcularCodigo(bool modoDebug)
         {
             
         }
+
+       
     }
 }

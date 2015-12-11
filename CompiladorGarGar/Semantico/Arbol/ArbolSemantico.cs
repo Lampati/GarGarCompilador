@@ -100,7 +100,7 @@ namespace CompiladorGargar.Semantico.Arbol
 
         }
 
-        public string CalcularCodigo()
+        public string CalcularCodigo(bool modoDebug)
         {
             PilaRecorredor pilaRecorredor = new PilaRecorredor();
             pilaRecorredor.InsertarElemento(new NodoPilaRecorredor(this.nodoRaiz));
@@ -121,7 +121,7 @@ namespace CompiladorGargar.Semantico.Arbol
                 }
                 else
                 {
-                    nodoRecorredorActual.Nodo.CalcularCodigo();
+                    nodoRecorredorActual.Nodo.CalcularCodigo(modoDebug);
 
                     if (!pilaRecorredor.esVacia())
                     {

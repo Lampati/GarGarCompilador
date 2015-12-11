@@ -35,7 +35,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
         }
 
 
-        public override void CalcularCodigo()
+        public override void CalcularCodigo(bool modoDebug)
         {
             StringBuilder strBldr = new StringBuilder();
 
@@ -47,7 +47,10 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             strBldr.Append(") ");
             strBldr.Append(";");
 
-            strBldr.AppendLine(string.Format("Writeln(UserFile,{0});", this.hijosNodo[2].Codigo));
+            if (modoDebug)
+            {
+                strBldr.AppendLine(string.Format("Writeln(UserFile,{0});", this.hijosNodo[2].Codigo));
+            }
 
             if (ConPausa)
             {

@@ -137,7 +137,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
         }
 
       
-        public override void CalcularCodigo()
+        public override void CalcularCodigo(bool modoDebug)
         {
             bool esFuncion = (this.hijosNodo[0].Lexema.ToUpper() == "FUNCION");
 
@@ -186,12 +186,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
                     strBldr.AppendLine("begin");
                     strBldr.Append(GeneracionCodigoHelpers.InicializarVariablesProc(this.TablaSimbolos, this.Lexema));
                     strBldr.Append("\t").AppendLine(this.hijosNodo[7].Codigo.Replace("\r\n", "\r\n\t"));
-                    if (this.Lexema.ToUpper() == "SALIDA")
-                    {
-                        strBldr.AppendLine(GeneracionCodigoHelpers.ArmarLlamadaResFinalEnArchivo(this.TablaSimbolos));
-                        strBldr.AppendLine(GeneracionCodigoHelpers.CrearProcedimientoResultadoCorrectoEnArchivo());
-                    }
-
+                   
                     strBldr.AppendLine("end;");
                     strBldr.AppendLine();
                 //}

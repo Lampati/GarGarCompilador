@@ -1187,7 +1187,6 @@
     <Content Include="Configuracion\CompiladorPascal\Compilador\msg\errorues.msg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="Configuracion\validacionesSemanticasIncorrectas.gar" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
