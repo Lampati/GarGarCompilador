@@ -10,13 +10,9 @@ namespace CompiladorGargar.Semantico
     {
       
         public ErrorSemanticoException(MensajeError mensErr)
-            : base(mensErr.Mensaje)
+            : base(mensErr.Mensaje, GlobalesCompilador.UltFila, GlobalesCompilador.UltCol)
         {
             this.Tipo = "Semantico";
-
-            //Cambiado a partir de ahora, toma de global
-            this.Fila = GlobalesCompilador.UltFila;
-            this.Columna = GlobalesCompilador.UltCol;
 
             Mensaje = mensErr;
         }

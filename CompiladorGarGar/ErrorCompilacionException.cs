@@ -22,9 +22,5 @@ namespace CompiladorGargar
             this.Columna = c;
         }
 
-        public ErrorCompilacionException(string desc)
-            : base(desc)
-        {
-        }
     }
 }
