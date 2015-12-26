@@ -168,21 +168,6 @@ namespace CompiladorGargar.Sintactico.ErroresManager
                 case ContextoLinea.Mostrar:
                     mensajeError = "La operación mostrar no tiene lugar. Solo puede ser hecha dentro del cuerpo de un procedimiento o funcion";
                     break;
-                case ContextoLinea.Ninguno:
-                    // flanzani 9/11/2012
-                    // IDC_APP_3
-                    // Cambiar el := por =
-                    // Cambio el componenteLexico por el Igual, ya que ahora es el que indica asignacion
-                    if (terminal.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Igual)
-                    {
-                        mensajeError = string.Format("Error sintactico en {0}. {0} no tiene lugar o la linea comienza incorrectamente.", terminal.Componente.Lexema);
-                    }
-                    else
-                    {
-                        mensajeError = string.Format("Error sintactico en {0}. {0} no tiene lugar o la linea comienza incorrectamente.", terminal.Componente.Lexema);
-                    }
-                    
-                    break;
                 default:
                     mensajeError = string.Format("Error sintactico en {0}. {0} no tiene lugar o la linea comienza incorrectamente.", terminal.Componente.Lexema);
                     break;

@@ -73,7 +73,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager
 
         internal void ArrojarExcepcion()
         {
-            throw new ValidacionException(mensajeError, mensajeError.Descripcion) { Fila = filaDelError, Columna = columnaDelError };
+            throw new ValidacionException(mensajeError) { Fila = filaDelError, Columna = columnaDelError };
         }
 
         public override string ToString()

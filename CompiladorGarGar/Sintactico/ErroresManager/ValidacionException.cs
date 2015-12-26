@@ -13,7 +13,8 @@ namespace CompiladorGargar.Sintactico.ErroresManager
         public int Columna { get; set; }
         public MensajeError MensjError { get; set; }
 
-        public ValidacionException(MensajeError mensaje, string m) : base(m)
+        public ValidacionException(MensajeError mensaje)
+            : base(mensaje.Descripcion)
         {
             MensjError = mensaje;
         }
