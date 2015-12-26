@@ -16,10 +16,9 @@ namespace CompiladorGargar.Resultado
         public bool CompilacionGarGarCorrecta { get; set; }
         public bool GeneracionEjectuableCorrecto { get; set; }
 
-        public List<PasoAnalizadorSintactico> ListaErrores { get; set; }
+        public List<ErrorCompilacion> ListaErrores { get; set; }
         public List<PasoCompilacion> ListaDebugSintactico { get; set; }
         internal ArbolSemantico ArbolSemanticoResultado { get; set; }
-        public TablaSimbolos TablaSimbolos { get; set; }
 
         public string CodigoPascal { get; set; }
         public string ArchTemporalCodigoPascal { get; set; }
@@ -41,7 +40,7 @@ namespace CompiladorGargar.Resultado
         public ResultadoCompilacion()
         {
             ListaDebugSintactico = new List<PasoCompilacion>();
-            ListaErrores = new List<PasoAnalizadorSintactico>();
+            ListaErrores = new List<ErrorCompilacion>();
             CompilacionGarGarCorrecta = false;
         }
 
@@ -87,12 +86,12 @@ namespace CompiladorGargar.Resultado
 
             for (int i = 0; i < this.ListaErrores.Count; i++)
             {
-                if ( this.ListaErrores[i].TipoError == GlobalesCompilador.TipoError.Sintactico && this.ListaErrores[i].MensajeError != null)
+                if ( this.ListaErrores[i].TipoError == GlobalesCompilador.TipoError.Sintactico && this.ListaErrores[i].Mensaje != null)
                 {
                     //Pregunto si el error ya aparece en la linea. Si aparece, con distinta columna, lo saco.
-                    if (listaErroresYaVistos.Find(x => x.CodigoGlobal == this.ListaErrores[i].MensajeError.CodigoGlobal && x.Fila == this.ListaErrores[i].Fila) == null)
+                    if (listaErroresYaVistos.Find(x => x.CodigoGlobal == this.ListaErrores[i].Mensaje.CodigoGlobal && x.Fila == this.ListaErrores[i].Fila) == null)
                     {
-                        listaErroresYaVistos.Add(new PosicionErrorSintactico() { CodigoGlobal = this.ListaErrores[i].MensajeError.CodigoGlobal, Fila = this.ListaErrores[i].Fila });
+                        listaErroresYaVistos.Add(new PosicionErrorSintactico() { CodigoGlobal = this.ListaErrores[i].Mensaje.CodigoGlobal, Fila = this.ListaErrores[i].Fila });
                     }
                     else
                     {

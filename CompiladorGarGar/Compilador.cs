@@ -99,7 +99,7 @@ namespace CompiladorGargar
                     {
 
                         timeStampPaso = Stopwatch.GetTimestamp();
-                        List<PasoAnalizadorSintactico> retorno = this.analizadorSintactico.AnalizarSintacticamenteUnPaso();
+                        List<ErrorCompilacion> retorno = this.analizadorSintactico.AnalizarSintacticamenteUnPaso();
                         float tiempoAnalizSint = ((float)(Stopwatch.GetTimestamp() - timeStampPaso)) / ((float)Stopwatch.Frequency);
 
                         if (retorno.Count > 0)
@@ -151,7 +151,7 @@ namespace CompiladorGargar
                 }          
                 catch (Exception ex)
                 {
-                    string error = "Ha habido un error en la compilacion. Por favor reporte el problema" ;
+                    string error = null;
 
                     if (modoDebug)
                     {
@@ -159,7 +159,7 @@ namespace CompiladorGargar
                     }
 
                     res.CompilacionGarGarCorrecta = false;
-                    res.ListaErrores.Add(new PasoAnalizadorSintactico(error,GlobalesCompilador.TipoError.Ninguno,0,0));
+                    res.ListaErrores.Add(new ErrorCompilacion(new ErrorDesconocido(error), GlobalesCompilador.TipoError.Ninguno, 0, 0));
                 }
                 
                 res.TiempoCompilacionTotal = temporizador.Elapsed.TotalSeconds;
@@ -167,8 +167,8 @@ namespace CompiladorGargar
             else
             {
                 //No hay nada para compilar
-                res.ListaErrores.Add(new PasoAnalizadorSintactico(
-                    "No se ha ingresado programa para compilar",
+                res.ListaErrores.Add(new ErrorCompilacion(
+                    new ErrorNoHayProgramaParaCompilar() ,
                     GlobalesCompilador.TipoError.Sintactico,
                     GlobalesCompilador.UltFila,
                     GlobalesCompilador.UltCol,
@@ -193,7 +193,6 @@ namespace CompiladorGargar
             if (res.CompilacionGarGarCorrecta)
             {
                 res.ArbolSemanticoResultado = this.analizadorSintactico.ArbolSemantico;
-                res.TablaSimbolos = res.ArbolSemanticoResultado.TablaDeSimbolos;
 
                 long timeStampCod = Stopwatch.GetTimestamp();
                 res.CodigoPascal = res.ArbolSemanticoResultado.CalcularCodigo(modoDebug);

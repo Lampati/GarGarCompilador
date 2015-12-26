@@ -25,9 +25,9 @@ namespace UnitTestCompiladorGarGar
             Assert.IsFalse(res.CompilacionGarGarCorrecta,
                 string.Format("La compilacion da correcta y esperaba error {0}", errorPretendido));
 
-            Assert.IsTrue(res.ListaErrores[0].MensajeError.CodigoGlobal == errorPretendido,
+            Assert.IsTrue(res.ListaErrores[0].Mensaje.CodigoGlobal == errorPretendido,
                 string.Format("Error {0} y esperaba {1}. Error: {2}",
-                res.ListaErrores[0].MensajeError.CodigoGlobal, errorPretendido, res.ListaErrores[0].MensajeError.Mensaje));
+                res.ListaErrores[0].Mensaje.CodigoGlobal, errorPretendido, res.ListaErrores[0].Mensaje.Descripcion));
         }
 
         [TestMethod]

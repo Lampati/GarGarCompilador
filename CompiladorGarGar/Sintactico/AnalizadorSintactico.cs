@@ -87,9 +87,9 @@ namespace CompiladorGargar.Sintactico
             return (CadenaEntrada.EsFinDeCadena() && Pila.EsFinDePila());
         }      
 
-        public List<PasoAnalizadorSintactico> AnalizarSintacticamenteUnPaso()
+        public List<ErrorCompilacion> AnalizarSintacticamenteUnPaso()
         {
-            List<PasoAnalizadorSintactico> retorno = new List<PasoAnalizadorSintactico>();
+            List<ErrorCompilacion> retorno = new List<ErrorCompilacion>();
             try
             {
                 retorno = AnalizarUnSoloPaso();
@@ -97,7 +97,7 @@ namespace CompiladorGargar.Sintactico
             catch (ErrorLexicoException ex)
             {
                 cantErroresSintacticos++;
-                retorno.Add(new PasoAnalizadorSintactico(ex.Message, GlobalesCompilador.TipoError.Sintactico, ex.Fila, ex.Columna, false, new ErrorLexemaInvalido(ex.Message)));
+                retorno.Add(new ErrorCompilacion(new ErrorLexemaInvalido(ex.Message), GlobalesCompilador.TipoError.Sintactico, ex.Fila, ex.Columna, false));
                 //MostrarError(new ErrorCompiladorEventArgs(ex.Tipo, ex.Descripcion, ex.Fila, ex.Columna, false));
             }            
             catch (ErrorSintacticoException ex)
@@ -133,7 +133,7 @@ namespace CompiladorGargar.Sintactico
                         HabilitarSemantico = false;
                         pararCompilacion = true; //siempre paro la compilacion al primer error
 
-                        retorno.Add(new PasoAnalizadorSintactico(mensajeAMostrar, GlobalesCompilador.TipoError.Sintactico, filaAMostrar, colAMostrar, pararCompilacion, excepVal.MensjError));
+                        retorno.Add(new ErrorCompilacion(excepVal.MensjError, GlobalesCompilador.TipoError.Sintactico, filaAMostrar, colAMostrar, pararCompilacion ));
                     }
                 }
                 catch (ErroresManager.AnalizadorErroresException exAnaliz)
@@ -144,25 +144,25 @@ namespace CompiladorGargar.Sintactico
                     pararCompilacion = exAnaliz.Parar;
 
                     CompiladorGargar.Sintactico.ErroresManager.Errores.MensajeError mensErr = new CompiladorGargar.Sintactico.ErroresManager.Errores.ErrorVacio();
-                    mensErr.Mensaje = exAnaliz.Message;
+                    mensErr.Descripcion = exAnaliz.Message;
                     mensErr.EsErrorBienDefinido = false;
 
-                    retorno.Add(new PasoAnalizadorSintactico(mensajeAMostrar, GlobalesCompilador.TipoError.Sintactico, filaAMostrar, colAMostrar, pararCompilacion, mensErr)); //siempre paro la compilacion al primer error
+                    retorno.Add(new ErrorCompilacion(mensErr, GlobalesCompilador.TipoError.Sintactico, filaAMostrar, colAMostrar, pararCompilacion)); //siempre paro la compilacion al primer error
                 }
 
 
                 if (cantErroresSintacticos >= GlobalesCompilador.CANT_MAX_ERRORES_SINTACTICOS)
                 {
-                    retorno.Add(new PasoAnalizadorSintactico("Se paró la compilacion por la cantidad de errores.", GlobalesCompilador.TipoError.Sintactico, 0, 0, true));
+                    retorno.Add(new ErrorCompilacion(new ErrorMaxCantDeErroresSintacticos(), GlobalesCompilador.TipoError.Sintactico, 0, 0, true));
                 }
             }
             return retorno;
         }
 
 
-        internal List<PasoAnalizadorSintactico> AnalizarUnSoloPaso()
+        internal List<ErrorCompilacion> AnalizarUnSoloPaso()
         {
-            List<PasoAnalizadorSintactico> retorno = new List<PasoAnalizadorSintactico>();
+            List<ErrorCompilacion> retorno = new List<ErrorCompilacion>();
 
             if (!(CadenaEntrada.EsFinDeCadena() && Pila.EsFinDePila()))
             {
@@ -272,9 +272,9 @@ namespace CompiladorGargar.Sintactico
         }
 
 
-        private List<PasoAnalizadorSintactico> AnalizarPila()
+        private List<ErrorCompilacion> AnalizarPila()
         {
-            List<PasoAnalizadorSintactico> retorno = new List<PasoAnalizadorSintactico>();
+            List<ErrorCompilacion> retorno = new List<ErrorCompilacion>();
 
             if (Pila.ObtenerTope().GetType() == typeof(NoTerminal))
             {

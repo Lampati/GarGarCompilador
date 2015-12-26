@@ -24,7 +24,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
 
     public abstract class MensajeError
     {
-        public string Mensaje { get; set; }
+        public string Descripcion { get; set; }
         public int CodigoGlobal { get; set; }
         public bool EsErrorBienDefinido { get; set; }
         public List<Sentencias> SentenciasQueTienenElError { get; set; }
@@ -42,20 +42,20 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
             : base()
         {
             CodigoGlobal = 0;
-            Mensaje = "";
+            Descripcion = "";
             EsErrorBienDefinido = false;
         }
     }
 
 
-
+   
     public class ErrorDeclaracionConstanteGenerico : MensajeError
     {
         public ErrorDeclaracionConstanteGenerico()
             : base()
         {
             CodigoGlobal = 1;
-            Mensaje = "La declaración de la constante contiene un error sintactico. La manera correcta de declarar una constante es: \"const EJEMPLO : TIPO = VALOR;\"\r\n(TIPO = \"numero|texto|booleano\")";
+            Descripcion = "La declaración de la constante contiene un error sintactico. La manera correcta de declarar una constante es: \"const EJEMPLO : TIPO = VALOR;\"\r\n(TIPO = \"numero|texto|booleano\")";
             SentenciasQueTienenElError.Add(Sentencias.DeclaracionConstante);
         }
     }
@@ -66,7 +66,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
             : base()
         {
             CodigoGlobal = 2;
-            Mensaje = "El : esta especificado mas de una vez en la declaración";
+            Descripcion = "El : esta especificado mas de una vez en la declaración";
             SentenciasQueTienenElError.Add(Sentencias.DeclaracionConstante);
             SentenciasQueTienenElError.Add(Sentencias.DeclaracionVariable);
         }
@@ -78,7 +78,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
             : base()
         {
             CodigoGlobal = 3;
-            Mensaje = ": faltante en la declaración";
+            Descripcion = ": faltante en la declaración";
             SentenciasQueTienenElError.Add(Sentencias.DeclaracionConstante);
             SentenciasQueTienenElError.Add(Sentencias.DeclaracionVariable);
         }
@@ -90,7 +90,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
             : base()
         {
             CodigoGlobal = 4;
-            Mensaje = "El = esta especificado mas de una vez en la declaración";
+            Descripcion = "El = esta especificado mas de una vez en la declaración";
             SentenciasQueTienenElError.Add(Sentencias.DeclaracionConstante);
         }
     }
@@ -101,7 +101,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
             : base()
         {
             CodigoGlobal = 5;
-            Mensaje = "= faltante en la declaración";
+            Descripcion = "= faltante en la declaración";
             SentenciasQueTienenElError.Add(Sentencias.DeclaracionConstante);
         }
     }
@@ -112,7 +112,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
             : base()
         {
             CodigoGlobal = 6;
-            Mensaje = "Las constantes no pueden ser arreglos";
+            Descripcion = "Las constantes no pueden ser arreglos";
             SentenciasQueTienenElError.Add(Sentencias.DeclaracionConstante);
         }
     }
@@ -123,7 +123,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
             : base()
         {
             CodigoGlobal = 7;
-            Mensaje = "El tipo de dato esta especificado mas de una vez en la declaración";
+            Descripcion = "El tipo de dato esta especificado mas de una vez en la declaración";
             SentenciasQueTienenElError.Add(Sentencias.DeclaracionConstante);
             SentenciasQueTienenElError.Add(Sentencias.DeclaracionVariable);
         }
@@ -135,7 +135,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
             : base()
         {
             CodigoGlobal = 8;
-            Mensaje = "Tipo de dato faltante en la declaración";
+            Descripcion = "Tipo de dato faltante en la declaración";
             SentenciasQueTienenElError.Add(Sentencias.DeclaracionConstante);
             SentenciasQueTienenElError.Add(Sentencias.DeclaracionVariable);
         }
@@ -147,7 +147,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
             : base()
         {
             CodigoGlobal = 9;
-            Mensaje = "El valor de constante esta especificado mas de una vez en la declaración";
+            Descripcion = "El valor de constante esta especificado mas de una vez en la declaración";
             SentenciasQueTienenElError.Add(Sentencias.DeclaracionConstante);
             
         }
@@ -159,7 +159,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
             : base()
         {
             CodigoGlobal = 10;
-            Mensaje = "Valor de constante faltante en la declaración";
+            Descripcion = "Valor de constante faltante en la declaración";
             SentenciasQueTienenElError.Add(Sentencias.DeclaracionConstante);
         }
     }
@@ -170,7 +170,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
             : base()
         {
             CodigoGlobal = 11;
-            Mensaje = string.Format("{0} no tiene lugar en una declaración de constante", elementoErroneo);
+            Descripcion = string.Format("{0} no tiene lugar en una declaración de constante", elementoErroneo);
             SentenciasQueTienenElError.Add(Sentencias.DeclaracionConstante);
         }
     }
@@ -185,7 +185,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
             // Cambiar el := por =
             // Cambio el componenteLexico por el Igual, ya que ahora es el que indica asignacion
             CodigoGlobal = 12;
-            Mensaje = "El = esta especificado mas de una vez en la asignacion";
+            Descripcion = "El = esta especificado mas de una vez en la asignacion";
 
             SentenciasQueTienenElError.Add(Sentencias.Asignacion);
         }
@@ -201,7 +201,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
             // Cambiar el := por =
             // Cambio el componenteLexico por el Igual, ya que ahora es el que indica asignacion
             CodigoGlobal = 13;
-            Mensaje = "= faltante en la asignacion";
+            Descripcion = "= faltante en la asignacion";
 
             SentenciasQueTienenElError.Add(Sentencias.Asignacion);
         }
@@ -213,7 +213,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
             : base()
         {
             CodigoGlobal = 14;
-            Mensaje = "Error sintactico en la parte derecha de la asignación";
+            Descripcion = "Error sintactico en la parte derecha de la asignación";
             SentenciasQueTienenElError.Add(Sentencias.Asignacion);
         }
     }
@@ -224,7 +224,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
             : base()
         {
             CodigoGlobal = 15;
-            Mensaje = "Error sintactico en la parte izq de la asignación";
+            Descripcion = "Error sintactico en la parte izq de la asignación";
             SentenciasQueTienenElError.Add(Sentencias.Asignacion);
         }
     }
@@ -235,7 +235,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
             : base()
         {
             CodigoGlobal = 16;
-            Mensaje = "Los parentesis no estan balanceados en la parte izquierda de la asignacion";
+            Descripcion = "Los parentesis no estan balanceados en la parte izquierda de la asignacion";
             SentenciasQueTienenElError.Add(Sentencias.Asignacion);
 
         }
@@ -247,7 +247,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
             : base()
         {
             CodigoGlobal = 17;
-            Mensaje = "Los parentesis no estan balanceados en la parte derecha de la asignacion";
+            Descripcion = "Los parentesis no estan balanceados en la parte derecha de la asignacion";
             SentenciasQueTienenElError.Add(Sentencias.Asignacion);
         }
     }
@@ -258,7 +258,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
             : base()
         {
             CodigoGlobal = 18;
-            Mensaje = "Los corchetes no estan balanceados en la parte izquierda de la asignacion";
+            Descripcion = "Los corchetes no estan balanceados en la parte izquierda de la asignacion";
             SentenciasQueTienenElError.Add(Sentencias.Asignacion);
         }
     }
@@ -269,7 +269,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
             : base()
         {
             CodigoGlobal = 19;
-            Mensaje = "Los corchetes no estan balanceados en la parte derecha de la asignacion";
+            Descripcion = "Los corchetes no estan balanceados en la parte derecha de la asignacion";
             SentenciasQueTienenElError.Add(Sentencias.Asignacion);
         }
     }
@@ -280,7 +280,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
             : base()
         {
             CodigoGlobal = 20;
-            Mensaje = "La asignacion contiene una expresión mal formada en su parte izquierda";
+            Descripcion = "La asignacion contiene una expresión mal formada en su parte izquierda";
             SentenciasQueTienenElError.Add(Sentencias.Asignacion);
         }
     }
@@ -291,7 +291,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
             : base()
         {
             CodigoGlobal = 21;
-            Mensaje = "La asignacion contiene una expresión mal formada en su parte derecha";
+            Descripcion = "La asignacion contiene una expresión mal formada en su parte derecha";
             SentenciasQueTienenElError.Add(Sentencias.Asignacion);
         }
     }
@@ -306,7 +306,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
             // Cambiar el := por =
             // Cambio el componenteLexico por el Igual, ya que ahora es el que indica asignacion
             CodigoGlobal = 22;
-            Mensaje = "La asignacion contiene un error sintactico. La manera correcta de usar una asignación es la siguiente: \"VARIABLE = EXPRESION;\"\r\n(VARIABLE = variable o posición de arreglo)\r\n(EXPRESION = expresión de cualquier tipo)";
+            Descripcion = "La asignacion contiene un error sintactico. La manera correcta de usar una asignación es la siguiente: \"VARIABLE = EXPRESION;\"\r\n(VARIABLE = variable o posición de arreglo)\r\n(EXPRESION = expresión de cualquier tipo)";
             SentenciasQueTienenElError.Add(Sentencias.Asignacion);
         }
     }
@@ -318,7 +318,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
         {
 
             CodigoGlobal = 23;
-            Mensaje = "La declaración de la función contiene un error sintactico. La manera correcta de declarar una función es la siguiente: \"funcion EJEMPLO ( PARAMETROS ) : TIPO comenzar BLOQUE finfunc RETORNO;\"\r\n(PARAMETROS = \"param1 : TIPO, param2 : arreglo[MAX] de TIPO\")\r\n(TIPO = \"numero|texto|booleano\")\r\n(BLOQUE = contenido de la función)\r\n(RETORNO = expresión conteniendo el retorno de la función)";
+            Descripcion = "La declaración de la función contiene un error sintactico. La manera correcta de declarar una función es la siguiente: \"funcion EJEMPLO ( PARAMETROS ) : TIPO comenzar BLOQUE finfunc RETORNO;\"\r\n(PARAMETROS = \"param1 : TIPO, param2 : arreglo[MAX] de TIPO\")\r\n(TIPO = \"numero|texto|booleano\")\r\n(BLOQUE = contenido de la función)\r\n(RETORNO = expresión conteniendo el retorno de la función)";
             SentenciasQueTienenElError.Add(Sentencias.DeclaracionFuncion);
         }
     }
@@ -329,7 +329,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
             : base()
         {
             CodigoGlobal = 24;
-            Mensaje = "La declaración del procedimiento contiene un error sintactico. La manera correcta de declarar un procedimiento es la siguiente: \"procedimiento EJEMPLO ( PARAMETROS ) comenzar BLOQUE finproc;\"\r\n(PARAMETROS = \"param1 : TIPO, param2 : arreglo[MAX] de TIPO\")\r\n(TIPO = \"numero|texto|booleano\")\r\n(BLOQUE = contenido del procedimiento)";
+            Descripcion = "La declaración del procedimiento contiene un error sintactico. La manera correcta de declarar un procedimiento es la siguiente: \"procedimiento EJEMPLO ( PARAMETROS ) comenzar BLOQUE finproc;\"\r\n(PARAMETROS = \"param1 : TIPO, param2 : arreglo[MAX] de TIPO\")\r\n(TIPO = \"numero|texto|booleano\")\r\n(BLOQUE = contenido del procedimiento)";
             SentenciasQueTienenElError.Add(Sentencias.DeclaracionProcedimiento);
         }
     }
@@ -340,7 +340,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
             : base()
         {
             CodigoGlobal = 25;
-            Mensaje = "La declaración de la variable contiene un error sintactico. La manera correcta de declarar una variable es la siguiente: \"var LISTA : TIPO\" o \"var LISTA : arreglo[MAX] de TIPO\"\r\n(LISTA = \"nombre1,nombre2,nombre3...\")\r\n(TIPO = \"numero|texto|booleano\")";
+            Descripcion = "La declaración de la variable contiene un error sintactico. La manera correcta de declarar una variable es la siguiente: \"var LISTA : TIPO\" o \"var LISTA : arreglo[MAX] de TIPO\"\r\n(LISTA = \"nombre1,nombre2,nombre3...\")\r\n(TIPO = \"numero|texto|booleano\")";
             SentenciasQueTienenElError.Add(Sentencias.DeclaracionVariable);
         }
     }
@@ -351,7 +351,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
             : base()
         {
             CodigoGlobal = 26;
-            Mensaje = "La declaración de variables es incorrecta. Debe ser una lista de identificadores separados por comas o un identificador solo";
+            Descripcion = "La declaración de variables es incorrecta. Debe ser una lista de identificadores separados por comas o un identificador solo";
             SentenciasQueTienenElError.Add(Sentencias.DeclaracionVariable);
         }
     }
@@ -362,7 +362,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
             : base()
         {
             CodigoGlobal = 27;
-            Mensaje = "El arreglo esta especificado mas de una vez en la declaración";
+            Descripcion = "El arreglo esta especificado mas de una vez en la declaración";
             SentenciasQueTienenElError.Add(Sentencias.DeclaracionVariable);
         }
     }
@@ -373,7 +373,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
             : base()
         {
             CodigoGlobal = 28;
-            Mensaje = "Los corchetes no estan balanceados en la declaracion del arreglo";
+            Descripcion = "Los corchetes no estan balanceados en la declaracion del arreglo";
             SentenciasQueTienenElError.Add(Sentencias.DeclaracionVariable);
         }
     }
@@ -384,7 +384,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
             : base()
         {
             CodigoGlobal = 29;
-            Mensaje = string.Format("Error sintactico: {0} es incorrecto en la declaración de un arreglo. La forma correcta es arreglo [MAX] de TIPO", elementoErroneo);
+            Descripcion = string.Format("Error sintactico: {0} es incorrecto en la declaración de un arreglo. La forma correcta es arreglo [MAX] de TIPO", elementoErroneo);
             SentenciasQueTienenElError.Add(Sentencias.DeclaracionVariable);
         }
     }
@@ -395,7 +395,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
             : base()
         {
             CodigoGlobal = 30;
-            Mensaje = "El mientras contiene un error sintactico. La manera correcta de usar un mientras es la siguiente: \"mientras ( EXPRBOOLEANA ) hacer BLOQUE finmientras;\"\r\n(EXPRBOOLEANA = expresión del tipo booleana)\r\n(BLOQUE = contenido del mientras)";
+            Descripcion = "El mientras contiene un error sintactico. La manera correcta de usar un mientras es la siguiente: \"mientras ( EXPRBOOLEANA ) hacer BLOQUE finmientras;\"\r\n(EXPRBOOLEANA = expresión del tipo booleana)\r\n(BLOQUE = contenido del mientras)";
             SentenciasQueTienenElError.Add(Sentencias.Mientras);
         }
     }
@@ -406,7 +406,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
             : base()
         {
             CodigoGlobal = 31;
-            Mensaje = "El fin de un bloque si debe especificarse de la siguiente manera: finsi;";
+            Descripcion = "El fin de un bloque si debe especificarse de la siguiente manera: finsi;";
             SentenciasQueTienenElError.Add(Sentencias.Si);
         }
     }
@@ -417,7 +417,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
             : base()
         {
             CodigoGlobal = 32;
-            Mensaje = "La llamada al procedimiento contiene un error sintactico. La manera correcta de usar una llamada a procedimiento es la siguiente: \"llamar NOMBREPROC ( EXPRESIONES );\"\r\n(EXPRESIONES = expresiones de cualquier tipo, separadas por coma)";
+            Descripcion = "La llamada al procedimiento contiene un error sintactico. La manera correcta de usar una llamada a procedimiento es la siguiente: \"llamar NOMBREPROC ( EXPRESIONES );\"\r\n(EXPRESIONES = expresiones de cualquier tipo, separadas por coma)";
             SentenciasQueTienenElError.Add(Sentencias.LlamarProcedimiento);
         }
     }
@@ -428,7 +428,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
             : base()
         {
             CodigoGlobal = 33;
-            Mensaje = "La llamada a leer contiene un error sintactico. La manera correcta de usar una llamada a leer es la siguiente: \"leer VARIABLE;\"\r\n(VARIABLE = variable o posición de arreglo)";
+            Descripcion = "La llamada a leer contiene un error sintactico. La manera correcta de usar una llamada a leer es la siguiente: \"leer VARIABLE;\"\r\n(VARIABLE = variable o posición de arreglo)";
         }
     }
 
@@ -438,7 +438,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
             : base()
         {
             CodigoGlobal = 34;
-            Mensaje = "El fin de un bloque mientras debe especificarse de la siguiente manera: finmientras;";
+            Descripcion = "El fin de un bloque mientras debe especificarse de la siguiente manera: finmientras;";
             SentenciasQueTienenElError.Add(Sentencias.Mientras);
         }
     }
@@ -449,7 +449,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
             : base()
         {
             CodigoGlobal = 35;
-            Mensaje = "La declaracion del bloque si contiene un error sintactico.  La manera correcta de declarar un si es la siguiente: \"si ( EXPRBOOLEANA ) entonces BLOQUE sino BLOQUE finsi;\"\r\n(EXPRBOOLEANA = expresión del tipo booleana)\r\n(BLOQUE = contenido del si/sino)";
+            Descripcion = "La declaracion del bloque si contiene un error sintactico.  La manera correcta de declarar un si es la siguiente: \"si ( EXPRBOOLEANA ) entonces BLOQUE sino BLOQUE finsi;\"\r\n(EXPRBOOLEANA = expresión del tipo booleana)\r\n(BLOQUE = contenido del si/sino)";
             SentenciasQueTienenElError.Add(Sentencias.Si);
         }
     }
@@ -460,7 +460,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
             : base()
         {
             CodigoGlobal = 36;
-            Mensaje = "La llamada a mostrar contiene un error sintactico. La manera correcta de usar una llamada a mostrar es la siguiente: \"mostrar ( EXPRESIONES );\" o \"mostrarp ( EXPRESIONES );\"\r\n(EXPRESIONES = expresiones de cualquier tipo, separadas por coma)";
+            Descripcion = "La llamada a mostrar contiene un error sintactico. La manera correcta de usar una llamada a mostrar es la siguiente: \"mostrar ( EXPRESIONES );\" o \"mostrarp ( EXPRESIONES );\"\r\n(EXPRESIONES = expresiones de cualquier tipo, separadas por coma)";
             SentenciasQueTienenElError.Add(Sentencias.Mostrar);
         }
     }
@@ -471,7 +471,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
             : base()
         {
             CodigoGlobal = 37;
-            Mensaje = "El fin de la declaración de un procedimiento debe especificarse de la siguiente manera: finproc;";
+            Descripcion = "El fin de la declaración de un procedimiento debe especificarse de la siguiente manera: finproc;";
             SentenciasQueTienenElError.Add(Sentencias.DeclaracionProcedimiento);
         }
     }
@@ -482,7 +482,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
             : base()
         {
             CodigoGlobal = 38;
-            Mensaje = "El fin de la declaración de una función debe especificarse de la siguiente manera: finfunc RETORNO;";
+            Descripcion = "El fin de la declaración de una función debe especificarse de la siguiente manera: finfunc RETORNO;";
             SentenciasQueTienenElError.Add(Sentencias.DeclaracionFuncion);
         }
     }
@@ -493,7 +493,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
             : base()
         {
             CodigoGlobal = 39;
-            Mensaje = "El fin de la declaracion de la funcion contiene un error sintactico.";
+            Descripcion = "El fin de la declaracion de la funcion contiene un error sintactico.";
             SentenciasQueTienenElError.Add(Sentencias.DeclaracionFuncion);
         }
     }
@@ -504,7 +504,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
             : base()
         {
             CodigoGlobal = 40;
-            Mensaje = "Hay llamadas a leer repetidas en la misma linea";
+            Descripcion = "Hay llamadas a leer repetidas en la misma linea";
             SentenciasQueTienenElError.Add(Sentencias.Leer);
         }
     }
@@ -515,7 +515,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
             : base()
         {
             CodigoGlobal = 41;
-            Mensaje = "La llamada a leer debe estar acompañada de una variable o una posición de un arreglo";
+            Descripcion = "La llamada a leer debe estar acompañada de una variable o una posición de un arreglo";
             SentenciasQueTienenElError.Add(Sentencias.Leer);
         }
     }
@@ -526,7 +526,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
             : base()
         {
             CodigoGlobal = 42;
-            Mensaje = "La llamada a leer puede estar acompañada unicamente de una variable o una posición de un arreglo";
+            Descripcion = "La llamada a leer puede estar acompañada unicamente de una variable o una posición de un arreglo";
             SentenciasQueTienenElError.Add(Sentencias.Leer);
         }
     }
@@ -537,7 +537,22 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
             : base()
         {
             CodigoGlobal = 43;
-            Mensaje = mensaje;
+            Descripcion = mensaje;
+        }
+    }
+
+    public class ErrorMaxCantDeErroresSintacticos : MensajeError
+    {
+        public ErrorMaxCantDeErroresSintacticos()
+            : base()
+        {
+            CodigoGlobal = 999;
+
+            SentenciasQueTienenElError.Add(Sentencias.Ninguno);
+
+            StringBuilder strbldr = new StringBuilder("Se paró la compilacion por la cantidad de errores.");
+
+            Descripcion = strbldr.ToString();
         }
     }
 
@@ -556,7 +571,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
             StringBuilder strbldr = new StringBuilder("El arreglo ").Append(nombreArr).Append(" es del tipo ").Append(EnumUtils.stringValueOf(tipoArr));
             strbldr.Append(" pero se le intento asignar el tipo ").Append(EnumUtils.stringValueOf(tipoAsignado));
 
-            Mensaje = strbldr.ToString();
+            Descripcion = strbldr.ToString();
         }
     }
 
@@ -572,7 +587,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
 
             StringBuilder strbldr = new StringBuilder("La variable ").Append(nombre).Append(" no esta declarada.");
 
-            Mensaje = strbldr.ToString();
+            Descripcion = strbldr.ToString();
         }
     }
 
@@ -587,7 +602,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
 
             StringBuilder strbldr = new StringBuilder("La variable ").Append(nombre).Append(" esta declarada como variable y se intento usar como arreglo");
 
-            Mensaje = strbldr.ToString();
+            Descripcion = strbldr.ToString();
         }
     }
 
@@ -602,7 +617,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
 
             StringBuilder strbldr = new StringBuilder("La variable ").Append(nombre).Append(" esta declarada como una constante, no puede modificarse su valor.");
 
-            Mensaje = strbldr.ToString();
+            Descripcion = strbldr.ToString();
         }
     }
 
@@ -620,7 +635,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
             StringBuilder strbldr = new StringBuilder("La variable ").Append(nombre).Append(" es del tipo ").Append(EnumUtils.stringValueOf(tipo));
             strbldr.Append(" pero se le intento asignar el tipo ").Append(EnumUtils.stringValueOf(tipoAsignado));
 
-            Mensaje = strbldr.ToString();
+            Descripcion = strbldr.ToString();
         }
     }
 
@@ -636,7 +651,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
             StringBuilder strbldr = new StringBuilder("La variable ").Append(nombre).Append(" es un arreglo. Debe usar un indice para asignarle el contenido");
             strbldr.Append(" a una de sus posiciones. No se puede asignar el contenido total de un arreglo a otro. ");
 
-            Mensaje = strbldr.ToString();
+            Descripcion = strbldr.ToString();
         }
     }
 
@@ -651,7 +666,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
 
             StringBuilder strbldr = new StringBuilder("La condicion resultante del bloque mientras debe ser booleana");
 
-            Mensaje = strbldr.ToString();
+            Descripcion = strbldr.ToString();
         }
     }
 
@@ -666,7 +681,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
 
             StringBuilder strbldr = new StringBuilder("La condicion resultante del bloque si debe ser booleana");
 
-            Mensaje = strbldr.ToString();
+            Descripcion = strbldr.ToString();
         }
     }
 
@@ -685,7 +700,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
             StringBuilder strbldr = new StringBuilder("La constante ").Append(nombre).Append(" es del tipo ").Append(EnumUtils.stringValueOf(tipo));
             strbldr.Append(" pero se le intento asignar el tipo ").Append(EnumUtils.stringValueOf(tipoAsignado));
 
-            Mensaje = strbldr.ToString();
+            Descripcion = strbldr.ToString();
         }
     }
 
@@ -700,7 +715,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
 
             StringBuilder strbldr = new StringBuilder("La constante ").Append(nombre).Append(" ya existia en ese contexto");
 
-            Mensaje = strbldr.ToString();
+            Descripcion = strbldr.ToString();
         }
     }
 
@@ -715,7 +730,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
 
             StringBuilder strbldr = new StringBuilder("La variable ").Append(nombre).Append(" ya existia en ese contexto");
 
-            Mensaje = strbldr.ToString();
+            Descripcion = strbldr.ToString();
         }
     }
 
@@ -730,7 +745,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
 
             StringBuilder strbldr = new StringBuilder("La variable ").Append(nombre).Append(" es booleana, no se le puede asignar un valor desde el teclado, porque sus unicos valores son verdadero y falso.");
 
-            Mensaje = strbldr.ToString();
+            Descripcion = strbldr.ToString();
         }
     }
 
@@ -745,7 +760,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
 
             StringBuilder strbldr = new StringBuilder("El indice del arreglo debe ser un numero.");
 
-            Mensaje = strbldr.ToString();
+            Descripcion = strbldr.ToString();
         }
     }
 
@@ -760,7 +775,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
 
             StringBuilder strbldr = new StringBuilder("El arreglo ").Append(nombre).Append(" ya existia.");
 
-            Mensaje = strbldr.ToString();
+            Descripcion = strbldr.ToString();
         }
     }
 
@@ -775,7 +790,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
 
             StringBuilder strbldr = new StringBuilder("El tope de un arreglo no puede ser decimal.");
 
-            Mensaje = strbldr.ToString();
+            Descripcion = strbldr.ToString();
         }
     }
 
@@ -789,7 +804,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
             SentenciasQueTienenElError.Add(Sentencias.Asignacion);
             SentenciasQueTienenElError.Add(Sentencias.DeclaracionConstante);
 
-            Mensaje = string.Format("No se pueden manejar valores numericos mas grandes que {0} en tiempo de compilacion", valor);
+            Descripcion = string.Format("No se pueden manejar valores numericos mas grandes que {0} en tiempo de compilacion", valor);
         }
     }
 
@@ -803,7 +818,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
             SentenciasQueTienenElError.Add(Sentencias.Asignacion);
             SentenciasQueTienenElError.Add(Sentencias.DeclaracionConstante);
 
-            Mensaje = string.Format("No se pueden manejar valores numericos mas chicos que {0} en tiempo de compilacion", valor);
+            Descripcion = string.Format("No se pueden manejar valores numericos mas chicos que {0} en tiempo de compilacion", valor);
         }
     }
 
@@ -818,7 +833,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
 
             StringBuilder strbldr = new StringBuilder("Ya existe la funcion ").Append(nombre);
 
-            Mensaje = strbldr.ToString();
+            Descripcion = strbldr.ToString();
         }
     }
 
@@ -833,7 +848,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
 
             StringBuilder strbldr = new StringBuilder("Ya existe el procedimiento ").Append(nombre);
 
-            Mensaje = strbldr.ToString();
+            Descripcion = strbldr.ToString();
         }
     }
 
@@ -848,7 +863,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
 
             StringBuilder strbldr = new StringBuilder("Principal no puede ser una funcion. Debe ser forzosamente un procedimiento");
 
-            Mensaje = strbldr.ToString();
+            Descripcion = strbldr.ToString();
         }
     }
 
@@ -866,7 +881,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
 
             StringBuilder strbldr = new StringBuilder("La funcion ").Append(nombre).Append(" esta declarada como ").Append(EnumUtils.stringValueOf(tipo)).Append(" pero la expresion que devuelve es ").Append(EnumUtils.stringValueOf(tipoExp));
 
-            Mensaje = strbldr.ToString();
+            Descripcion = strbldr.ToString();
         }
     }
 
@@ -881,7 +896,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
 
             StringBuilder strbldr = new StringBuilder("La funcion ").Append(nombre).Append(" no esta declarada.");
 
-            Mensaje = strbldr.ToString();
+            Descripcion = strbldr.ToString();
         }
     }
     public class ErrorUsoProcedimientoNoDeclarado : MensajeError
@@ -895,7 +910,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
 
             StringBuilder strbldr = new StringBuilder("El procedimiento ").Append(nombre).Append(" no esta declarado.");
 
-            Mensaje = strbldr.ToString();
+            Descripcion = strbldr.ToString();
         }
     }
 
@@ -910,7 +925,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
 
             StringBuilder strbldr = new StringBuilder("La cantidad de parametros para la funcion ").Append(nombre).Append(" es incorrecta.");
 
-            Mensaje = strbldr.ToString();
+            Descripcion = strbldr.ToString();
         }
     }
 
@@ -925,7 +940,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
 
             StringBuilder strbldr = new StringBuilder("La cantidad de parametros para el procedimiento ").Append(nombre).Append(" es incorrecta.");
 
-            Mensaje = strbldr.ToString();
+            Descripcion = strbldr.ToString();
         }
     }
 
@@ -940,7 +955,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
 
             StringBuilder strbldr = new StringBuilder("No se permiten declarar constantes aqui. Las constantes deben ser creadas en el contexto global, al principio del programa.");
 
-            Mensaje = strbldr.ToString();
+            Descripcion = strbldr.ToString();
         }
     }
 
@@ -956,7 +971,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
             StringBuilder strbldr = new StringBuilder("No se puede realizar operaciones logicas o aritmeticas con un ");
             strbldr.Append(" arreglo. Las operaciones logicas y aritmenticas se pueden realizar únicamente con las posiciones de un arreglo");
 
-            Mensaje = strbldr.ToString();
+            Descripcion = strbldr.ToString();
         }
     }
 
@@ -972,7 +987,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
             StringBuilder strbldr = new StringBuilder("Los operadores logicos and y or ");
             strbldr.Append("solo pueden ser usados con expresiones del tipo booleanas");
 
-            Mensaje = strbldr.ToString();
+            Descripcion = strbldr.ToString();
         }
     }
 
@@ -989,7 +1004,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
             strbldr.Append("solo pueden ser usados con expresiones del tipo numericas");
                         
 
-            Mensaje = strbldr.ToString();
+            Descripcion = strbldr.ToString();
         }
     }
 
@@ -1006,7 +1021,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
             StringBuilder strbldr = new StringBuilder("Se esta intentando comparar una expresion del tipo ").Append(EnumUtils.stringValueOf(tipo1));
             strbldr.Append(" con una del tipo ").Append(EnumUtils.stringValueOf(tipo2));
 
-            Mensaje = strbldr.ToString();
+            Descripcion = strbldr.ToString();
         }
     }
 
@@ -1023,7 +1038,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
             StringBuilder strbldr = new StringBuilder("Se esta intentando operar entre una expresion del tipo ").Append(EnumUtils.stringValueOf(tipo1));
             strbldr.Append(" y otra del tipo ").Append(EnumUtils.stringValueOf(tipo2));
 
-            Mensaje = strbldr.ToString();
+            Descripcion = strbldr.ToString();
         }
     }
 
@@ -1039,7 +1054,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
 
             StringBuilder strbldr = new StringBuilder("Existen parametros con el mismo nombre.");
 
-            Mensaje = strbldr.ToString();
+            Descripcion = strbldr.ToString();
         }
     }
 
@@ -1054,7 +1069,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
 
             StringBuilder strbldr = new StringBuilder("La constante numerica ").Append(nombre).Append(" no es mayor a 0. Solo se pueden usar constantes o numeros mayores a 0 al especificar el rango de los arreglos.");
 
-            Mensaje = strbldr.ToString();
+            Descripcion = strbldr.ToString();
         }
     }
 
@@ -1069,7 +1084,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
 
             StringBuilder strbldr = new StringBuilder("La constante ").Append(nombre).Append(" no es del tipo numero. Solo se pueden usar constantes numericas o numeros al especificar el rango de los arreglos.");
 
-            Mensaje = strbldr.ToString();
+            Descripcion = strbldr.ToString();
         }
     }
 
@@ -1084,7 +1099,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
 
             StringBuilder strbldr = new StringBuilder("La variable ").Append(nombre).Append(" no es una constante. Solo se pueden usar constantes o numeros al especificar el rango de los arreglos.");
 
-            Mensaje = strbldr.ToString();
+            Descripcion = strbldr.ToString();
         }
     }
 
@@ -1099,7 +1114,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
 
             StringBuilder strbldr = new StringBuilder("El numero ").Append(nombre).Append(" no es mayor a 0. Solo se pueden usar constantes o numeros mayores a 0 al especificar el rango de los arreglos.");
 
-            Mensaje = strbldr.ToString();
+            Descripcion = strbldr.ToString();
         }
     }
 
@@ -1114,7 +1129,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
 
             StringBuilder strbldr = new StringBuilder("").Append(nombre).Append(" no es del tipo numero. Solo se pueden usar constantes numericas o numeros al especificar el rango de los arreglos.");
 
-            Mensaje = strbldr.ToString();
+            Descripcion = strbldr.ToString();
         }
     }
 
@@ -1130,7 +1145,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
 
             StringBuilder strbldr = new StringBuilder("No se permiten declarar variables aqui. Las variables deben ser creadas en el contexto global al principio del programa o en la zona de declaraciones de un procedimiento o funcion");
 
-            Mensaje = strbldr.ToString();
+            Descripcion = strbldr.ToString();
         }
     }
 
@@ -1145,7 +1160,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
 
             StringBuilder strbldr = new StringBuilder("Unicamente se pueden negar expresiones booleanas");
 
-            Mensaje = strbldr.ToString();
+            Descripcion = strbldr.ToString();
         }
     }
 
@@ -1160,7 +1175,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
 
             StringBuilder strbldr = new StringBuilder("Error en el procedimiento principal: Debe haber unicamente un procedimiento principal y debe ser el ultimo.");
 
-            Mensaje = strbldr.ToString();
+            Descripcion = strbldr.ToString();
         }
     }
 
@@ -1175,7 +1190,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
 
             StringBuilder strbldr = new StringBuilder("No se puede dividir por cero.");
 
-            Mensaje = strbldr.ToString();
+            Descripcion = strbldr.ToString();
         }
     }
 
@@ -1191,7 +1206,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
 
             StringBuilder strbldr = new StringBuilder("El parametro ").Append(param).Append(" pasado a la funcion ");
             strbldr.Append(funcion).Append(" debe ser una variable, y se paso una arreglo.");
-            Mensaje = strbldr.ToString();
+            Descripcion = strbldr.ToString();
         }
     }
 
@@ -1207,7 +1222,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
 
             StringBuilder strbldr = new StringBuilder("El parametro ").Append(param).Append(" pasado a la funcion ");
             strbldr.Append(funcion).Append(" debe ser un arreglo, y se paso una variable.");
-            Mensaje = strbldr.ToString();
+            Descripcion = strbldr.ToString();
         }
     }
 
@@ -1223,7 +1238,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
 
             StringBuilder strbldr = new StringBuilder("El parametro ").Append(param).Append(" de la función ");
             strbldr.Append(funcion).Append(" esta definido por referencia, y se le intento pasar una constante. No se pueden pasar constantes por referencia.");
-            Mensaje = strbldr.ToString();
+            Descripcion = strbldr.ToString();
         }
     }
 
@@ -1239,7 +1254,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
 
             StringBuilder strbldr = new StringBuilder("El parametro ").Append(param).Append(" de la función ");
             strbldr.Append(funcion).Append(" esta especificado como por referencia y se le intento pasar una expresion. El parametro no puede ser el resultado de una expresion o un valor constante o una función. De ser necesario, asigne el valor a una nueva variable para pasarla por parametro.");
-            Mensaje = strbldr.ToString();
+            Descripcion = strbldr.ToString();
         }
     }
 
@@ -1258,7 +1273,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
             StringBuilder strbldr = new StringBuilder("Se intento pasar un tipo incorrecto al parametro ").Append(param).Append(" de la función ");
             strbldr.Append(funcion).Append(". Debe ser de tipo ").Append(EnumUtils.stringValueOf(tipo));
 
-            Mensaje = strbldr.ToString();
+            Descripcion = strbldr.ToString();
         }
     }
 
@@ -1277,7 +1292,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
 
             StringBuilder strbldr = new StringBuilder("El parametro ").Append(param).Append(" pasado al procedimiento ");
             strbldr.Append(funcion).Append(" debe ser una variable, y se paso una arreglo.");
-            Mensaje = strbldr.ToString();
+            Descripcion = strbldr.ToString();
         }
     }
 
@@ -1293,7 +1308,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
 
             StringBuilder strbldr = new StringBuilder("El parametro ").Append(param).Append(" pasado al procedimiento ");
             strbldr.Append(funcion).Append(" debe ser un arreglo, y se paso una variable.");
-            Mensaje = strbldr.ToString();
+            Descripcion = strbldr.ToString();
         }
     }
 
@@ -1309,7 +1324,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
 
             StringBuilder strbldr = new StringBuilder("El parametro ").Append(param).Append(" del procedimiento ");
             strbldr.Append(funcion).Append(" esta definido por referencia, y se le intento pasar una constante. No se pueden pasar constantes por referencia.");
-            Mensaje = strbldr.ToString();
+            Descripcion = strbldr.ToString();
         }
     }
 
@@ -1325,7 +1340,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
 
             StringBuilder strbldr = new StringBuilder("El parametro ").Append(param).Append(" del procedimiento ");
             strbldr.Append(funcion).Append(" esta especificado como por referencia y se le intento pasar una expresion. El parametro no puede ser el resultado de una expresion o un valor constante o una función. De ser necesario, asigne el valor a una nueva variable para pasarla por parametro.");
-            Mensaje = strbldr.ToString();
+            Descripcion = strbldr.ToString();
         }
     }
 
@@ -1344,7 +1359,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
             StringBuilder strbldr = new StringBuilder("Se intento pasar un tipo incorrecto al parametro ").Append(param).Append(" del procedimiento ");
             strbldr.Append(funcion).Append(". Debe ser de tipo ").Append(EnumUtils.stringValueOf(tipo));
 
-            Mensaje = strbldr.ToString();
+            Descripcion = strbldr.ToString();
         }
     }
 
@@ -1359,7 +1374,47 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
 
             StringBuilder strbldr = new StringBuilder("No se pueden manejar cadenas de texto mayores a ").Append(cantMax).Append(" caracteres en tiempo de compilación");
 
-            Mensaje = strbldr.ToString();
+            Descripcion = strbldr.ToString();
         }
     }
+
+
+
+    public class ErrorDesconocido : MensajeError
+    {
+        public ErrorDesconocido(string error)
+            : base()
+        {
+            CodigoGlobal = 9999;
+
+            SentenciasQueTienenElError.Add(Sentencias.Ninguno);
+
+            if (string.IsNullOrEmpty(error))
+            {
+                Descripcion = "Se paró la compilacion por la cantidad de errores.";
+            }
+            else
+            {
+                Descripcion = error;
+            }
+        }
+
+    }
+
+
+    public class ErrorNoHayProgramaParaCompilar : MensajeError
+    {
+        public ErrorNoHayProgramaParaCompilar()
+            : base()
+        {
+            CodigoGlobal = 9998;
+
+            SentenciasQueTienenElError.Add(Sentencias.Ninguno);
+
+            Descripcion = "No se ha ingresado programa para compilar.";
+          
+        }
+
+    }
+
 }

@@ -69,7 +69,7 @@ namespace CompiladorGargar
                                 Console.WriteLine("Error de compilacion");
                                 foreach (var error in res.ListaErrores)
                                 {
-                                    Console.WriteLine(string.Format("<{0},{1}> {2}",error.Fila,error.Columna, error.Descripcion));
+                                    Console.WriteLine(string.Format("<{0},{1}> {2}",error.Fila,error.Columna, error.Mensaje.Descripcion));
                                 }
                                 
                             }

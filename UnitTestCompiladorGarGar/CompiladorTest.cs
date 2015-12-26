@@ -27,7 +27,7 @@ namespace UnitTestCompiladorGarGar
             StringBuilder strBldr = new StringBuilder();
             foreach (var item in res.ListaErrores)
             {
-                strBldr.AppendLine(string.Format("{0},{1}: {2}", item.Fila, item.Columna, item.Descripcion));
+                strBldr.AppendLine(string.Format("{0},{1}: {2}", item.Fila, item.Columna, item.Mensaje.Descripcion));
             }
             return strBldr.ToString();
         }
@@ -191,7 +191,7 @@ namespace UnitTestCompiladorGarGar
 
              
 
-             Assert.IsTrue(res.ListaErrores[0].MensajeError.CodigoGlobal == 43);
+             Assert.IsTrue(res.ListaErrores[0].Mensaje.CodigoGlobal == 43);
          }
 
 
@@ -207,7 +207,7 @@ namespace UnitTestCompiladorGarGar
 
 
 
-            Assert.IsTrue(res.ListaErrores[0].MensajeError.CodigoGlobal == 43);
+            Assert.IsTrue(res.ListaErrores[0].Mensaje.CodigoGlobal == 43);
         }
 
 
