@@ -12,63 +12,63 @@ namespace CompiladorGargar.Sintactico.ErroresManager
 
 
         #region Declaraciones de constantes y variables
-        internal static bool ValidarDefTipoDatoFaltante(List<Terminal> lista)
+        internal static bool ValidarDefTipoDatoFaltante(List<Terminal> lista, List<Terminal> listaHastaAhora)
         {
             int cantidad = lista.FindAll(x => x.Componente.Token == Lexicografico.ComponenteLexico.TokenType.TipoDato).Count;
 
             return cantidad > 0;
         }
 
-        internal static bool ValidarDefTipoDatoRepetido(List<Terminal> lista)
+        internal static bool ValidarDefTipoDatoRepetido(List<Terminal> lista, List<Terminal> listaHastaAhora)
         {
             int cantidad = lista.FindAll(x => x.Componente.Token == Lexicografico.ComponenteLexico.TokenType.TipoDato).Count;
 
             return cantidad < 2;
         }
 
-        internal static bool ValidarTipoDatoFaltante(List<Terminal> lista)
+        internal static bool ValidarTipoDatoFaltante(List<Terminal> lista, List<Terminal> listaHastaAhora)
         {
             int cantidad = lista.FindAll(x => TerminalesHelpers.EsTipoDeDato(x)).Count;
 
             return cantidad > 0;
         }
 
-        internal static bool ValidarTipoDatoRepetido(List<Terminal> lista)
+        internal static bool ValidarTipoDatoRepetido(List<Terminal> lista, List<Terminal> listaHastaAhora)
         {
             int cantidad = lista.FindAll(x => TerminalesHelpers.EsTipoDeDato(x)).Count;
 
             return cantidad < 2;
         }
 
-        internal static bool ValidarAsignacionConstanteFaltante(List<Terminal> lista)
+        internal static bool ValidarAsignacionConstanteFaltante(List<Terminal> lista, List<Terminal> listaHastaAhora)
         {
             int cantidad = lista.FindAll(x => x.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Igual).Count;
 
             return cantidad > 0;
         }
 
-        internal static bool ValidarAsignacionConstanteRepetido(List<Terminal> lista)
+        internal static bool ValidarAsignacionConstanteRepetido(List<Terminal> lista, List<Terminal> listaHastaAhora)
         {
             int cantidad = lista.FindAll(x => x.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Igual).Count;
 
             return cantidad < 2;
         }
 
-        internal static bool ValidarAsignacionValorConstanteFaltante(List<Terminal> lista)
+        internal static bool ValidarAsignacionValorConstanteFaltante(List<Terminal> lista, List<Terminal> listaHastaAhora)
         {
             int cantidad = lista.FindAll(x => TerminalesHelpers.EsTerminalConValorConstante(x)).Count;
 
             return cantidad > 0;
         }
 
-        internal static bool ValidarAsignacionValorConstanteRepetido(List<Terminal> lista)
+        internal static bool ValidarAsignacionValorConstanteRepetido(List<Terminal> lista, List<Terminal> listaHastaAhora)
         {
             int cantidad = lista.FindAll(x => TerminalesHelpers.EsTerminalConValorConstante(x)).Count;
 
             return cantidad < 2;
         }
 
-        internal static bool ValidarDefTipoDatoSinArreglo(List<Terminal> lista)
+        internal static bool ValidarDefTipoDatoSinArreglo(List<Terminal> lista, List<Terminal> listaHastaAhora)
         {
             bool retorno = true;
 
@@ -80,28 +80,28 @@ namespace CompiladorGargar.Sintactico.ErroresManager
             return retorno;
         }
 
-        internal static bool ValidarEstarDefiniendoSoloUnID(List<Terminal> lista)
+        internal static bool ValidarEstarDefiniendoSoloUnID(List<Terminal> lista, List<Terminal> listaHastaAhora)
         {
             int cantidad = lista.FindAll(x => x.Componente.Token == Lexicografico.ComponenteLexico.TokenType.TipoDato).Count;
 
             return cantidad < 2;
         }
 
-        internal static bool IdRepetido(List<Terminal> lista)
+        internal static bool IdRepetido(List<Terminal> lista, List<Terminal> listaHastaAhora)
         {
             int cantidad = lista.FindAll(x => x.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Identificador).Count;
 
             return cantidad > 0;
         }
 
-        internal static bool IdFaltante(List<Terminal> lista)
+        internal static bool IdFaltante(List<Terminal> lista, List<Terminal> listaHastaAhora)
         {
             int cantidad = lista.FindAll(x => x.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Identificador).Count;
 
             return cantidad > 0;
         }
 
-        internal static bool CantidadIdsCorrectaYOrdenadosPorComas(List<Terminal> lista)
+        internal static bool CantidadIdsCorrectaYOrdenadosPorComas(List<Terminal> lista, List<Terminal> listaHastaAhora)
         {
             bool retorno = true;
 
@@ -126,7 +126,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager
             return retorno;
         }
 
-        internal static bool ArregloRepetido(List<Terminal> lista)
+        internal static bool ArregloRepetido(List<Terminal> lista, List<Terminal> listaHastaAhora)
         {
             int cantidad = lista.FindAll(x => x.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Arreglo).Count;
 
@@ -139,7 +139,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager
 
 
 
-        internal static bool ValidarFinMientras(List<Terminal> lista)
+        internal static bool ValidarFinMientras(List<Terminal> lista, List<Terminal> listaHastaAhora)
         {
             bool retorno = lista.Count == 2 
                 && lista[0].Componente.Token == Lexicografico.ComponenteLexico.TokenType.MientrasFin
@@ -148,7 +148,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager
             return retorno;
         }
 
-        internal static bool ValidarFinSi(List<Terminal> lista)
+        internal static bool ValidarFinSi(List<Terminal> lista, List<Terminal> listaHastaAhora)
         {
             bool retorno = lista.Count == 2
                 && lista[0].Componente.Token == Lexicografico.ComponenteLexico.TokenType.SiFin
@@ -158,7 +158,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager
         }
 
 
-        internal static bool ValidarFinProc(List<Terminal> lista)
+        internal static bool ValidarFinProc(List<Terminal> lista, List<Terminal> listaHastaAhora)
         {
             bool retorno = lista.Count == 2
                 && lista[0].Componente.Token == Lexicografico.ComponenteLexico.TokenType.ProcedimientoFin
@@ -167,7 +167,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager
             return retorno;
         }
 
-        internal static bool AsignacionRepetido(List<Terminal> lista)
+        internal static bool AsignacionRepetido(List<Terminal> lista, List<Terminal> listaHastaAhora)
         {
             // flanzani 9/11/2012
             // IDC_APP_3
@@ -180,7 +180,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager
 
        
 
-        internal static bool AsignacionFaltante(List<Terminal> lista)
+        internal static bool AsignacionFaltante(List<Terminal> lista, List<Terminal> listaHastaAhora)
         {
             // flanzani 9/11/2012
             // IDC_APP_3
@@ -193,24 +193,55 @@ namespace CompiladorGargar.Sintactico.ErroresManager
 
         
 
-        internal static bool AsignacionTerminaCorrectamente(List<Terminal> lista)
+        internal static bool AsignacionParteDerechaCorrecta(List<Terminal> lista, List<Terminal> listaHastaAhora)
         {
             int cantidad = lista.FindAll(x => x.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Igual).Count;
 
-            return cantidad > 0;
+            bool ultElementoFinSentencia = 
+                listaHastaAhora[listaHastaAhora.Count-1].Componente.Token == Lexicografico.ComponenteLexico.TokenType.FinSentencia;
+
+            bool contieneElementosIncompatiblesAsignacion =
+                lista.Exists(
+                    x => x.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Arreglo
+                        || x.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Comenzar
+                        || x.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Const
+                        || x.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Constantes
+                        || x.Componente.Token == Lexicografico.ComponenteLexico.TokenType.De
+                        || x.Componente.Token == Lexicografico.ComponenteLexico.TokenType.FuncionComienzo
+                        || x.Componente.Token == Lexicografico.ComponenteLexico.TokenType.FuncionFin
+                        || x.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Leer
+                        || x.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Llamar
+                        || x.Componente.Token == Lexicografico.ComponenteLexico.TokenType.MientrasComienzo
+                        || x.Componente.Token == Lexicografico.ComponenteLexico.TokenType.MientrasFin
+                        || x.Componente.Token == Lexicografico.ComponenteLexico.TokenType.MientrasHacer
+                        || x.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Mostrar
+                        || x.Componente.Token == Lexicografico.ComponenteLexico.TokenType.ProcedimientoComienzo
+                        || x.Componente.Token == Lexicografico.ComponenteLexico.TokenType.ProcedimientoFin
+                        || x.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Principal
+                        || x.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Referencia
+                        || x.Componente.Token == Lexicografico.ComponenteLexico.TokenType.SiComienzo
+                        || x.Componente.Token == Lexicografico.ComponenteLexico.TokenType.SiEntonces
+                        || x.Componente.Token == Lexicografico.ComponenteLexico.TokenType.SiFin
+                        || x.Componente.Token == Lexicografico.ComponenteLexico.TokenType.TipoBooleano
+                        || x.Componente.Token == Lexicografico.ComponenteLexico.TokenType.TipoDato
+                        || x.Componente.Token == Lexicografico.ComponenteLexico.TokenType.TipoTexto
+                        || x.Componente.Token == Lexicografico.ComponenteLexico.TokenType.TipoNumero
+                        || x.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Var
+                        || x.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Variables                        
+                    );
+
+            return ultElementoFinSentencia && !contieneElementosIncompatiblesAsignacion;
         }
 
-        internal static bool AsignacionParteIzqCorrecta(List<Terminal> lista)
+        internal static bool AsignacionParteIzqCorrecta(List<Terminal> lista, List<Terminal> listaHastaAhora)
         {
-            bool res = lista.Exists(x => 
-                                x.Componente.Token != Lexicografico.ComponenteLexico.TokenType.Identificador
-                                && x.Componente.Token != Lexicografico.ComponenteLexico.TokenType.CorcheteApertura                                
+            bool res = lista.Exists(x => x.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Igual 
                             );
-
+            
             return res;
         }
 
-        internal static bool ParentesisBalanceados(List<Terminal> lista)
+        internal static bool ParentesisBalanceados(List<Terminal> lista, List<Terminal> listaHastaAhora)
         {
             int cantidadAbiertos = lista.FindAll(x => x.Componente.Token == Lexicografico.ComponenteLexico.TokenType.ParentesisApertura).Count;
             int cantidadCerrados = lista.FindAll(x => x.Componente.Token == Lexicografico.ComponenteLexico.TokenType.ParentesisClausura).Count;
@@ -218,7 +249,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager
             return cantidadAbiertos == cantidadCerrados;
         }
 
-        internal static bool CorchetesBalanceados(List<Terminal> lista)
+        internal static bool CorchetesBalanceados(List<Terminal> lista, List<Terminal> listaHastaAhora)
         {
             int cantidadAbiertos = lista.FindAll(x => x.Componente.Token == Lexicografico.ComponenteLexico.TokenType.CorcheteApertura).Count;
             int cantidadCerrados = lista.FindAll(x => x.Componente.Token == Lexicografico.ComponenteLexico.TokenType.CorcheteClausura).Count;
@@ -226,21 +257,21 @@ namespace CompiladorGargar.Sintactico.ErroresManager
             return cantidadAbiertos == cantidadCerrados;
         }
 
-        internal static bool ElementosConValorNoContiguos(List<Terminal> lista)
+        internal static bool ElementosConValorNoContiguos(List<Terminal> lista, List<Terminal> listaHastaAhora)
         {
             List<Terminal> listaElementosConValorContiguos = lista.FindAll(x => TerminalesHelpers.EsTerminalConValor(x));
 
             return ChequeoContiguosIguales(lista, listaElementosConValorContiguos, TerminalesHelpers.EsTerminalConValor);
         }
 
-        internal static bool ElementosOperadoresNoContiguos(List<Terminal> lista)
+        internal static bool ElementosOperadoresNoContiguos(List<Terminal> lista, List<Terminal> listaHastaAhora)
         {
             List<Terminal> listaElementosOperadoresContiguos = lista.FindAll(x => TerminalesHelpers.EsOperador(x));
 
             return ChequeoContiguosIguales(lista, listaElementosOperadoresContiguos, TerminalesHelpers.EsOperador);
         }
 
-        internal static bool NegacionesCorrectas(List<Terminal> lista)
+        internal static bool NegacionesCorrectas(List<Terminal> lista, List<Terminal> listaHastaAhora)
         {
             bool retorno = true;
 
@@ -268,12 +299,12 @@ namespace CompiladorGargar.Sintactico.ErroresManager
         }
 
 
-        internal static bool ForzarFalso(List<Terminal> lista)
+        internal static bool ForzarFalso(List<Terminal> lista, List<Terminal> listaHastaAhora)
         {
             return false;
         }
 
-        internal static bool ForzarVerdadero(List<Terminal> lista)
+        internal static bool ForzarVerdadero(List<Terminal> lista, List<Terminal> listaHastaAhora)
         {
             return true;
         }
@@ -317,19 +348,19 @@ namespace CompiladorGargar.Sintactico.ErroresManager
             return retorno;
         }
 
-        internal static bool LeerRepetido(List<Terminal> lista)
+        internal static bool LeerRepetido(List<Terminal> lista, List<Terminal> listaHastaAhora)
         {
             int cantidad = lista.FindAll(x => x.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Leer).Count;
 
             return cantidad < 2;
         }
 
-        internal static bool LeerSolo(List<Terminal> lista)
+        internal static bool LeerSolo(List<Terminal> lista, List<Terminal> listaHastaAhora)
         {
             return lista.Count > 2;
         }
 
-        internal static bool LeerNoIdentificador(List<Terminal> lista)
+        internal static bool LeerNoIdentificador(List<Terminal> lista, List<Terminal> listaHastaAhora)
         {
             if (lista.Count > 0)
             {

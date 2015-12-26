@@ -5,6 +5,7 @@ using System.Text;
 using CompiladorGargar.Sintactico.Gramatica;
 using CompiladorGargar.Semantico.TablaDeSimbolos;
 using CompiladorGargar.Auxiliares;
+using CompiladorGargar.Sintactico.ErroresManager.Errores;
 
 namespace CompiladorGargar.Semantico.Arbol.Nodos
 {
@@ -29,7 +30,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
                 {
                     if (tipo != this.hijosNodo[4].TipoDato)
                     {
-                        throw new ErrorSemanticoException(new StringBuilder("Se intento asignar un tipo invalido a ").Append(nombre).ToString());
+                        throw new ErrorSemanticoException(new ErrorTipoInvalidoEnConstante(nombre, tipo, this.hijosNodo[4].TipoDato));
                     }
 
                     this.ValorConstanteNumerica = this.hijosNodo[4].ValorConstanteNumerica;
@@ -45,18 +46,15 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
                     }
 
                     //this.TablaSimbolos.AgregarVariable(nombre, tipo, this.EsConstante, this.ContextoActual, this.NombreContextoLocal);
-                    
-                   
-
                 }
                 else
                 {
-                    throw new ErrorSemanticoException(new StringBuilder("La variable ").Append(nombre).Append(" ya existia en ese contexto").ToString());
+                    throw new ErrorSemanticoException(new ErrorConstanteRepetida(nombre));
                 }
             }
             else
             {
-                throw new ErrorSemanticoException(new StringBuilder("No se permiten declarar constantes aqui. Las constantes deben ser creadas en el contexto global, al principio del programa").ToString());
+                throw new ErrorSemanticoException(new ErrorDeclaracionConstanteFueraLugar());
             }
 
             return this;

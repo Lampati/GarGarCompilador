@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using CompiladorGargar.Semantico.TablaDeSimbolos;
 using CompiladorGargar.Sintactico.Gramatica;
+using CompiladorGargar.Sintactico.ErroresManager.Errores;
 
 namespace CompiladorGargar.Semantico.Arbol.Nodos
 {
@@ -45,12 +46,12 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
                     }
                     else
                     {
-                        throw new ErrorSemanticoException(new StringBuilder("El numero ").Append(valor.ToString()).Append(" no es mayor a 0. Solo se pueden usar constantes o numeros mayores a 0 al especificar el rango de los arreglos. ").ToString());                        
+                        throw new ErrorSemanticoException(new ErrorNumeroInvalidoEnTopeArreglo(valor.ToString()));                        
                     }
                 }
                 else
                 {
-                    throw new ErrorSemanticoException(new StringBuilder("").Append(t.Componente.Lexema).Append(" no es del tipo numero. Solo se pueden usar constantes numericas o numeros al especificar el rango de los arreglos. ").ToString());
+                    throw new ErrorSemanticoException(new ErrorNoNumeroEnTopeArreglo(t.Componente.Lexema));                        
                     
                 }
             }
@@ -74,22 +75,22 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
                             }
                             else
                             {
-                                throw new ErrorSemanticoException(new StringBuilder("La constante numerica ").Append(Lexema).Append(" no es mayor a 0. Solo se pueden usar constantes o numeros mayores a 0 al especificar el rango de los arreglos. ").ToString());
+                                throw new ErrorSemanticoException(new ErrorConstanteNumericaInvalidaEnTopeArreglo(Lexema));
                             }
                         }
                         else
                         {
-                            throw new ErrorSemanticoException(new StringBuilder("La constante ").Append(Lexema).Append(" no es del tipo numero. Solo se pueden usar constantes numericas o numeros al especificar el rango de los arreglos. ").ToString());
+                            throw new ErrorSemanticoException(new ErrorConstanteNoNumericaEnTopeArreglo(Lexema));
                         }
                     }
                     else
                     {
-                        throw new ErrorSemanticoException(new StringBuilder("La variable ").Append(Lexema).Append(" no es una constante. Solo se pueden usar constantes o numeros al especificar el rango de los arreglos. ").ToString());
+                        throw new ErrorSemanticoException(new ErrorNoConstanteEnTopeArreglo(Lexema));
                     }
                 }
                 else
                 {
-                    throw new ErrorSemanticoException(new StringBuilder("La variable ").Append(Lexema).Append(" no existia ").ToString());
+                    throw new ErrorSemanticoException(new ErrorUsoVariableNoDeclarada(Lexema));
                 }
             }
 

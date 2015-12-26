@@ -76,7 +76,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager
 
                 if (mensajeError != null)
                 {
-                    throw new AnalizadorErroresException(mensajeError, string.Empty) 
+                    throw new AnalizadorErroresException(mensajeError) 
                         { Fila = terminal.Componente.Fila, Columna = terminal.Componente.Columna, Parar = true };
                 }
             }
@@ -85,9 +85,8 @@ namespace CompiladorGargar.Sintactico.ErroresManager
         private void ConstruirYArrojarExcepcion(Terminal terminal, ContextoGlobal contextoGlobal)
         {
 
-            string mensajeError, mensajeErrorModoGrafico;
+            string mensajeError;
 
-            mensajeErrorModoGrafico = string.Empty;
 
             ContextoLinea cont = EstadoSintactico.ContextoPerteneceTerminal(terminal);
 
@@ -176,7 +175,6 @@ namespace CompiladorGargar.Sintactico.ErroresManager
                     // Cambio el componenteLexico por el Igual, ya que ahora es el que indica asignacion
                     if (terminal.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Igual)
                     {
-                        mensajeErrorModoGrafico = "Error sintactico en la asignación";
                         mensajeError = string.Format("Error sintactico en {0}. {0} no tiene lugar o la linea comienza incorrectamente.", terminal.Componente.Lexema);
                     }
                     else
@@ -190,7 +188,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager
                     break;
             }
 
-            throw new AnalizadorErroresException(mensajeError, mensajeErrorModoGrafico) 
+            throw new AnalizadorErroresException(mensajeError) 
                     { Fila = terminal.Componente.Fila, Columna = terminal.Componente.Columna, Parar = true  };
         }
 

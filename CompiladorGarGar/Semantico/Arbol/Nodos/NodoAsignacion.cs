@@ -5,6 +5,7 @@ using System.Text;
 using CompiladorGargar.Sintactico.Gramatica;
 using CompiladorGargar.Semantico.TablaDeSimbolos;
 using CompiladorGargar.Auxiliares;
+using CompiladorGargar.Sintactico.ErroresManager.Errores;
 
 namespace CompiladorGargar.Semantico.Arbol.Nodos
 {
@@ -62,15 +63,12 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
                         }
                         else
                         {
-                            strbldr = new StringBuilder("La variable ").Append(nombre).Append(" esta declarada como una constante, no puede modificarse su valor.");
-                            throw new ErrorSemanticoException(strbldr.ToString());
+                            throw new ErrorSemanticoException(new ErrorUsoConstanteComoVariable(nombre));
                         }
                     }
                     else
                     {
-                        strbldr = new StringBuilder("La variable ").Append(nombre).Append(" es del tipo ").Append(EnumUtils.stringValueOf(tipo));
-                        strbldr.Append(" pero se le intento asignar el tipo ").Append(EnumUtils.stringValueOf(tipoExp));
-                        throw new ErrorSemanticoException(strbldr.ToString());
+                        throw new ErrorSemanticoException(new ErrorVariableAsignarTipoInvalido(nombre, tipo, tipoExp));
                     }
                                       
                 }
@@ -78,16 +76,11 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
                 {
                     if (this.TablaSimbolos.ExisteArreglo(nombre, this.ContextoActual, this.NombreContextoLocal))
                     {
-                        strbldr = new StringBuilder("La variable ").Append(nombre).Append(" es un arreglo. Debe usar un indice para asignarle el contenido");
-                        strbldr.Append(" a una de sus posiciones. No se puede asignar el contenido total de un arreglo a otro. ");
-                        throw new ErrorSemanticoException(strbldr.ToString());
+                        throw new ErrorSemanticoException(new ErrorUsoArregloSinIndice(nombre));
                     }
                     else
                     {
-                        
-
-                        strbldr = new StringBuilder("La variable ").Append(nombre).Append(" no esta declarada.");
-                        throw new ErrorSemanticoException(strbldr.ToString());
+                        throw new ErrorSemanticoException(new ErrorUsoVariableNoDeclarada(nombre));
                     }
                 }
             }
@@ -95,39 +88,30 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             {
                 if (this.TablaSimbolos.ExisteArreglo(nombre, this.ContextoActual, this.NombreContextoLocal))
                 {
-                    //if (this.TablaSimbolos.ExisteArreglo(nombre, indice))
-                    //{
+                  
                     tipo = this.TablaSimbolos.ObtenerTipoArreglo(nombre, this.ContextoActual, this.NombreContextoLocal);
 
-                        if (tipo == tipoExp)
+                    if (tipo == tipoExp)
+                    {
+                        //this.TablaSimbolos.ModificarValorPosicionArreglo(nombre, indice, valorExp);
+
+                        //esto es para agarrar que no se haga nada raro en el procedimiento salida
+                        if (this.TablaSimbolos.EsParametroDeEsteProc(nombre, this.ContextoActual, this.NombreContextoLocal))
                         {
-                            //this.TablaSimbolos.ModificarValorPosicionArreglo(nombre, indice, valorExp);
-
-                            //esto es para agarrar que no se haga nada raro en el procedimiento salida
-                            if (this.TablaSimbolos.EsParametroDeEsteProc(nombre, this.ContextoActual, this.NombreContextoLocal))
-                            {
-                                this.ModificaParametros = true;
-                            }
-
-                            if (this.TablaSimbolos.EsVariableGlobal(nombre, this.ContextoActual, this.NombreContextoLocal))
-                            {
-                                this.UsaVariablesGlobales = true;
-                            }
-
-                            this.AsignaParametros = this.hijosNodo[2].AsignaParametros;                          
+                            this.ModificaParametros = true;
                         }
-                        else
+
+                        if (this.TablaSimbolos.EsVariableGlobal(nombre, this.ContextoActual, this.NombreContextoLocal))
                         {
-                            strbldr = new StringBuilder("El arreglo ").Append(nombre).Append(" es del tipo ").Append(EnumUtils.stringValueOf(tipo));
-                            strbldr.Append(" pero se le intento asignar el tipo ").Append(EnumUtils.stringValueOf(tipoExp));
-                            throw new ErrorSemanticoException(strbldr.ToString());
+                            this.UsaVariablesGlobales = true;
                         }
-                    //}
-                    //else
-                    //{
-                    //    strbldr = new StringBuilder("El subindice ").Append(indice).Append(" esta fuera del rango permitido para el arreglo ").Append(nombre).Append(".");
-                    //    throw new ErrorSemanticoException(strbldr.ToString(), t.Componente.Fila, t.Componente.Columna);
-                    //}
+
+                        this.AsignaParametros = this.hijosNodo[2].AsignaParametros;                          
+                    }
+                    else
+                    {
+                        throw new ErrorSemanticoException(new ErrorArregloAsignarTipoInvalido(nombre, tipo, tipoExp ));
+                    }                    
 
                 }
                 else
@@ -135,14 +119,13 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
                     //mejora de error. Me fijo si no ta declarada ya como arreglo o variable
                     if (this.TablaSimbolos.ExisteVariable(nombre, this.ContextoActual, this.NombreContextoLocal))
                     {
-                        strbldr = new StringBuilder("La variable ").Append(nombre).Append(" esta declarada como variable y se intento usar como arreglo");
+                        throw new ErrorSemanticoException(new ErrorUsoVariableComoArreglo(nombre));
                     }
                     else
                     {
-                        strbldr = new StringBuilder("La variable ").Append(nombre).Append(" no esta declarada.");
+                        throw new ErrorSemanticoException(new ErrorUsoVariableNoDeclarada(nombre));
                     }
 
-                    throw new ErrorSemanticoException(strbldr.ToString());
                 }
             }
 

@@ -7,6 +7,7 @@ using CompiladorGargar.Sintactico.Gramatica;
 using CompiladorGargar.Auxiliares;
 using Utilidades;
 using CompiladorGargar.Semantico.TablaDeSimbolos;
+using CompiladorGargar.Sintactico.ErroresManager.Errores;
 
 namespace CompiladorGargar.Semantico.Arbol.Nodos
 {
@@ -30,7 +31,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             NodoTablaSimbolos.TipoDeDato tipoDato = this.hijosNodo[2].TipoDato;
             if (tipoDato != NodoTablaSimbolos.TipoDeDato.Booleano)
             {
-                throw new ErrorSemanticoException(new StringBuilder("La condicion resultante del bloque mientras debe ser booleana").ToString());
+                throw new ErrorSemanticoException(new ErrorCondicionMientrasNoBooleana());
             }
 
            

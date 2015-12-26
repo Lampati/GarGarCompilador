@@ -5,6 +5,7 @@ using System.Text;
 using CompiladorGargar.Sintactico.Gramatica;
 using CompiladorGargar.Semantico.TablaDeSimbolos;
 using CompiladorGargar.Auxiliares;
+using CompiladorGargar.Sintactico.ErroresManager.Errores;
 
 namespace CompiladorGargar.Semantico.Arbol.Nodos
 {
@@ -36,9 +37,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
                 {
                     if (this.TipoDato != NodoTablaSimbolos.TipoDeDato.Numero)
                     {
-                        StringBuilder strbldr = new StringBuilder("Los comparadores mayor, mayor igual, menor y menor igual ");
-                        strbldr.Append("solo pueden ser usados con expresiones del tipo numericas");
-                        throw new ErrorSemanticoException(strbldr.ToString());
+                        throw new ErrorSemanticoException(new ErrorOperadoresComparacionConExprNoNumericas());
                     }
 
                 }
@@ -47,9 +46,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
 
                 if (this.EsArregloEnParametro)
                 {
-                    StringBuilder strbldr = new StringBuilder("No se puede realizar operaciones logicas o aritmeticas con un ");
-                    strbldr.Append(" arreglo. Las operaciones logicas y aritmenticas se pueden realizar únicamente con las posiciones de un arreglo");
-                    throw new ErrorSemanticoException(strbldr.ToString());
+                    throw new ErrorSemanticoException(new ErrorOperacionesConArreglo());
                 }
 
             }

@@ -1,0 +1,19 @@
+﻿
+PROCEDIMIENTO PRINCIPAL() 
+var x : numero;
+var cont : numero;
+comenzar  
+
+x = 10;
+cont = 0;
+
+mientras (cont < x) hacer
+	cont = cont +1;
+finmientras;
+
+si (cont = 10) entonces
+	mostrar('OK');
+sino
+	mostrar('ERROR');
+finsi;
+finproc;

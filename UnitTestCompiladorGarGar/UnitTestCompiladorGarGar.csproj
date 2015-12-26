@@ -54,6 +54,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="AnalizadorSintacticoTest.cs" />
     <Compile Include="EjecucionTest.cs" />
     <Compile Include="CompiladorTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -94,7 +95,56 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Programas\pruebaLecturaCinco.gar" />
-    <EmbeddedResource Include="Programas\testEjecucion.gar" />
+    <EmbeddedResource Include="Programas\ejecucionMientrasTest.gar" />
+    <EmbeddedResource Include="Programas\ErroresSintacticos\error1.gar" />
+    <EmbeddedResource Include="Programas\ErroresSintacticos\error2.gar" />
+    <EmbeddedResource Include="Programas\ErroresSintacticos\error11.gar" />
+    <EmbeddedResource Include="Programas\ErroresSintacticos\error11_2.gar" />
+    <EmbeddedResource Include="Programas\ErroresSintacticos\error4.gar" />
+    <EmbeddedResource Include="Programas\ErroresSintacticos\error4_2.gar" />
+    <EmbeddedResource Include="Programas\ErroresSintacticos\error10.gar" />
+    <EmbeddedResource Include="Programas\ErroresSintacticos\error5.gar" />
+    <EmbeddedResource Include="Programas\ErroresSintacticos\error8.gar" />
+    <EmbeddedResource Include="Programas\ErroresSintacticos\error3.gar" />
+    <EmbeddedResource Include="Programas\ErroresSintacticos\error7.gar" />
+    <EmbeddedResource Include="Programas\ErroresSintacticos\error6.gar" />
+    <EmbeddedResource Include="Programas\ErroresSintacticos\error9.gar" />
+    <EmbeddedResource Include="Programas\ErroresSintacticos\error12.gar" />
+    <EmbeddedResource Include="Programas\ErroresSintacticos\error8_2.gar" />
+    <EmbeddedResource Include="Programas\ErroresSintacticos\error14.gar" />
+    <EmbeddedResource Include="Programas\ErroresSintacticos\error13.gar" />
+    <EmbeddedResource Include="Programas\ErroresSintacticos\error15.gar" />
+    <EmbeddedResource Include="Programas\ErroresSintacticos\error17.gar" />
+    <EmbeddedResource Include="Programas\ErroresSintacticos\error18.gar" />
+    <EmbeddedResource Include="Programas\ErroresSintacticos\error19.gar" />
+    <EmbeddedResource Include="Programas\ErroresSintacticos\error20.gar" />
+    <EmbeddedResource Include="Programas\ErroresSintacticos\error16.gar" />
+    <EmbeddedResource Include="Programas\ErroresSintacticos\error21.gar" />
+    <EmbeddedResource Include="Programas\ErroresSintacticos\error23.gar" />
+    <EmbeddedResource Include="Programas\ErroresSintacticos\error38.gar" />
+    <EmbeddedResource Include="Programas\ErroresSintacticos\error23_2.gar" />
+    <EmbeddedResource Include="Programas\ErroresSintacticos\error23_3.gar" />
+    <EmbeddedResource Include="Programas\ErroresSintacticos\error37.gar" />
+    <EmbeddedResource Include="Programas\ErroresSintacticos\error24_2.gar" />
+    <EmbeddedResource Include="Programas\ErroresSintacticos\error24_3.gar" />
+    <EmbeddedResource Include="Programas\ErroresSintacticos\error24.gar" />
+    <EmbeddedResource Include="Programas\ErroresSintacticos\error25.gar" />
+    <EmbeddedResource Include="Programas\ErroresSintacticos\error26.gar" />
+    <EmbeddedResource Include="Programas\ErroresSintacticos\error27.gar" />
+    <EmbeddedResource Include="Programas\ErroresSintacticos\error28.gar" />
+    <EmbeddedResource Include="Programas\ErroresSintacticos\error39.gar" />
+    <EmbeddedResource Include="Programas\ErroresSintacticos\error41.gar" />
+    <EmbeddedResource Include="Programas\ErroresSintacticos\error40_2.gar" />
+    <EmbeddedResource Include="Programas\ErroresSintacticos\error40.gar" />
+    <EmbeddedResource Include="Programas\ErroresSintacticos\error42.gar" />
+    <EmbeddedResource Include="Programas\ErroresSintacticos\error36.gar" />
+    <EmbeddedResource Include="Programas\ErroresSintacticos\error36_2.gar" />
+    <EmbeddedResource Include="Programas\ErroresSintacticos\error35.gar" />
+    <EmbeddedResource Include="Programas\ErroresSintacticos\error36_3.gar" />
+    <EmbeddedResource Include="Programas\ErroresSintacticos\error35_2.gar" />
+    <EmbeddedResource Include="Programas\ErroresSintacticos\error35_3.gar" />
+    <EmbeddedResource Include="Programas\ErroresSintacticos\error35_4.gar" />
+    <EmbeddedResource Include="Programas\ErroresSintacticos\error31.gar" />
     <None Include="UIMap.uitest" />
   </ItemGroup>
   <Choose>

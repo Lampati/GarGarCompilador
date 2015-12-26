@@ -5,6 +5,7 @@ using System.Text;
 using CompiladorGargar.Sintactico.Gramatica;
 using CompiladorGargar.Semantico.Arbol.Nodos.Auxiliares;
 using CompiladorGargar.Semantico.TablaDeSimbolos;
+using CompiladorGargar.Sintactico.ErroresManager.Errores;
 
 namespace CompiladorGargar.Semantico.Arbol.Nodos
 {
@@ -30,12 +31,8 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
         {
             if (this.TablaSimbolos.ExisteVariableEnEsteContexto(this.VariablesACrear[0].Lexema, this.ContextoActual, this.NombreContextoLocal))
             {
-                throw new ErrorSemanticoException(new StringBuilder("La variable ").Append(this.VariablesACrear[0].Lexema).Append(" ya existia en ese contexto").ToString());
+                throw new ErrorSemanticoException(new ErrorVariableRepetida(this.VariablesACrear[0].Lexema));
             }
-            //if (this.VariablesACrear[0].EsArreglo && this.ContextoActual != NodoTablaSimbolos.TipoContexto.Global)
-            //{
-            //    throw new ErrorSemanticoException(new StringBuilder("No se pueden crear arreglos fuera del contexto global.").ToString());
-            //}  
         }
 
         public override NodoArbolSemantico SalvarAtributosParaContinuar()

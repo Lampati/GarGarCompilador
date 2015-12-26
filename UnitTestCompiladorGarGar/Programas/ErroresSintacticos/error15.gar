@@ -1,0 +1,10 @@
+﻿
+
+
+PROCEDIMIENTO PRINCIPAL() 
+var a : numero;
+comenzar  
+
+a numero = 4 + 1;
+
+finproc;

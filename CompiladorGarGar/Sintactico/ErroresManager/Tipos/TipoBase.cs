@@ -10,14 +10,10 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
     {
         protected List<Validacion> listaValidaciones = new List<Validacion>();
 
+
         protected List<Terminal> listaLineaEntera = new List<Terminal>();
-        public List<Terminal> ListaLineaEntera
-        {
-            get
-            {
-                return listaLineaEntera;
-            }            
-        }
+        protected List<Terminal> listaLineaHastaAhora = new List<Terminal>();
+      
 
         protected int filaDelError;
         public int FilaDelError
@@ -33,10 +29,12 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
             set { columnaDelError = value; }
         }
 
-        public TipoBase(int f, int c)
+        public TipoBase(List<Terminal> listaEntera, List<Terminal> listaHastaAhora, int f, int c)
         {
             filaDelError = f;
             columnaDelError = c;
+            listaLineaHastaAhora = listaHastaAhora;
+            listaLineaEntera = listaEntera;
 
         }
 
@@ -139,5 +137,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
                 return lista;
             }
         }
+
+        
     }
 }

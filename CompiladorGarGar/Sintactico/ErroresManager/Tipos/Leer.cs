@@ -9,10 +9,10 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
 {
     class Leer : TipoBase
     {
-        public Leer(List<Terminal> lista, int fila, int col) 
-            : base(fila,col)
-        {
-            listaLineaEntera = lista;
+        public Leer(List<Terminal> listaEntera, List<Terminal> listaHastaAhora, int fila, int col)
+            : base(listaEntera, listaHastaAhora, fila, col)
+        {         
+
 
             AgregarValidacionLeerRepetido();
             AgregarValidacionLeerSolo();

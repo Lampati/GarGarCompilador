@@ -144,8 +144,7 @@ namespace CompiladorGargar.Sintactico
                     pararCompilacion = exAnaliz.Parar;
 
                     CompiladorGargar.Sintactico.ErroresManager.Errores.MensajeError mensErr = new CompiladorGargar.Sintactico.ErroresManager.Errores.ErrorVacio();
-                    mensErr.MensajeModoTexto = exAnaliz.Message;
-                    mensErr.MensajeModoGrafico = exAnaliz.MensajeModoGrafico;
+                    mensErr.Mensaje = exAnaliz.Message;
                     mensErr.EsErrorBienDefinido = false;
 
                     retorno.Add(new PasoAnalizadorSintactico(mensajeAMostrar, GlobalesCompilador.TipoError.Sintactico, filaAMostrar, colAMostrar, pararCompilacion, mensErr)); //siempre paro la compilacion al primer error

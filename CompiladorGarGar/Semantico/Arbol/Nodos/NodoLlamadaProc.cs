@@ -6,6 +6,7 @@ using CompiladorGargar.Sintactico.Gramatica;
 using CompiladorGargar.Semantico.Arbol.Nodos.Auxiliares;
 using CompiladorGargar.Semantico.TablaDeSimbolos;
 using CompiladorGargar.Auxiliares;
+using CompiladorGargar.Sintactico.ErroresManager.Errores;
 
 namespace CompiladorGargar.Semantico.Arbol.Nodos
 {
@@ -70,20 +71,13 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
                         strbldr = new StringBuilder();
                         if (firmaFuncion[i - 1].TipoDato != listaFirmaComparar[i - 1].Tipo)
                         {
-
-                            strbldr = new StringBuilder("Se intento pasar un tipo incorrecto al parametro ").Append(firmaFuncion[i - 1].Lexema).Append(" del procedimiento ");
-                            strbldr.Append(nombre).Append(". Debe ser de tipo ").Append(EnumUtils.stringValueOf(firmaFuncion[i - 1].TipoDato));
-                            listaExcepciones.Add(new ErrorSemanticoException(strbldr.ToString()));
-
-
+                            listaExcepciones.Add(new ErrorSemanticoException(new ErrorParametroTipoIncorrectoEnProc(firmaFuncion[i - 1].Lexema, nombre, firmaFuncion[i - 1].TipoDato)));
                         }
 
                         if (firmaFuncion[i - 1].EsPorReferencia != listaFirmaComparar[i - 1].EsReferencia)
                         {
 
-                            strbldr = new StringBuilder("El parametro ").Append(firmaFuncion[i - 1].Lexema).Append(" del procedimiento ");
-                            strbldr.Append(nombre).Append(" esta especificado como por referencia y se le intento pasar una expresion. El parametro no puede ser el resultado de una expresion o un valor constante o una función. De ser necesario, asigne el valor a una nueva variable para pasarla por parametro.");
-                            listaExcepciones.Add(new ErrorSemanticoException(strbldr.ToString()));
+                            listaExcepciones.Add(new ErrorSemanticoException(new ErrorParametroExpresionPorRefEnProc(firmaFuncion[i - 1].Lexema, nombre)));
 
 
                         }
@@ -91,24 +85,18 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
                         if (firmaFuncion[i - 1].EsPorReferencia && listaFirmaComparar[i - 1].EsConstante)
                         {
 
-                            strbldr = new StringBuilder("El parametro ").Append(firmaFuncion[i - 1].Lexema).Append(" del procedimiento ");
-                            strbldr.Append(nombre).Append(" esta definido por referencia, y se le intento pasar una constante. No se pueden pasar constantes por referencia.");
-                            listaExcepciones.Add(new ErrorSemanticoException(strbldr.ToString()));
+                            listaExcepciones.Add(new ErrorSemanticoException(new ErrorParametroConstantePorRefEnProc(firmaFuncion[i - 1].Lexema, nombre)));
                         }
 
                         if (firmaFuncion[i - 1].EsArreglo != listaFirmaComparar[i - 1].EsArreglo)
                         {
                             if (firmaFuncion[i - 1].EsArreglo)
                             {
-                                strbldr = new StringBuilder("El parametro ").Append(firmaFuncion[i - 1].Lexema).Append(" pasado a la procedimiento ");
-                                strbldr.Append(nombre).Append(" debe ser un arreglo, y se paso una variable.");
-                                listaExcepciones.Add(new ErrorSemanticoException(strbldr.ToString()));
+                                listaExcepciones.Add(new ErrorSemanticoException(new ErrorParametroVariableEnLugarDeArregloEnProc(firmaFuncion[i - 1].Lexema, nombre)));
                             }
                             else
                             {
-                                strbldr = new StringBuilder("El parametro ").Append(firmaFuncion[i - 1].Lexema).Append(" pasado a la procedimiento ");
-                                strbldr.Append(nombre).Append(" debe ser una variable, y se paso una arreglo.");
-                                listaExcepciones.Add(new ErrorSemanticoException(strbldr.ToString()));
+                                listaExcepciones.Add(new ErrorSemanticoException(new ErrorParametroArregloEnLugarDeVariableEnProc(firmaFuncion[i - 1].Lexema, nombre)));
 
                             }
                         }
@@ -122,14 +110,12 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
                 }
                 else
                 {
-                    strbldr = new StringBuilder("La cantidad de parametros para el procedimiento ").Append(nombre).Append(" es incorrecta.");
-                    throw new ErrorSemanticoException(strbldr.ToString());
+                    throw new ErrorSemanticoException(new ErrorCantidadIncorrectaParamentrosProcedimiento(nombre));
                 }
             }
             else
             {
-                strbldr = new StringBuilder("El procedimiento ").Append(nombre).Append(" no esta declarado.");
-                throw new ErrorSemanticoException(strbldr.ToString());
+                throw new ErrorSemanticoException(new ErrorUsoProcedimientoNoDeclarado(nombre));
             }
 
             return this;

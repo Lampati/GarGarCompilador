@@ -5,6 +5,7 @@ using System.Text;
 using CompiladorGargar.Sintactico.Gramatica;
 using CompiladorGargar.Auxiliares;
 using CompiladorGargar.Semantico.TablaDeSimbolos;
+using CompiladorGargar.Sintactico.ErroresManager.Errores;
 
 namespace CompiladorGargar.Semantico.Arbol.Nodos
 {
@@ -45,18 +46,14 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
 
                 if (this.hijosNodo[0].TipoDato != NodoTablaSimbolos.TipoDeDato.Booleano || this.hijosNodo[1].TipoDato != NodoTablaSimbolos.TipoDeDato.Booleano)
                 {
-                    StringBuilder strbldr = new StringBuilder("Los operadores logicos and y or ");
-                    strbldr.Append("solo pueden ser usados con expresiones del tipo booleanas");
-                    throw new ErrorSemanticoException(strbldr.ToString());
+                    throw new ErrorSemanticoException(new ErrorOperadoresBooleanosConExprNoBooleanas());
                 }
 
                 
 
                 if ( this.EsArregloEnParametro)
                 {
-                    StringBuilder strbldr = new StringBuilder("No se puede realizar operaciones logicas o aritmeticas con un ");
-                    strbldr.Append(" arreglo. Las operaciones logicas y aritmenticas se pueden realizar únicamente con las posiciones de un arreglo");
-                    throw new ErrorSemanticoException(strbldr.ToString());
+                    throw new ErrorSemanticoException(new ErrorOperacionesConArreglo());
                 }
             }
             else
@@ -80,9 +77,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
                 {
                     if (this.hijosNodo[0].TipoDato != this.hijosNodo[1].TipoDato)
                     {
-                        strbldr = new StringBuilder("Se esta intentando comparar una expresion del tipo ").Append(EnumUtils.stringValueOf(this.hijosNodo[0].TipoDato));
-                        strbldr.Append(" con una del tipo ").Append(EnumUtils.stringValueOf(this.hijosNodo[1].TipoDato));
-                        throw new ErrorSemanticoException(strbldr.ToString());
+                        throw new ErrorSemanticoException(new ErrorCompararExpresionesTipoIncorrecto(this.hijosNodo[0].TipoDato, this.hijosNodo[1].TipoDato));
                     }
                 }
             }

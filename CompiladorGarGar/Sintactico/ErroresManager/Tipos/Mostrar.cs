@@ -9,10 +9,9 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
 {
     class Mostrar : TipoBase
     {
-        public Mostrar(List<Terminal> lista, int fila, int col) 
-            : base(fila,col)
-        {
-            listaLineaEntera = lista;
+        public Mostrar(List<Terminal> listaEntera, List<Terminal> listaHastaAhora, int fila, int col)
+            : base(listaEntera, listaHastaAhora, fila, col)
+        {         
 
 
             AgregarValidacionPorDefault();

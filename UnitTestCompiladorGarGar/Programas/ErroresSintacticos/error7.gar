@@ -1,0 +1,8 @@
+﻿constantes
+const gaa : numero  texto = 10;
+
+
+PROCEDIMIENTO PRINCIPAL() 
+comenzar  
+
+finproc;

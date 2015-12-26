@@ -9,6 +9,7 @@ using CompiladorGargar.Auxiliares;
 
 using System.IO;
 using System.Configuration;
+using CompiladorGargar.Sintactico.ErroresManager.Errores;
 
 
 namespace CompiladorGargar.Semantico.Arbol.Nodos
@@ -32,8 +33,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             
             if (!this.ProcPrincipalYaCreadoyCorrecto)
             {
-                StringBuilder strbldr = new StringBuilder("Error en el procedimiento principal: Debe haber unicamente un procedimiento principal y debe ser el ultimo.");
-                throw new ErrorSemanticoException(strbldr.ToString());
+                throw new ErrorSemanticoException(new ErrorProcedimientoPrincipalMalUbicado());
             }
 
          

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CompiladorGargar.Sintactico.ErroresManager.Errores;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,14 +8,9 @@ namespace CompiladorGargar.Semantico
 {
     class ErrorSemanticoException : ErrorCompilacionException
     {
-        public ErrorSemanticoException(string desc, int f, int c) 
-            : base(desc, f, c)
-        {
-            this.Tipo = "Semantico";         
-        }
-
-        public ErrorSemanticoException(string desc)
-            : base(desc)
+      
+        public ErrorSemanticoException(MensajeError mensErr)
+            : base(mensErr.Mensaje)
         {
             this.Tipo = "Semantico";
 
@@ -22,7 +18,10 @@ namespace CompiladorGargar.Semantico
             this.Fila = GlobalesCompilador.UltFila;
             this.Columna = GlobalesCompilador.UltCol;
 
-
+            Mensaje = mensErr;
         }
+
+         
+
     }
 }

@@ -63,7 +63,7 @@ namespace UnitTestCompiladorGarGar
          [TestMethod]
         public void CompilacionGarGarCorrectaBasica()
         {
-            Compilador compilador = new Compilador("basica");
+            Compilador compilador = new Compilador(true, "basica");
 
             ResultadoCompilacion res = compilador.Compilar(PROGRAMA_BASICO);
 
@@ -90,7 +90,7 @@ namespace UnitTestCompiladorGarGar
          [TestMethod]
          public void CompilacionCorrectaDosSeguidas()
          {
-             Compilador compilador = new Compilador("test");
+             Compilador compilador = new Compilador(true, "test");
 
              string resourceName = "UnitTestCompiladorGarGar.Programas.test.gar";
              string programa = Utilidades.FileManager.LeerArchivoEnteroDeAssembly(Assembly.GetExecutingAssembly(), resourceName);
@@ -113,7 +113,7 @@ namespace UnitTestCompiladorGarGar
          [TestMethod]
          public void CompilacionCorrectaValidacionesSemanticasCorrectas()
          {
-             Compilador compilador = new Compilador("validacionesSemanticasCorrectas");
+             Compilador compilador = new Compilador(true, "validacionesSemanticasCorrectas");
 
              string resourceName = "UnitTestCompiladorGarGar.Programas.validacionesSemanticasCorrectas.gar";
              string programa = Utilidades.FileManager.LeerArchivoEnteroDeAssembly(Assembly.GetExecutingAssembly(), resourceName);
@@ -165,7 +165,7 @@ namespace UnitTestCompiladorGarGar
          public void CompilacionCorrectaSinProcSalida()
          {
              string resourceName = "UnitTestCompiladorGarGar.Programas.testSinProcSalida.gar";
-             Compilador compilador = new Compilador("testSinProcSalida");
+             Compilador compilador = new Compilador(true, "testSinProcSalida");
 
              string programa = Utilidades.FileManager.LeerArchivoEnteroDeAssembly(Assembly.GetExecutingAssembly(), resourceName);
 
@@ -184,7 +184,7 @@ namespace UnitTestCompiladorGarGar
 
              string resourceName = "UnitTestCompiladorGarGar.Programas.testErrorLexico2.gar";
 
-             Compilador compilador = new Compilador(resourceName);
+             Compilador compilador = new Compilador(true, resourceName);
              string programa = Utilidades.FileManager.LeerArchivoEnteroDeAssembly(Assembly.GetExecutingAssembly(), resourceName);
 
              ResultadoCompilacion res = compilador.Compilar(programa);
@@ -216,7 +216,7 @@ namespace UnitTestCompiladorGarGar
         [TestMethod]
         public void CompilarLecturaCinco()
         {
-            Compilador compilador = new Compilador("pruebaLecturaCinco");
+            Compilador compilador = new Compilador(true, "pruebaLecturaCinco");
 
             string resourceName = "UnitTestCompiladorGarGar.Programas.pruebaLecturaCinco.gar";
             string programa = Utilidades.FileManager.LeerArchivoEnteroDeAssembly(Assembly.GetExecutingAssembly(), resourceName);
@@ -229,6 +229,21 @@ namespace UnitTestCompiladorGarGar
 
         }
 
+        [TestMethod]
+        public void CompilarMientrasTest()
+        {
+            Compilador compilador = new Compilador(true, "ejecucionMientrasTest");
+
+            string resourceName = "UnitTestCompiladorGarGar.Programas.ejecucionMientrasTest.gar";
+            string programa = Utilidades.FileManager.LeerArchivoEnteroDeAssembly(Assembly.GetExecutingAssembly(), resourceName);
+
+            ResultadoCompilacion res = compilador.Compilar(programa);
+
+            Assert.IsTrue(res.CompilacionGarGarCorrecta, ObtenerErrores(res));
+
+            Assert.IsTrue(res.ResultadoCompPascal.CompilacionPascalCorrecta);
+
+        }
 
         
     }

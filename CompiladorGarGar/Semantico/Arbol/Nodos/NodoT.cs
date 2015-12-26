@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using CompiladorGargar.Sintactico.Gramatica;
+using CompiladorGargar.Sintactico.ErroresManager.Errores;
 
 namespace CompiladorGargar.Semantico.Arbol.Nodos
 {
@@ -34,7 +35,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
 
                     if (this.hijosNodo[2].TipoDato != TablaDeSimbolos.NodoTablaSimbolos.TipoDeDato.Booleano)
                     {                       
-                        throw new ErrorSemanticoException("Unicamente se pueden negar expresiones booleanas");
+                        throw new ErrorSemanticoException(new ErrorNegarExprNoBooleana());
                     }
 
                     this.AsignaParametros = this.hijosNodo[2].AsignaParametros;

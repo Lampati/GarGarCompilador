@@ -6,6 +6,7 @@ using CompiladorGargar.Sintactico.Gramatica;
 using CompiladorGargar.Semantico.TablaDeSimbolos;
 using System.Diagnostics;
 using CompiladorGargar.Auxiliares;
+using CompiladorGargar.Sintactico.ErroresManager.Errores;
 
 
 namespace CompiladorGargar.Semantico.Arbol.Nodos
@@ -51,9 +52,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
 
                 if (this.EsArregloEnParametro)
                 {
-                    StringBuilder strbldr = new StringBuilder("No se puede realizar operaciones logicas o aritmeticas con un ");
-                    strbldr.Append(" arreglo. Las operaciones logicas y aritmenticas se pueden realizar únicamente con las posiciones de un arreglo");
-                    throw new ErrorSemanticoException(strbldr.ToString());
+                    throw new ErrorSemanticoException(new ErrorOperacionesConArreglo());
                 }
             
             }
@@ -87,8 +86,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             {
                 if (tipo1 != tipo2)
                 {
-                    StringBuilder strbldr = new StringBuilder("Se esta intentando operar con distintos tipos");
-                    throw new ErrorSemanticoException(strbldr.ToString());
+                    throw new ErrorSemanticoException(new ErrorOperarExpresionesTipoIncorrecto(tipo1, tipo2));
                 }
             }
         }

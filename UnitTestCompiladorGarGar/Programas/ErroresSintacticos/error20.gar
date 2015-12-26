@@ -1,0 +1,11 @@
+﻿variables
+var arr : arreglo[10] de numero;
+
+
+PROCEDIMIENTO PRINCIPAL() 
+var a : numero;
+comenzar  
+
+arr[1++1]  = ((4 + 1) *2 ) + arr[0];
+
+finproc;

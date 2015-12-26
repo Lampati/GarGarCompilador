@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using CompiladorGargar.Sintactico.Gramatica;
 using CompiladorGargar.Semantico.Arbol.Nodos.Auxiliares;
+using CompiladorGargar.Sintactico.ErroresManager.Errores;
 
 namespace CompiladorGargar.Semantico.Arbol.Nodos
 {
@@ -22,7 +23,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
 
             if (listaFirmas.Count != new List<Firma>(listaFirmas.Distinct()).Count)
             {
-                throw new ErrorSemanticoException(new StringBuilder("Existen parametros con el mismo nombre").ToString());
+                throw new ErrorSemanticoException(new ErrorParametrosConMismoNombre());
             }
 
             foreach (Firma f in listaFirmas)
@@ -39,7 +40,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
 
                         if (!res)
                         {
-                            throw new ErrorSemanticoException(new StringBuilder("El tope de un arreglo no puede ser decimal").ToString());
+                            throw new ErrorSemanticoException(new ErrorArregloTopeDecimal());
                         }
                     }
                 }

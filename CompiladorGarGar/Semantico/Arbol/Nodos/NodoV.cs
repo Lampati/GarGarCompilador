@@ -6,6 +6,7 @@ using CompiladorGargar.Sintactico.Gramatica;
 using CompiladorGargar.Semantico.TablaDeSimbolos;
 using CompiladorGargar.Semantico.Arbol.Nodos.Auxiliares;
 using CompiladorGargar.Auxiliares;
+using CompiladorGargar.Sintactico.ErroresManager.Errores;
 
 namespace CompiladorGargar.Semantico.Arbol.Nodos
 {
@@ -47,7 +48,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
                             }
                             else
                             {
-                                throw new ErrorSemanticoException(new StringBuilder("La variable ").Append(v.Lexema).Append(" ya existia en ese contexto").ToString());
+                                throw new ErrorSemanticoException(new ErrorVariableRepetida(v.Lexema));
                             }
                         }
                         else
@@ -61,14 +62,14 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
 
                                 if (!res)
                                 {
-                                    throw new ErrorSemanticoException(new StringBuilder("El tope de un arreglo no puede ser decimal").ToString());
+                                    throw new ErrorSemanticoException(new ErrorArregloTopeDecimal());
                                 }
 
                                 nombresVariables.Add(v.Lexema);
                             }
                             else
                             {
-                                throw new ErrorSemanticoException(new StringBuilder("El arreglo ").Append(v.Lexema).Append(" ya existia").ToString());
+                                throw new ErrorSemanticoException(new ErrorArregloRepetido(v.Lexema));
                             }
                         }
                     }
@@ -85,7 +86,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             }
             else
             {
-                throw new ErrorSemanticoException(new StringBuilder("No se permiten declarar variables aqui. Las variables deben ser creadas en el contexto global al principio del programa o en la zona de declaraciones de un procedimiento o funcion").ToString());
+                throw new ErrorSemanticoException(new ErrorDeclaracionVariableFueraLugar());
             }
 
             return this;

@@ -9,9 +9,10 @@ namespace CompiladorGargar.Sintactico.ErroresManager
 {
     internal class Validacion
     {
-        internal delegate bool ValidacionDelegate(List<Terminal> x);
+        internal delegate bool ValidacionDelegate(List<Terminal> aValidar, List<Terminal> hastaAhora);
 
-        private List<Terminal> lista;
+        private List<Terminal> listaTerminalesAValidar;
+        private List<Terminal> listaTerminalesHastaAhora;
         private ValidacionDelegate metodoValidacion;
         private MensajeError mensajeError;
         private short importancia;
@@ -48,8 +49,15 @@ namespace CompiladorGargar.Sintactico.ErroresManager
         /// <param name="importancia">Importancia de la validacion</param>
         /// <param name="metodoVal">Metodo que contiene el codigo a ejecutar de la validacion</param>
         internal Validacion(List<Terminal> terminalesAValidar, MensajeError mens, short p, ValidacionDelegate metodoVal, int f, int c)
+            : this( terminalesAValidar, null, mens, p, metodoVal, f, c)
         {
-            lista = terminalesAValidar;
+            
+        }
+
+        internal Validacion(List<Terminal> terminalesAValidar, List<Terminal> terminalesHastaAhora, MensajeError mens, short p, ValidacionDelegate metodoVal, int f, int c)
+        {
+            listaTerminalesAValidar = terminalesAValidar;
+            listaTerminalesHastaAhora = terminalesHastaAhora;
             mensajeError = mens;
             importancia = p;
             metodoValidacion = metodoVal;
@@ -60,12 +68,17 @@ namespace CompiladorGargar.Sintactico.ErroresManager
 
         private bool Validar()
         {
-            return metodoValidacion.Invoke(lista);
+            return metodoValidacion.Invoke(listaTerminalesAValidar, listaTerminalesHastaAhora);
         }
 
         internal void ArrojarExcepcion()
         {
-            throw new ValidacionException(mensajeError, mensajeError.MensajeModoTexto) { Fila = filaDelError, Columna = columnaDelError };
+            throw new ValidacionException(mensajeError, mensajeError.Mensaje) { Fila = filaDelError, Columna = columnaDelError };
+        }
+
+        public override string ToString()
+        {
+            return metodoValidacion.Method.Name;
         }
     }
 }

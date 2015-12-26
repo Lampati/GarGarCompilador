@@ -6,6 +6,7 @@ using CompiladorGargar.Semantico.Arbol.Nodos.Auxiliares;
 using CompiladorGargar.Semantico.TablaDeSimbolos;
 using CompiladorGargar.Sintactico.Gramatica;
 using CompiladorGargar.Auxiliares;
+using CompiladorGargar.Sintactico.ErroresManager.Errores;
 
 
 namespace CompiladorGargar.Semantico.Arbol.Nodos
@@ -92,44 +93,29 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
                             strbldr = new StringBuilder();
                             if (firmaFuncion[i - 1].TipoDato != listaFirmaComparar[i - 1].Tipo)
                             {
-
-                                strbldr = new StringBuilder("Se intento pasar un tipo incorrecto al parametro ").Append(firmaFuncion[i - 1].Lexema).Append(" de la función ");
-                                strbldr.Append(nombre).Append(". Debe ser de tipo ").Append(EnumUtils.stringValueOf(firmaFuncion[i - 1].TipoDato));
-                                listaExcepciones.Add(new ErrorSemanticoException(strbldr.ToString()));
+                                listaExcepciones.Add(new ErrorSemanticoException(new ErrorParametroTipoIncorrectoEnFuncion(firmaFuncion[i - 1].Lexema, nombre,firmaFuncion[i - 1 ].TipoDato)));
                                 
                             }
 
                             if (firmaFuncion[i - 1].EsPorReferencia != listaFirmaComparar[i - 1].EsReferencia)
                             {
-
-                                strbldr = new StringBuilder("El parametro ").Append(firmaFuncion[i - 1].Lexema).Append(" de la función ");
-                                strbldr.Append(nombre).Append(" esta especificado como por referencia y se le intento pasar una expresion. El parametro no puede ser el resultado de una expresion o un valor constante o una función. De ser necesario, asigne el valor a una nueva variable para pasarla por parametro.");
-                                listaExcepciones.Add(new ErrorSemanticoException(strbldr.ToString()));
-
-
+                                listaExcepciones.Add(new ErrorSemanticoException(new ErrorParametroExpresionPorRefEnFuncion(firmaFuncion[i - 1].Lexema, nombre)));
                             }
 
                             if (firmaFuncion[i - 1].EsPorReferencia && listaFirmaComparar[i - 1].EsConstante)
                             {
-
-                                strbldr = new StringBuilder("El parametro ").Append(firmaFuncion[i - 1].Lexema).Append(" de la función ");
-                                strbldr.Append(nombre).Append(" esta definido por referencia, y se le intento pasar una constante. No se pueden pasar constantes por referencia.");
-                                listaExcepciones.Add(new ErrorSemanticoException(strbldr.ToString()));
+                                listaExcepciones.Add(new ErrorSemanticoException(new ErrorParametroConstantePorRefEnFuncion(firmaFuncion[i - 1].Lexema, nombre)));
                             }
 
                             if (firmaFuncion[i - 1].EsArreglo != listaFirmaComparar[i - 1].EsArreglo)
                             {
                                 if (firmaFuncion[i - 1].EsArreglo)
                                 {
-                                    strbldr = new StringBuilder("El parametro ").Append(firmaFuncion[i - 1].Lexema).Append(" pasado a la funcion ");
-                                    strbldr.Append(nombre).Append(" debe ser un arreglo, y se paso una variable.");
-                                    listaExcepciones.Add(new ErrorSemanticoException(strbldr.ToString()));
+                                    listaExcepciones.Add(new ErrorSemanticoException(new ErrorParametroVariableEnLugarDeArregloEnFuncion(firmaFuncion[i - 1].Lexema,nombre)));
                                 }
                                 else
                                 {
-                                    strbldr = new StringBuilder("El parametro ").Append(firmaFuncion[i - 1].Lexema).Append(" pasado a la funcion ");
-                                    strbldr.Append(nombre).Append(" debe ser una variable, y se paso una arreglo.");
-                                    listaExcepciones.Add(new ErrorSemanticoException(strbldr.ToString()));
+                                    listaExcepciones.Add(new ErrorSemanticoException(new ErrorParametroArregloEnLugarDeVariableEnFuncion(firmaFuncion[i - 1].Lexema, nombre)));
 
                                 }
                             }
@@ -144,49 +130,23 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
                     }
                     else
                     {
-                        strbldr = new StringBuilder("La cantidad de parametros para la funcion ").Append(nombre).Append(" es incorrecta.");
-                        throw new ErrorSemanticoException(strbldr.ToString());
+                        throw new ErrorSemanticoException(new ErrorCantidadIncorrectaParamentrosFuncion(nombre));
                     }
                 }
                 else
                 {
-                    strbldr = new StringBuilder("La funcion ").Append(nombre).Append(" no esta declarada.");
-                    throw new ErrorSemanticoException(strbldr.ToString());
+                    throw new ErrorSemanticoException(new ErrorUsoFuncionNoDeclarada(nombre));
                 }
 
             }
             else if (esArreglo)
             {
                 
-
                 if (this.TablaSimbolos.ExisteArreglo(nombre, this.ContextoActual, this.NombreContextoLocal))
                 {
                     this.EsArreglo = true;
                     this.TipoDato = this.TablaSimbolos.ObtenerTipoArreglo(nombre, this.ContextoActual, this.NombreContextoLocal);
-                    //this.Valor = this.TablaSimbolos.ObtenerValorPosicionArreglo(nombre, indice);
-
-                    //flanzani 21/03/2012
-                    //Muy dificil de lograr... es neceario evaluar expresionaes en tiempo de ejecucion.
-
-                    //string indice = this.hijosNodo[1].RangoArregloSinPrefijo;
-                    //int indiceEntero;
-
-                    //if (int.TryParse(indice, out indiceEntero))
-                    //{
-                    //    int tope = this.TablaSimbolos.ObtenerTopeArreglo(nombre, this.ContextoActual, this.NombreContextoLocal);
-
-                    //    if (indiceEntero < 1 || indiceEntero > tope)
-                    //    {
-                    //        strbldr = new StringBuilder("Se esta intentando acceder a una posicion invalida del arreglo ").Append(nombre);                            
-                    //        throw new ErrorSemanticoException(strbldr.ToString());
-                    //    }
-                    //}
-
-                    
-              
-                    
-
-
+                                       
                     this.Lexema = nombre;
                     
 
@@ -205,15 +165,12 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
                     //mejora de error. Me fijo si no ta declarada ya como arreglo o variable
                     if (this.TablaSimbolos.ExisteVariable(nombre, this.ContextoActual, this.NombreContextoLocal))
                     {
-                        strbldr = new StringBuilder("La variable ").Append(nombre).Append(" esta declarada como variable y se intento usar como arreglo");
+                        throw new ErrorSemanticoException(new ErrorUsoVariableComoArreglo(nombre));
                     }
                     else
                     {
-                        strbldr = new StringBuilder("La variable ").Append(nombre).Append(" no esta declarada.");
+                        throw new ErrorSemanticoException(new ErrorUsoVariableNoDeclarada(nombre));
                     }
-
-                    
-                    throw new ErrorSemanticoException(strbldr.ToString());
                 }
             }
             else
@@ -260,15 +217,12 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
                         }
                         else
                         {
-                            strbldr = new StringBuilder("La variable ").Append(nombre).Append(" es un arreglo. Debe usar un indice para asignarle el contenido");
-                            strbldr.Append(" a una de sus posiciones. No se puede asignar el contenido total de un arreglo a otro. ");
-                            throw new ErrorSemanticoException(strbldr.ToString());
+                            throw new ErrorSemanticoException(new ErrorUsoArregloSinIndice(nombre));
                         }
                     }
                     else
                     {
-                        strbldr = new StringBuilder("La variable ").Append(nombre).Append(" no esta declarada.");
-                        throw new ErrorSemanticoException(strbldr.ToString());
+                        throw new ErrorSemanticoException(new ErrorUsoVariableNoDeclarada(nombre));
                     }
                 }
             }

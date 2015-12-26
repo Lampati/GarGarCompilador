@@ -5,6 +5,7 @@ using System.Text;
 using CompiladorGargar.Sintactico.Gramatica;
 using CompiladorGargar.Semantico.TablaDeSimbolos;
 using CompiladorGargar.Semantico.Arbol.Nodos.Auxiliares;
+using CompiladorGargar.Sintactico.ErroresManager.Errores;
 
 namespace CompiladorGargar.Semantico.Arbol.Nodos
 {
@@ -39,7 +40,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             {
                 if (this.hijosNodo[1].TipoDato != NodoTablaSimbolos.TipoDeDato.Numero)
                 {
-                    throw new ErrorSemanticoException(new StringBuilder("El subindice del arreglo debe ser natural.").ToString());
+                    throw new ErrorSemanticoException(new ErrorIndiceArregloNoNumerico());
                 }
             }
         }

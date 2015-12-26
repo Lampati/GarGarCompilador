@@ -6,6 +6,7 @@ using CompiladorGargar.Sintactico.Gramatica;
 using CompiladorGargar.Semantico.Arbol.Nodos.Auxiliares;
 using CompiladorGargar.Semantico.TablaDeSimbolos;
 using CompiladorGargar.Auxiliares;
+using CompiladorGargar.Sintactico.ErroresManager.Errores;
 
 
 
@@ -66,20 +67,18 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
                         }
                         else
                         {
-
-                            throw new ErrorSemanticoException(new StringBuilder("La funcion ").Append(nombre).Append(" esta declarada como ").Append(EnumUtils.stringValueOf(devolucion)).Append(" pero la expresion que devuelve es ").Append(EnumUtils.stringValueOf(this.hijosNodo[11].TipoDato)).ToString());
-
+                            throw new ErrorSemanticoException(new ErrorFuncionDevuelveExpresionOtroTipo(nombre, devolucion, this.hijosNodo[11].TipoDato));
                         }
                     }
                     else
                     {
-                        throw new ErrorSemanticoException(new StringBuilder("Ya existe la funcion ").Append(nombre).ToString());
+                        throw new ErrorSemanticoException(new ErrorFuncionRepetido(nombre));
                     }
                     
                 }
                 else
                 {
-                    throw new ErrorSemanticoException(new StringBuilder("Principal no puede ser una funcion. Debe ser forzosamente un procedimiento").ToString());
+                    throw new ErrorSemanticoException(new ErrorProcedimientoPrincipalComoFuncion());
                 }
             }
             else
@@ -113,9 +112,9 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
 
                 }
                 else
-                {                   
+                {
 
-                    throw new ErrorSemanticoException(new StringBuilder("Ya existe el procedimiento ").Append(nombre).ToString());
+                    throw new ErrorSemanticoException(new ErrorProcedimientoRepetido(nombre));
                 }
             }
 

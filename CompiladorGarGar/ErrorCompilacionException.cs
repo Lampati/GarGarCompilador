@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CompiladorGargar.Sintactico.ErroresManager.Errores;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,8 @@ namespace CompiladorGargar
         public string Tipo { get; set; }
         public int Fila { get; set; }
         public int Columna { get; set; }
+
+        public MensajeError Mensaje { get; set; } 
 
         public ErrorCompilacionException(string desc, int f, int c ) 
             : base(desc)

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using CompiladorGargar.Sintactico.Gramatica;
+using CompiladorGargar.Sintactico.ErroresManager.Errores;
 
 namespace CompiladorGargar.Semantico.Arbol.Nodos
 {
@@ -27,7 +28,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
 
             if (Lexema.Length > GlobalesCompilador.MAX_LONG_CADENA)
             {
-                throw new ErrorSemanticoException("No se pueden manejar cadenas de texto mayores a 250 caracteres en tiempo de compilación", GlobalesCompilador.UltFila, GlobalesCompilador.UltCol);
+                throw new ErrorSemanticoException(new ErrorCantMaxCaracteresEnCadenaTexto( GlobalesCompilador.MAX_LONG_CADENA));
             }
 
         }

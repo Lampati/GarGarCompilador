@@ -1,0 +1,23 @@
+﻿variables
+var arr : arreglo[10] de numero;
+
+funcion duplicar (x : numero) : numero
+comenzar
+
+finfunc  x * 2;
+
+procedimiento  (x : numero) 
+comenzar
+
+x = x * 2;
+
+finproc ;
+
+PROCEDIMIENTO PRINCIPAL() 
+var arr : arreglo[2] arreglo de numero;
+comenzar  
+a = duplicar (4);
+
+llamar hola (a);
+
+finproc;

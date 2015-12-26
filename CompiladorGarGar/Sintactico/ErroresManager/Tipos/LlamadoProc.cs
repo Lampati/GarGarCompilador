@@ -10,10 +10,10 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
     class LlamadoProc : TipoBase
     {
 
-        public LlamadoProc(List<Terminal> lista, int fila, int col) 
-            : base(fila,col)
-        {
-            listaLineaEntera = lista;
+        public LlamadoProc(List<Terminal> listaEntera, List<Terminal> listaHastaAhora, int fila, int col)
+            : base(listaEntera, listaHastaAhora, fila, col)
+        {         
+
             AgregarValidacionPorDefault();
         }
 

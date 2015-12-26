@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using CompiladorGargar.Sintactico.Gramatica;
 using System.Globalization;
+using CompiladorGargar.Sintactico.ErroresManager.Errores;
 
 namespace CompiladorGargar.Semantico.Arbol.Nodos
 {
@@ -25,13 +26,13 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
 
             if (valor > GlobalesCompilador.MAX_VALOR_NUMERO || double.IsPositiveInfinity(valor))
             {
-                throw new ErrorSemanticoException(string.Format("No se pueden manejar valores numericos mas grandes que {0} en tiempo de compilacion", GlobalesCompilador.MAX_VALOR_NUMERO), GlobalesCompilador.UltFila, GlobalesCompilador.UltCol);
+                throw new ErrorSemanticoException(new ErrorValorNumericoMuyGrande(GlobalesCompilador.MAX_VALOR_NUMERO));
             }
             else
             {
                 if (valor < GlobalesCompilador.MIN_VALOR_NUMERO || double.IsNegativeInfinity(valor))
                 {
-                    throw new ErrorSemanticoException(string.Format("No se pueden manejar valores numericos mas chicos que {0} en tiempo de compilacion", GlobalesCompilador.MIN_VALOR_NUMERO), GlobalesCompilador.UltFila, GlobalesCompilador.UltCol);
+                    throw new ErrorSemanticoException(new ErrorValorNumericoMuyChico(GlobalesCompilador.MIN_VALOR_NUMERO));
                 }
                 else
                 {

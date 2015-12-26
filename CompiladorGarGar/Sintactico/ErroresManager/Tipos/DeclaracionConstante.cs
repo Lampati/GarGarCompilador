@@ -9,13 +9,14 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
 {
     class DeclaracionConstante: TipoBase
     {
-        public DeclaracionConstante(List<Terminal> lista, int fila, int col) 
-            : base(fila,col)
-        {
-            listaLineaEntera = lista;
+        public DeclaracionConstante(List<Terminal> listaEntera, List<Terminal> listaHastaAhora, int fila, int col)
+            : base(listaEntera, listaHastaAhora, fila, col)
+        {         
+
 
             AgregarValidacionAsignarValorRepetido();
             AgregarValidacionTipoDatoDefRepetido();
+            AgregarValidacionTipoDatoDefFaltante();
             AgregarValidacionAsignarValorFaltante();
             AgregarValidacionAsignarValorRepetido();
             AgregarValidacionTipoDatoFaltante();
@@ -66,9 +67,9 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
             MensajeError mensajeError = new ErrorAsignarValorRepetido();
             short importancia = 9;
 
-            List<Terminal> parteDer = ArmarSubListaDerechaDe(listaLineaEntera, Lexicografico.ComponenteLexico.TokenType.TipoDato);
+            //List<Terminal> parteDer = ArmarSubListaDerechaDe(listaLineaEntera, Lexicografico.ComponenteLexico.TokenType.TipoDato);
 
-            Validacion valRep = new Validacion(parteDer, mensajeError, importancia, ValidacionesFactory.ValidarAsignacionConstanteRepetido, FilaDelError, ColumnaDelError);
+            Validacion valRep = new Validacion(listaLineaEntera, mensajeError, importancia, ValidacionesFactory.ValidarAsignacionConstanteRepetido, FilaDelError, ColumnaDelError);
 
             listaValidaciones.Add(valRep);
         }

@@ -9,10 +9,10 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
 {
     class FinSi : TipoBase
     {
-        public FinSi(List<Terminal> lista, int fila, int col) 
-            : base(fila,col)
-        {
-            listaLineaEntera = lista;
+        public FinSi(List<Terminal> listaEntera, List<Terminal> listaHastaAhora, int fila, int col)
+            : base(listaEntera, listaHastaAhora, fila, col)
+        {         
+
 
             AgregarValidacionFin();
         }

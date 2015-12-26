@@ -14,10 +14,10 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
         // IDC_APP_3
         // Cambiar el := por =
         // Cambio el componenteLexico por el Igual, ya que ahora es el que indica asignacion EN TODO EL DOCUMENTO
-        public Asignacion(List<Terminal> lista, int fila, int col) 
-            : base(fila,col)
-        {
-            listaLineaEntera = lista;
+        public Asignacion(List<Terminal> listaEntera, List<Terminal> listaHastaAhora, int fila, int col)
+            : base(listaEntera, listaHastaAhora, fila, col)
+        {         
+
 
             // flanzani 9/11/2012
             // IDC_APP_3
@@ -31,11 +31,11 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
             AgregarValidacionCorchetesBalanceadosParteIzq();
             AgregarValidacionParentesisBalanceadosParteDer();
             AgregarValidacionParentesisBalanceadosParteIzq();
-            //AgregarValidacionParteIzqCorrecta();
+            AgregarValidacionParteIzqCorrecta();
             AgregarValidacionTerminaCorrectamente();
 
-            AgregarValidacionElementosConValorNoContiguosParteIzq();
-            AgregarValidacionElementosConValorNoContiguosParteDer();
+            //AgregarValidacionElementosConValorNoContiguosParteIzq();
+            //AgregarValidacionElementosConValorNoContiguosParteDer();
 
             AgregarValidacionPorDefault();
         }
@@ -64,31 +64,31 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
         }
 
         
-
-        private void AgregarValidacionTerminaCorrectamente()
-        {
-            MensajeError mensajeError = new ErrorAsignacionTerminaCorrectamente();
-            short importancia = 8;
-
-            List<Terminal> parteDer = ArmarSubListaDerechaDe(listaLineaEntera, Lexicografico.ComponenteLexico.TokenType.Igual);            
-
-            Validacion valRep = new Validacion(parteDer, mensajeError, importancia, ValidacionesFactory.AsignacionTerminaCorrectamente, FilaDelError, ColumnaDelError);
-
-            listaValidaciones.Add(valRep);
-        }
-
-        private void AgregarValidacionParteIzqCorrecta()
+           private void AgregarValidacionParteIzqCorrecta()
         {
             MensajeError mensajeError = new ErrorAsignacionParteIzqCorrecta();
-            short importancia = 7;
+            short importancia = 3;
 
             List<Terminal> parteIzq = ArmarSubListaIzquierdaDe(listaLineaEntera, Lexicografico.ComponenteLexico.TokenType.Igual); 
 
-            Validacion valRep = new Validacion(parteIzq, mensajeError, importancia, ValidacionesFactory.AsignacionParteIzqCorrecta, FilaDelError, ColumnaDelError);
+            Validacion valRep = new Validacion(listaLineaHastaAhora, mensajeError, importancia, ValidacionesFactory.AsignacionParteIzqCorrecta, FilaDelError, ColumnaDelError);
 
             listaValidaciones.Add(valRep);
         }
 
+        private void AgregarValidacionTerminaCorrectamente()
+        {
+            MensajeError mensajeError = new ErrorAsignacionParteDerechaCorrecta();
+            short importancia = 2;
+
+            List<Terminal> parteDer = ArmarSubListaDerechaDe(listaLineaEntera, Lexicografico.ComponenteLexico.TokenType.Igual);
+
+            Validacion valRep = new Validacion(parteDer, listaLineaHastaAhora, mensajeError, importancia, ValidacionesFactory.AsignacionParteDerechaCorrecta, FilaDelError, ColumnaDelError);
+
+            listaValidaciones.Add(valRep);
+        }
+
+     
         private void AgregarValidacionParentesisBalanceadosParteIzq()
         {
             MensajeError mensajeError = new ErrorAsignacionParentesisBalanceadosParteIzq();

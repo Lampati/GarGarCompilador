@@ -9,7 +9,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager
     internal static class TipoFactory
     {
 
-        internal static Tipos.TipoBase CrearTipo(List<Terminal> linea, ContextoGlobal contextoGlobal, ContextoLinea tipo, List<Terminal> cadenaEntradaFaltante)
+        internal static Tipos.TipoBase CrearTipo(List<Terminal> lineaHastaAhora, ContextoGlobal contextoGlobal, ContextoLinea tipo, List<Terminal> cadenaEntradaFaltante)
         {
             int fila, col;
 
@@ -20,10 +20,10 @@ namespace CompiladorGargar.Sintactico.ErroresManager
             }
             else
             {
-                if (linea.Count > 0)
+                if (lineaHastaAhora.Count > 0)
                 {
-                    fila = linea[linea.Count - 1].Componente.Fila;
-                    col = linea[linea.Count - 1].Componente.Columna;
+                    fila = lineaHastaAhora[lineaHastaAhora.Count - 1].Componente.Fila;
+                    col = lineaHastaAhora[lineaHastaAhora.Count - 1].Componente.Columna;
                 }
                 else
                 {
@@ -34,7 +34,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager
             
             bool errorLineaFueraContextoGlobal = false; 
 
-            List<Terminal> lineaEntera = new List<Terminal>(linea);
+            List<Terminal> lineaEntera = new List<Terminal>(lineaHastaAhora);
 
             List<Terminal> terminalesQueTerminanLinea = new List<Terminal>();
             List<Terminal> terminalesQueIndicanComienzoOtraSentencia = new List<Terminal>();
@@ -86,7 +86,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager
 
                 case ContextoLinea.Ninguno:
                     //Es el primer terminal se una linea fuera de contexto
-                    errorLineaFueraContextoGlobal = ChequeoLineasFueraContexto(linea, contextoGlobal, cadenaEntradaFaltante);
+                    errorLineaFueraContextoGlobal = ChequeoLineasFueraContexto(lineaHastaAhora, contextoGlobal, cadenaEntradaFaltante);
                     break;
             }
 
@@ -117,7 +117,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager
 
 
 
-                    return Crear(lineaEntera, contextoGlobal, tipo, fila, col);
+                    return Crear(lineaEntera, lineaHastaAhora, contextoGlobal, tipo, fila, col);
                 }
                 else
                 {
@@ -148,61 +148,62 @@ namespace CompiladorGargar.Sintactico.ErroresManager
             }
         }
 
-        private static Tipos.TipoBase Crear(List<Terminal> linea, ContextoGlobal contextoGlobal, ContextoLinea tipo, int fila, int col)
+        private static Tipos.TipoBase Crear(List<Terminal> lineaEntera, List<Terminal> lineaHastaAhora, ContextoGlobal contextoGlobal, ContextoLinea tipo, int fila, int col)
         {
             Tipos.TipoBase retorno = null;
 
             switch (tipo)
             {
                 case ContextoLinea.Asignacion:
-                    retorno = new Tipos.Asignacion(linea,fila,col);
+                    retorno = new Tipos.Asignacion(lineaEntera, lineaHastaAhora, fila, col);
                     break;
                 case ContextoLinea.Leer:
-                    retorno = new Tipos.Leer(linea, fila, col);
+                    retorno = new Tipos.Leer(lineaEntera, lineaHastaAhora, fila, col);
                     break;
                 case ContextoLinea.LlamadaProc:
-                    retorno = new Tipos.LlamadoProc(linea, fila, col);
+                    retorno = new Tipos.LlamadoProc(lineaEntera, lineaHastaAhora, fila, col);
                     break;
                 case ContextoLinea.Mientras:
-                    retorno = new Tipos.Mientras(linea, fila,col );
+                    retorno = new Tipos.Mientras(lineaEntera, lineaHastaAhora, fila, col);
                     break;
                 case ContextoLinea.Si:
-                    retorno = new Tipos.Si(linea, fila, col);
+                    retorno = new Tipos.Si(lineaEntera, lineaHastaAhora, fila, col);
                     break;
                 case ContextoLinea.Sino:
                     break;
                 case ContextoLinea.DeclaracionFuncion:
-                    retorno = new Tipos.DeclaracionFuncion(linea, fila, col);
+                    retorno = new Tipos.DeclaracionFuncion(lineaEntera, lineaHastaAhora, fila, col);
                     break;
                 case ContextoLinea.DeclaracionProc:
-                    retorno = new Tipos.DeclaracionProc(linea, fila, col);
+                    retorno = new Tipos.DeclaracionProc(lineaEntera, lineaHastaAhora, fila, col);
                     break;
                 case ContextoLinea.DeclaracionConstante:
-                    retorno = new Tipos.DeclaracionConstante(linea, fila, col);
+                    retorno = new Tipos.DeclaracionConstante(lineaEntera, lineaHastaAhora, fila, col);
                     break;
                 case ContextoLinea.DeclaracionVariable:
-                    retorno = new Tipos.DeclaracionVariable(linea, fila, col);
+                    retorno = new Tipos.DeclaracionVariable(lineaEntera, lineaHastaAhora, fila, col);
                     break;
                 case ContextoLinea.FinFuncion:
-                    retorno = new Tipos.FinFuncion(linea, fila, col);
+                    retorno = new Tipos.FinFuncion(lineaEntera, lineaHastaAhora, fila, col);
                     break;
                 case ContextoLinea.FinProc:
-                    retorno = new Tipos.FinProc(linea, fila, col);  //terminada 16/3/2012
+                    retorno = new Tipos.FinProc(lineaEntera, lineaHastaAhora,fila, col);  //terminada 16/3/2012
                     break;
                 case ContextoLinea.FinMientras:
-                    retorno = new Tipos.FinMientras(linea, fila, col);  //terminada 16/3/2012
+                    retorno = new Tipos.FinMientras(lineaEntera, lineaHastaAhora,fila, col);  //terminada 16/3/2012
                     break;
                 case ContextoLinea.FinSi:
-                    retorno = new Tipos.FinSi(linea, fila, col); //terminada 16/3/2012
+                    retorno = new Tipos.FinSi(lineaEntera, lineaHastaAhora,fila, col); //terminada 16/3/2012
                     break;
                 case ContextoLinea.Mostrar:
-                    retorno = new Tipos.Mostrar(linea, fila, col);
+                    retorno = new Tipos.Mostrar(lineaEntera, lineaHastaAhora, fila, col);
                     break;
                 case ContextoLinea.Ninguno:
                     break;
                 default:
                     break;
             }
+
 
             return retorno;
         }

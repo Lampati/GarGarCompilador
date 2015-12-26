@@ -9,10 +9,10 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
 {
     class DeclaracionProc : TipoBase
     {
-        public DeclaracionProc(List<Terminal> lista, int fila, int col) 
-            : base(fila,col)
-        {
-            listaLineaEntera = lista;
+        public DeclaracionProc(List<Terminal> listaEntera, List<Terminal> listaHastaAhora, int fila, int col)
+            : base(listaEntera, listaHastaAhora, fila, col)
+        {         
+
 
 
             AgregarValidacionPorDefault();

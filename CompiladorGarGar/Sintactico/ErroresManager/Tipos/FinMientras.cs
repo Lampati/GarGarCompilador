@@ -9,10 +9,11 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
 {
     class FinMientras : TipoBase
     {
-        public FinMientras(List<Terminal> lista, int fila, int col) 
-            : base(fila,col)
-        {
-            listaLineaEntera = lista;
+        public FinMientras(List<Terminal> listaEntera, List<Terminal> listaHastaAhora, int fila, int col)
+            : base(listaEntera, listaHastaAhora, fila, col)
+        {         
+
+
 
             AgregarValidacionFin();
         }

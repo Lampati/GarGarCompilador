@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using CompiladorGargar.Semantico.TablaDeSimbolos;
 using CompiladorGargar.Sintactico.Gramatica;
+using CompiladorGargar.Sintactico.ErroresManager.Errores;
 
 namespace CompiladorGargar.Semantico.Arbol.Nodos
 {
@@ -59,7 +60,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             {
                 if (this.TipoDato != NodoTablaSimbolos.TipoDeDato.Numero)
                 {
-                    throw new ErrorSemanticoException(new StringBuilder("El indice del arreglo debe ser un numero.").ToString());
+                    throw new ErrorSemanticoException(new ErrorIndiceArregloNoNumerico());
                 }
             }
         }

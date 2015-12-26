@@ -1,0 +1,8 @@
+﻿constantes
+const = gaa : numero = 5;
+
+
+PROCEDIMIENTO PRINCIPAL() 
+comenzar  
+
+finproc;

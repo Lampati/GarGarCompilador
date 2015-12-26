@@ -52,30 +52,15 @@ namespace CompiladorGargar.Sintactico
 
     internal static class EstadoSintactico
     {
-        private static bool esProcSalida = false;
         private static bool esProcPrincipal = false;
 
-        private static bool procSalidaLlamado = false;
         
 
         private static List<Terminal> listaLeidoHastaAhora = new List<Terminal>();
 
         private static List<Terminal> listaLineaActual = new List<Terminal>();
 
-        private static List<int> listaLineasValidasParaInsertarCodigo = new List<int>();
-        internal static List<int> ListaLineasValidasParaInsertarCodigo
-        {
-            get { return listaLineasValidasParaInsertarCodigo; }
-            set { listaLineasValidasParaInsertarCodigo = value; }
-        }
-
-        private static List<int> listaLineasContenidoProcSalida = new List<int>();
-        internal static List<int> ListaLineasContenidoProcSalida
-        {
-            get { return listaLineasContenidoProcSalida; }
-            set { listaLineasContenidoProcSalida = value; }
-        }
-
+  
         private static ContextoGlobal contextoGlobal = Sintactico.ContextoGlobal.Global;
         internal static ContextoGlobal ContextoGlobal
         {
@@ -89,6 +74,8 @@ namespace CompiladorGargar.Sintactico
             get { return contextoLinea; }
             set { contextoLinea = value; }
         }
+
+        
 
         private static Stack<ElementoPila> pila = new Stack<ElementoPila>();
 
@@ -128,12 +115,8 @@ namespace CompiladorGargar.Sintactico
             contextoGlobal = Sintactico.ContextoGlobal.Global;
             contextoLinea = Sintactico.ContextoLinea.Ninguno;
 
-            listaLineasContenidoProcSalida.Clear();
-            listaLineasValidasParaInsertarCodigo.Clear();
 
-            esProcSalida = false;
             esProcPrincipal = false;
-            procSalidaLlamado = false;
         }
             
 
@@ -195,16 +178,7 @@ namespace CompiladorGargar.Sintactico
             listaLineaActual.Add(t);
             listaLeidoHastaAhora.Add(t);
 
-            //if (t.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Salida)
-            //{
-            //    esProcSalida = true;
-            //}
-
-            //if (esProcSalida && t.Componente.Token == Lexicografico.ComponenteLexico.TokenType.ProcedimientoFin)
-            //{
-            //    esProcSalida = false;
-            //}
-
+         
           
 
             if (t.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Principal)
@@ -219,10 +193,7 @@ namespace CompiladorGargar.Sintactico
                 esProcPrincipal = false;
             }
 
-            if (esProcSalida && t.Componente.Token == Lexicografico.ComponenteLexico.TokenType.ProcedimientoFin)
-            {
-                esProcSalida = false;
-            }
+          
         }
 
         private static void NuevaLinea(Terminal t)
@@ -351,21 +322,9 @@ namespace CompiladorGargar.Sintactico
                 AgregarALinea(t);
             }
 
-            if (contextoGlobal == Sintactico.ContextoGlobal.Cuerpo && esProcPrincipal && !pila.Contains(ElementoPila.Mientras) && !procSalidaLlamado)
-            {
-                if (!ListaLineasValidasParaInsertarCodigo.Contains(GlobalesCompilador.UltFila))
-                {
-                    ListaLineasValidasParaInsertarCodigo.Add(GlobalesCompilador.UltFila);
-                }
-            }
+           
 
-            if (contextoGlobal == Sintactico.ContextoGlobal.Cuerpo && esProcSalida)
-            {
-                if (!listaLineasContenidoProcSalida.Contains(GlobalesCompilador.UltFila))
-                {
-                    listaLineasContenidoProcSalida.Add(GlobalesCompilador.UltFila);
-                }
-            }
+          
         }
 
         private static void FinLinea(Terminal t)

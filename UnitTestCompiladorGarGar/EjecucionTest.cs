@@ -77,7 +77,7 @@ namespace UnitTestCompiladorGarGar
             {
                 app.SetFocus();
 
-                Keyboard.SendKeysDelay = 2000; //2 segundos
+                Keyboard.SendKeysDelay = 1000; //2 segundos
 
                 Keyboard.SendKeys("5");
                 Keyboard.SendKeys("{ENTER}");
@@ -87,9 +87,35 @@ namespace UnitTestCompiladorGarGar
 
             string resultado = ObtenerResultadoArchivo();
 
-            Assert.IsTrue(resultado.Contains("OK"));
+            Assert.IsTrue(!string.IsNullOrEmpty(resultado) && !resultado.Contains("ERROR"));
 
          
+        }
+
+        [TestMethod]
+        public void EjecucionEjecucionMientrasTest()
+        {
+            ProcessStartInfo start = new ProcessStartInfo();
+            start.FileName = @"C:\Users\FEDE\AppData\Local\Temp\ejecucionMientrasTest.exe";
+
+
+            using (ApplicationUnderTest app = ApplicationUnderTest.Launch(start))
+            {
+                app.SetFocus();
+
+                Keyboard.SendKeysDelay = 1000; //2 segundos
+
+                
+                Keyboard.SendKeys("{ENTER}");
+
+
+            }
+
+            string resultado = ObtenerResultadoArchivo();
+
+            Assert.IsTrue(!resultado.Contains("ERROR"));
+
+
         }
 
 
