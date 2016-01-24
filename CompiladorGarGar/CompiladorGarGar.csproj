@@ -1197,7 +1197,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Resultado\Auxiliares\PasoAnalizadorSintactico.cs" />
+    <Compile Include="Resultado\Auxiliares\ErrorCompilacion.cs" />
     <Compile Include="Resultado\Auxiliares\PasoDebugTiempos.cs" />
     <Compile Include="Resultado\Auxiliares\PasoCompilacion.cs" />
     <Compile Include="Resultado\Auxiliares\ResultadoCompilacionPascal.cs" />
@@ -1316,7 +1316,7 @@
     <Compile Include="Sintactico\TablaPrimerosSiguientes\TablaPrimeros.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Configuracion\AFD_GARGAR.txt" />
+    <EmbeddedResource Include="Configuracion\AFD_GARGAR.txt" />
     <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\ar.exe">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -1515,9 +1515,9 @@
     <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\zip.exe">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Configuracion\Gramatica.xml">
+    <EmbeddedResource Include="Configuracion\Gramatica.xml">
       <SubType>Designer</SubType>
-    </Content>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0">

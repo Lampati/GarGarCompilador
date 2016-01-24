@@ -541,6 +541,398 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
         }
     }
 
+
+    public class ErrorVariableSinLugarEnAsignacion : MensajeError
+    {
+        public ErrorVariableSinLugarEnAsignacion(string nombre)
+            : base()
+        {
+            CodigoGlobal = 44;
+
+            SentenciasQueTienenElError.Add(Sentencias.Asignacion);
+
+            Descripcion = string.Format("La variable {0} no tiene lugar. Una asignacion solo puede ser hecha dentro del cuerpo de un procedimiento o funcion", nombre);
+
+        }
+
+    }
+
+    public class ErrorLeerFueraDeLugar : MensajeError
+    {
+        public ErrorLeerFueraDeLugar()
+            : base()
+        {
+            CodigoGlobal = 45;
+
+            SentenciasQueTienenElError.Add(Sentencias.Leer);
+
+            Descripcion = "La operacion leer no tiene lugar. Solo puede ser hecha dentro del cuerpo de un procedimiento o funcion";
+
+        }
+
+    }
+
+    public class ErrorLlamadaProcFueraLugar : MensajeError
+    {
+        public ErrorLlamadaProcFueraLugar()
+            : base()
+        {
+            CodigoGlobal = 46;
+
+            SentenciasQueTienenElError.Add(Sentencias.LlamarProcedimiento);
+
+            Descripcion = "La llamada a un procedimiento no tiene lugar. Solo puede ser hecha dentro del cuerpo de un procedimiento o funcion";
+
+        }
+
+    }
+
+    public class ErrorBloqueMientrasFueraLugar : MensajeError
+    {
+        public ErrorBloqueMientrasFueraLugar()
+            : base()
+        {
+            CodigoGlobal = 47;
+
+            SentenciasQueTienenElError.Add(Sentencias.Mientras);
+
+            Descripcion = "El bloque mientras no tiene lugar. Solo puede ser usado dentro del cuerpo de un procedimiento o funcion";
+
+        }
+
+    }
+
+    public class ErrorBloqueSiFueraLugar : MensajeError
+    {
+        public ErrorBloqueSiFueraLugar()
+            : base()
+        {
+            CodigoGlobal = 48;
+
+            SentenciasQueTienenElError.Add(Sentencias.Si);
+
+            Descripcion = "El bloque si no tiene lugar. Solo puede ser usado dentro del cuerpo de un procedimiento o funcion";
+
+        }
+
+    }
+
+    public class ErrorBloqueSinoFueraLugar : MensajeError
+    {
+        public ErrorBloqueSinoFueraLugar()
+            : base()
+        {
+            CodigoGlobal = 49;
+
+            SentenciasQueTienenElError.Add(Sentencias.Si);
+
+            Descripcion = "El sino no tiene lugar. No se encontro el bloque si al que pertenece";
+
+        }
+
+    }
+
+    public class ErrorDeclaracionFuncionFueraLugar : MensajeError
+    {
+        public ErrorDeclaracionFuncionFueraLugar()
+            : base()
+        {
+            CodigoGlobal = 50;
+
+            SentenciasQueTienenElError.Add(Sentencias.DeclaracionFuncion);
+
+            Descripcion = "No es posible declarar una funcion en este contexto. Las funciones deben ser declaradas en un contexto global, no dentro de procedimientos o funciones";
+
+        }
+
+    }
+
+    public class ErrorDeclaracionProcFueraLugar : MensajeError
+    {
+        public ErrorDeclaracionProcFueraLugar()
+            : base()
+        {
+            CodigoGlobal = 51;
+
+            SentenciasQueTienenElError.Add(Sentencias.DeclaracionProcedimiento);
+
+            Descripcion = "No es posible declarar un procedimiento en este contexto. Los procedimientos deben ser declarados en un contexto global, no dentro de procedimientos o funciones";
+
+        }
+
+    }
+
+    public class ErrorDeclaracionConstanteFueraLugar2 : MensajeError
+    {
+        public ErrorDeclaracionConstanteFueraLugar2()
+            : base()
+        {
+            CodigoGlobal = 52;
+
+            SentenciasQueTienenElError.Add(Sentencias.DeclaracionConstante);
+
+            Descripcion = @"No es posible declarar una constante en este contexto. Las constantes solo pueden ser declaradas globalmente (debajo de 'constantes')";
+
+        }
+
+    }
+
+    public class ErrorDeclaracionConstanteFueraLugarEnVariables : MensajeError
+    {
+        public ErrorDeclaracionConstanteFueraLugarEnVariables()
+            : base()
+        {
+            CodigoGlobal = 53;
+
+            SentenciasQueTienenElError.Add(Sentencias.DeclaracionConstante);
+
+            Descripcion = "No es posible declarar una constante en este contexto. Las constantes solo pueden ser declaradas globalmente (debajo de 'constantes') y no dentro del espacio de declaraciones globales de variables";
+
+        }
+
+    }
+
+    public class ErrorDeclaracionConstanteFueraLugarEnEspacioDecLocal : MensajeError
+    {
+        public ErrorDeclaracionConstanteFueraLugarEnEspacioDecLocal()
+            : base()
+        {
+            CodigoGlobal = 54;
+
+            SentenciasQueTienenElError.Add(Sentencias.DeclaracionConstante);
+
+            Descripcion = "No es posible declarar una constante en este contexto. Las constantes solo pueden ser declaradas globalmente (debajo de 'constantes') y no dentro del espacio de declaraciones local de un procedimiento o función";
+
+        }
+
+    }
+
+    public class ErrorDeclaracionConstanteFueraLugarCuerpoProc : MensajeError
+    {
+        public ErrorDeclaracionConstanteFueraLugarCuerpoProc()
+            : base()
+        {
+            CodigoGlobal = 55;
+
+            SentenciasQueTienenElError.Add(Sentencias.DeclaracionConstante);
+
+            Descripcion = "No es posible declarar una constante en este contexto. Las constantes solo pueden ser declaradas globalmente (debajo de 'constantes') y no dentro del cuerpo de un procediminiento o función";
+
+        }
+
+    }
+
+    public class ErrorDeclaracionVariableFueraLugarConstantes : MensajeError
+    {
+        public ErrorDeclaracionVariableFueraLugarConstantes()
+            : base()
+        {
+            CodigoGlobal = 56;
+
+            SentenciasQueTienenElError.Add(Sentencias.DeclaracionVariable);
+
+            Descripcion = "No es posible declarar una variable en este contexto. Las variables solo pueden ser declaradas globalmente (debajo de 'variables') o en el ambito local de un procedimiento o función y no dentro del espacio de declaraciones globales de constantes";
+
+        }
+
+    }
+
+    public class ErrorDeclaracionVariableFueraLugarCuerpo : MensajeError
+    {
+        public ErrorDeclaracionVariableFueraLugarCuerpo()
+            : base()
+        {
+            CodigoGlobal = 57;
+
+            SentenciasQueTienenElError.Add(Sentencias.DeclaracionVariable);
+
+            Descripcion = "No es posible declarar una variable en este contexto. Las variables solo pueden ser declaradas globalmente (debajo de 'variables') o en el ambito local de un procedimiento o función y no dentro del cuerpo de un procediminiento o función";
+
+        }
+
+    }
+
+    public class ErrorDeclaracionVariableFueraLugar2 : MensajeError
+    {
+        public ErrorDeclaracionVariableFueraLugar2()
+            : base()
+        {
+            CodigoGlobal = 58;
+
+            SentenciasQueTienenElError.Add(Sentencias.DeclaracionVariable);
+
+            Descripcion = "No es posible declarar una variable en este contexto. Las variables solo pueden ser declaradas globalmente (debajo de 'variables') o en el ambito local de un procedimiento o función";
+
+        }
+
+    }
+
+
+    public class ErrorFinFuncFueraLugar : MensajeError
+    {
+        public ErrorFinFuncFueraLugar()
+            : base()
+        {
+            CodigoGlobal = 59;
+
+            SentenciasQueTienenElError.Add(Sentencias.DeclaracionFuncion);
+
+            Descripcion = "El finfunc no tiene lugar. No se encontro la declaracion de funcion al que pertenece";
+
+        }
+
+    }
+
+    public class ErrorFinProcFueraLugar : MensajeError
+    {
+        public ErrorFinProcFueraLugar()
+            : base()
+        {
+            CodigoGlobal = 60;
+
+            SentenciasQueTienenElError.Add(Sentencias.DeclaracionProcedimiento);
+
+            Descripcion = "El finproc no tiene lugar. No se encontro la declaracion del procedimiento al que pertenece";
+
+        }
+
+    }
+
+    public class ErrorFinMientrasFueraLugar : MensajeError
+    {
+        public ErrorFinMientrasFueraLugar()
+            : base()
+        {
+            CodigoGlobal = 61;
+
+            SentenciasQueTienenElError.Add(Sentencias.Mientras);
+
+            Descripcion = "El finmientras no tiene lugar. No se encontro el bloque mientras al que pertenece";
+
+        }
+
+    }
+
+    public class ErrorFinSiFueraLugar : MensajeError
+    {
+        public ErrorFinSiFueraLugar()
+            : base()
+        {
+            CodigoGlobal = 62;
+
+            SentenciasQueTienenElError.Add(Sentencias.Si);
+
+            Descripcion = "El finsi no tiene lugar. No se encontro el bloque si al que pertenece";
+
+        }
+
+    }
+
+
+    public class ErrorMostrarFueraLugar : MensajeError
+    {
+        public ErrorMostrarFueraLugar()
+            : base()
+        {
+            CodigoGlobal = 63;
+
+            SentenciasQueTienenElError.Add(Sentencias.Mostrar);
+
+            Descripcion = "La operación mostrar no tiene lugar. Solo puede ser hecha dentro del cuerpo de un procedimiento o funcion";
+
+        }
+
+    }
+
+    public class ErrorLineaComienzaIncorrecta : MensajeError
+    {
+        public ErrorLineaComienzaIncorrecta(string nombre)
+            : base()
+        {
+            CodigoGlobal = 64;
+
+            SentenciasQueTienenElError.Add(Sentencias.Ninguno);
+
+            Descripcion = string.Format("Error en {0}. {0} no tiene lugar o la linea comienza incorrectamente.", nombre);
+
+        }
+
+    }
+
+    public class ErrorCierreMientrasFueraLugar : MensajeError
+    {
+        public ErrorCierreMientrasFueraLugar(string nombre)
+            : base()
+        {
+            CodigoGlobal = 65;
+
+            SentenciasQueTienenElError.Add(Sentencias.Ninguno);
+
+            Descripcion = string.Format("Se intento cerrar un bloque MIENTRAS pero el ultimo bloque abierto fue un un {0}.", nombre);
+
+        }
+
+    }
+
+    public class ErrorSinoFueraLugar : MensajeError
+    {
+        public ErrorSinoFueraLugar(string nombre)
+            : base()
+        {
+            CodigoGlobal = 66;
+
+            SentenciasQueTienenElError.Add(Sentencias.Ninguno);
+
+            Descripcion = string.Format("Se intento realizar un SINO pero el ultimo bloque abierto fue un un {0}.", nombre);
+
+        }
+
+    }
+
+    public class ErrorCierreSiFueraLugar : MensajeError
+    {
+        public ErrorCierreSiFueraLugar(string nombre)
+            : base()
+        {
+            CodigoGlobal = 67;
+
+            SentenciasQueTienenElError.Add(Sentencias.Ninguno);
+
+            Descripcion = string.Format("Se intento cerrar un bloque SI pero el ultimo bloque abierto fue un un {0}.", nombre);
+
+        }
+
+    }
+
+    public class ErrorCierreProcFueraLugar : MensajeError
+    {
+        public ErrorCierreProcFueraLugar(string nombre)
+            : base()
+        {
+            CodigoGlobal = 68;
+
+            SentenciasQueTienenElError.Add(Sentencias.Ninguno);
+
+            Descripcion = string.Format("Se intento cerrar un PROCEDIMIENTO pero el ultimo bloque abierto fue un un {0}.", nombre);
+
+        }
+
+    }
+
+    public class ErrorCierreFuncFueraLugar : MensajeError
+    {
+        public ErrorCierreFuncFueraLugar(string nombre)
+            : base()
+        {
+            CodigoGlobal = 69;
+
+            SentenciasQueTienenElError.Add(Sentencias.Ninguno);
+
+            Descripcion = string.Format("Se intento cerrar una FUNCION pero el ultimo bloque abierto fue un un {0}.", nombre);
+
+        }
+
+    }
     public class ErrorMaxCantDeErroresSintacticos : MensajeError
     {
         public ErrorMaxCantDeErroresSintacticos()
@@ -1416,5 +1808,6 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
         }
 
     }
+
 
 }

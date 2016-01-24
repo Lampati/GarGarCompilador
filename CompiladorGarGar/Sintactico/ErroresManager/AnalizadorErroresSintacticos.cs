@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using CompiladorGargar.Sintactico.Gramatica;
+using CompiladorGargar.Sintactico.ErroresManager.Errores;
 
 namespace CompiladorGargar.Sintactico.ErroresManager
 {
@@ -24,7 +25,6 @@ namespace CompiladorGargar.Sintactico.ErroresManager
 
             if (tipoError == null)
             {
-                //significa que
                 ConstruirYArrojarExcepcion(cadenaEntradaFaltante[0], contextoGlobal);
             }
             
@@ -34,7 +34,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager
 
         private void ChequearErrorCierreBloqueIncorrecta(Terminal terminal, ContextoGlobal contextoGlobal)
         {
-            string mensajeError = null;
+            MensajeError mensajeError = null;
 
             if (contextoGlobal == ContextoGlobal.Cuerpo)
             {
@@ -43,31 +43,31 @@ namespace CompiladorGargar.Sintactico.ErroresManager
                     case CompiladorGargar.Lexicografico.ComponenteLexico.TokenType.MientrasFin:
                         if (EstadoSintactico.TopePilaLlamados != ElementoPila.Mientras)
                         {
-                            mensajeError = string.Format("Se intento cerrar un bloque MIENTRAS pero el ultimo bloque abierto fue un un {0} ", EstadoSintactico.TopePilaLlamados);
+                            mensajeError = new ErrorCierreMientrasFueraLugar(EstadoSintactico.TopePilaLlamados.ToString());
                         }
                         break;
                     case CompiladorGargar.Lexicografico.ComponenteLexico.TokenType.SiSino:
                         if (EstadoSintactico.TopePilaLlamados != ElementoPila.Si)
                         {
-                            mensajeError = string.Format("Se intento realizar un SINO pero el ultimo bloque abierto fue un un {0} ", EstadoSintactico.TopePilaLlamados);
+                            mensajeError = new ErrorSinoFueraLugar(EstadoSintactico.TopePilaLlamados.ToString());
                         }
                         break;
                     case CompiladorGargar.Lexicografico.ComponenteLexico.TokenType.SiFin:
                         if (EstadoSintactico.TopePilaLlamados != ElementoPila.Si && EstadoSintactico.TopePilaLlamados != ElementoPila.Sino)
                         {
-                            mensajeError = string.Format("Se intento cerrar un bloque SI pero el ultimo bloque abierto fue un un {0} ", EstadoSintactico.TopePilaLlamados);
+                            mensajeError = new ErrorCierreSiFueraLugar(EstadoSintactico.TopePilaLlamados.ToString());
                         }
                         break;
                     case CompiladorGargar.Lexicografico.ComponenteLexico.TokenType.ProcedimientoFin:
                         if (EstadoSintactico.TopePilaLlamados != ElementoPila.Procedimiento)
                         {
-                            mensajeError = string.Format("Se intento cerrar un PROCEDIMIENTO pero el ultimo bloque abierto fue un un {0} ", EstadoSintactico.TopePilaLlamados);
+                            mensajeError = new ErrorCierreProcFueraLugar(EstadoSintactico.TopePilaLlamados.ToString());
                         }
                         break;
                     case CompiladorGargar.Lexicografico.ComponenteLexico.TokenType.FuncionFin:
                         if (EstadoSintactico.TopePilaLlamados != ElementoPila.Funcion)
                         {
-                            mensajeError = string.Format("Se intento cerrar una FUNCION pero el ultimo bloque abierto fue un un {0} ", EstadoSintactico.TopePilaLlamados);
+                            mensajeError = new ErrorCierreFuncFueraLugar(EstadoSintactico.TopePilaLlamados.ToString());
                         }
                         break;
                     default:
@@ -85,7 +85,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager
         private void ConstruirYArrojarExcepcion(Terminal terminal, ContextoGlobal contextoGlobal)
         {
 
-            string mensajeError;
+            MensajeError mensajeError;
 
 
             ContextoLinea cont = EstadoSintactico.ContextoPerteneceTerminal(terminal);
@@ -93,83 +93,77 @@ namespace CompiladorGargar.Sintactico.ErroresManager
             switch (cont)
             {
                 case ContextoLinea.Asignacion:
-                    mensajeError = string.Format("La variable {0} no tiene lugar. Una asignacion solo puede ser hecha dentro del cuerpo de un procedimiento o funcion",terminal.Componente.Lexema);
+                    mensajeError = new ErrorVariableSinLugarEnAsignacion(terminal.Componente.Lexema);
                     break;
                 case ContextoLinea.Leer:
-                    mensajeError = "La operacion leer no tiene lugar. Solo puede ser hecha dentro del cuerpo de un procedimiento o funcion";
+                    mensajeError = new ErrorLeerFueraDeLugar();
                     break;
                 case ContextoLinea.LlamadaProc:
-                    mensajeError = "La llamada a un procedimiento no tiene lugar. Solo puede ser hecha dentro del cuerpo de un procedimiento o funcion";
+                    mensajeError = new ErrorLlamadaProcFueraLugar();
                     break;
                 case ContextoLinea.Mientras:
-                    mensajeError = "El bloque mientras no tiene lugar. Solo puede ser usado dentro del cuerpo de un procedimiento o funcion";
+                    mensajeError = new ErrorBloqueMientrasFueraLugar();
                     break;
                 case ContextoLinea.Si:
-                    mensajeError = "El bloque si no tiene lugar. Solo puede ser usado dentro del cuerpo de un procedimiento o funcion";
+                    mensajeError = new ErrorBloqueSiFueraLugar();
                     break;
                 case ContextoLinea.Sino:
-                    mensajeError = "El sino no tiene lugar. No se encontro el bloque si al que pertenece";
+                    mensajeError = new ErrorBloqueSinoFueraLugar();
                     break;
                 case ContextoLinea.DeclaracionFuncion:
-                    mensajeError = "No es posible declarar una funcion en este contexto. Las funciones deben ser declaradas en un contexto global, no dentro de procedimientos o funciones";
+                    mensajeError = new ErrorDeclaracionFuncionFueraLugar();
                     break;
                 case ContextoLinea.DeclaracionProc:
-                    mensajeError = "No es posible declarar un procedimiento en este contexto. Los procedimientos deben ser declarados en un contexto global, no dentro de procedimientos o funciones";
+                    mensajeError = new ErrorDeclaracionProcFueraLugar();
                     break;
                 case ContextoLinea.DeclaracionConstante:
                     switch (contextoGlobal)
 	                {
-                        case ContextoGlobal.Global:
-                            mensajeError = @"No es posible declarar una constante en este contexto. Las constantes solo pueden ser declaradas globalmente (debajo de 'constantes')";
-                            break;                       
                         case ContextoGlobal.GlobalDeclaracionesVariables:
-                            mensajeError = "No es posible declarar una constante en este contexto. Las constantes solo pueden ser declaradas globalmente (debajo de 'constantes') y no dentro del espacio de declaraciones globales de variables";
+                            mensajeError = new ErrorDeclaracionConstanteFueraLugarEnVariables();
                             break;
                         case ContextoGlobal.DeclaracionLocal:
-                            mensajeError = "No es posible declarar una constante en este contexto. Las constantes solo pueden ser declaradas globalmente (debajo de 'constantes') y no dentro del espacio de declaraciones local de un procedimiento o función";
+                            mensajeError = new ErrorDeclaracionConstanteFueraLugarEnEspacioDecLocal();
                             break;
                         case ContextoGlobal.Cuerpo:
-                            mensajeError = "No es posible declarar una constante en este contexto. Las constantes solo pueden ser declaradas globalmente (debajo de 'constantes') y no dentro del cuerpo de un procediminiento o función";
+                            mensajeError = new ErrorDeclaracionConstanteFueraLugarCuerpoProc();
                             break;
                         default:
-                            mensajeError = @"No es posible declarar una constante en este contexto. Las constantes solo pueden ser declaradas globalmente (debajo de 'constantes')";
+                            mensajeError = new ErrorDeclaracionConstanteFueraLugar2();
                             break;
 	                }                    
                     break;
                 case ContextoLinea.DeclaracionVariable:
                     switch (contextoGlobal)
                     {
-                        case ContextoGlobal.Global:
-                            mensajeError = @"No es posible declarar una variable en este contexto. Las variables solo pueden ser declaradas globalmente (debajo de 'variables') o en el ambito local de un procedimiento o función";
-                            break;
                         case ContextoGlobal.GlobalDeclaracionesConstantes:
-                            mensajeError = "No es posible declarar una variable en este contexto. Las variables solo pueden ser declaradas globalmente (debajo de 'variables') o en el ambito local de un procedimiento o función y no dentro del espacio de declaraciones globales de constantes";
+                            mensajeError = new ErrorDeclaracionVariableFueraLugarConstantes();
                             break;                        
                         case ContextoGlobal.Cuerpo:
-                            mensajeError = "No es posible declarar una variable en este contexto. Las variables solo pueden ser declaradas globalmente (debajo de 'variables') o en el ambito local de un procedimiento o función y no dentro del cuerpo de un procediminiento o función";
+                            mensajeError = new ErrorDeclaracionVariableFueraLugarCuerpo();
                             break;
                         default:
-                            mensajeError = @"No es posible declarar una variable en este contexto. Las variables solo pueden ser declaradas globalmente (debajo de 'variables') o en el ambito local de un procedimiento o función";
+                            mensajeError = new ErrorDeclaracionVariableFueraLugar2();
                             break;
                     }  
                     break;
                 case ContextoLinea.FinFuncion:
-                    mensajeError = "El finfunc no tiene lugar. No se encontro la declaracion de funcion al que pertenece";
+                    mensajeError = new ErrorFinFuncFueraLugar();
                     break;
                 case ContextoLinea.FinProc:
-                    mensajeError = "El finproc no tiene lugar. No se encontro la declaracion de procedimiento al que pertenece";
+                    mensajeError = new ErrorFinProcFueraLugar();
                     break;
                 case ContextoLinea.FinMientras:
-                    mensajeError = "El finmientras no tiene lugar. No se encontro el bloque mientras al que pertenece";
+                    mensajeError = new ErrorFinMientrasFueraLugar();
                     break;
                 case ContextoLinea.FinSi:
-                    mensajeError = "El finsi no tiene lugar. No se encontro el bloque si al que pertenece";
+                    mensajeError = new ErrorFinSiFueraLugar();
                     break;
                 case ContextoLinea.Mostrar:
-                    mensajeError = "La operación mostrar no tiene lugar. Solo puede ser hecha dentro del cuerpo de un procedimiento o funcion";
+                    mensajeError = new ErrorMostrarFueraLugar();
                     break;
                 default:
-                    mensajeError = string.Format("Error sintactico en {0}. {0} no tiene lugar o la linea comienza incorrectamente.", terminal.Componente.Lexema);
+                    mensajeError = new ErrorLineaComienzaIncorrecta( terminal.Componente.Lexema);
                     break;
             }
 

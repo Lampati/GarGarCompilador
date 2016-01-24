@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CompiladorGargar.Sintactico.ErroresManager.Errores;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,10 +13,12 @@ namespace CompiladorGargar.Sintactico.ErroresManager
         public int Columna { get; set; }
         public bool Parar { get; set; }
 
-        public AnalizadorErroresException(string m)
-            : base(m)
+        public MensajeError Mensaje { get; set; }
+
+        public AnalizadorErroresException(MensajeError m)
+            : base(m.Descripcion)
         {
-            
+            Mensaje = m;
           
         }
     }
