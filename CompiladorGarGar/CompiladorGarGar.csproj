@@ -370,18 +370,6 @@
     <Content Include="CompiladorPascal\extra\varutils.ppu">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="CompiladorPascal\extra\wformat.o">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="CompiladorPascal\extra\wformat.ppu">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="CompiladorPascal\extra\whtml.o">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="CompiladorPascal\extra\whtml.ppu">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="CompiladorPascal\extra\windows.o">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
