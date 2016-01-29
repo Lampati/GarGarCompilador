@@ -208,12 +208,6 @@
     <Content Include="CompiladorPascal\extra\fprepos.ppu">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="CompiladorPascal\extra\macpas.o">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="CompiladorPascal\extra\macpas.ppu">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="CompiladorPascal\extra\maskutils.o">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
