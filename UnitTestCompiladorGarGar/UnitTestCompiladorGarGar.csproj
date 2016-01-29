@@ -70,10 +70,6 @@
       <Project>{ef449af2-cd1c-418c-bc22-4bc5ad269f19}</Project>
       <Name>CompiladorGarGar</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Utilidades\Utilidades.csproj">
-      <Project>{e49532c0-201d-45c9-a5b5-5b7589fd4123}</Project>
-      <Name>Utilidades</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Programas\test.gar" />

@@ -11,6 +11,7 @@ using CompiladorGargar.Resultado;
 using CompiladorGargar.Lexicografico;
 using CompiladorGargar.Sintactico.ErroresManager;
 using CompiladorGargar.Sintactico.ErroresManager.Errores;
+using System.Reflection;
 
 namespace CompiladorGargar
 {
@@ -24,6 +25,7 @@ namespace CompiladorGargar
         public string NombreEjecutable { get; set; }
 
         private bool modoDebug { get; set; }
+
 
 
         public Compilador()
@@ -60,6 +62,62 @@ namespace CompiladorGargar
             analizadorSintactico = new AnalizadorSintactico(GlobalesCompilador.NOMBRE_ARCH_GRAMATICA);
             analizadorSintactico.HabilitarSemantico = true;
             analizadorSintactico.ModoDebug = modoDebug;
+
+            DescomprimirCompiladorPascal();
+        }
+
+        private void DescomprimirCompiladorPascal()
+        {
+            Assembly assembly = Assembly.GetExecutingAssembly();
+
+            foreach (string resourceName in assembly.GetManifestResourceNames())
+            {
+                using (Stream input = assembly.GetManifestResourceStream(resourceName))
+                {
+                    string pathCrear = null;
+
+                    if (resourceName.StartsWith("CompiladorGargar.CompiladorPascal.msg"))
+                    {
+                        string fileName = FileManager.ObtenerNombreArchivoDeResource(resourceName);
+                        if (fileName != null)
+                        {
+                            pathCrear = Path.Combine(DirectorioTemporales, "msg", fileName);
+                        }
+                    }
+                    else if (resourceName.StartsWith("CompiladorGargar.CompiladorPascal.fpc"))
+                    {
+                         string fileName = FileManager.ObtenerNombreArchivoDeResource(resourceName);
+                         if (fileName != null)
+                         {
+                             pathCrear = Path.Combine(DirectorioTemporales, "fpc", fileName);
+                         }
+                    }
+                    else if (resourceName.StartsWith("CompiladorGargar.CompiladorPascal.extra"))
+                    {
+                        string fileName = FileManager.ObtenerNombreArchivoDeResource(resourceName);
+                        if (fileName != null)
+                        {
+                            pathCrear = Path.Combine(DirectorioTemporales, "extra", fileName);
+                        }
+                    }
+
+                    if (pathCrear != null)
+                    {
+
+                        FileInfo fileInfo = new FileInfo(pathCrear);
+                        if (!fileInfo.Directory.Exists)
+                        {
+                            fileInfo.Directory.Create();
+                        }
+
+                        using (Stream output = File.Create(pathCrear))
+                        {
+                            FileManager.CopyStream(input, output);
+                        }
+                    }
+                }
+            }
+                
         }
       
 
