@@ -310,36 +310,6 @@
     <Content Include="CompiladorPascal\extra\fpxmlrep.ppu">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="CompiladorPascal\extra\inicol.o">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="CompiladorPascal\extra\inicol.ppu">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="CompiladorPascal\extra\inifiles.o">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="CompiladorPascal\extra\inifiles.ppu">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="CompiladorPascal\extra\initc.o">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="CompiladorPascal\extra\initc.ppu">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="CompiladorPascal\extra\iostream.o">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="CompiladorPascal\extra\iostream.ppu">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="CompiladorPascal\extra\keyboard.o">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="CompiladorPascal\extra\keyboard.ppu">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="CompiladorPascal\extra\lexlib.o">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
