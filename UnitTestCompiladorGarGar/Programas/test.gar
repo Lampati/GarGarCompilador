@@ -99,13 +99,29 @@ finproc;
 procedimiento PRINCIPAL()
 var X: numero;
 var A: arreglo[MaxArreglo] de numero;
+var B : booleano;
 comenzar
 	
 	X = 6 + 10 - 10 - 10 ;
 	X = 100 - X - (X);
   llamar PROC1();
   
-
+  X = rcoseno(45);
+  X = rseno(45);
+  X = rtangente(45);
+  X = coseno(45);
+  X = seno(45);
+  X = tangente(45);
+  X = PI();
+  X = ValAbs(45);
+  X = raiz(9,2);
+  X = Potencia(9,2);
+  
+  B = espar(2);
+  B = esimpar(1);
+  
+  x = redondear(5.5);
+  x = Truncar(5.5);
   
   A[1] = VALABSOLUTO(5);
   A[2] = VALABSOLUTO(-2);
