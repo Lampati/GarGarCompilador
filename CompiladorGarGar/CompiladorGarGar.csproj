@@ -139,12 +139,6 @@
     <Content Include="CompiladorPascal\extra\ctypes.ppu">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="CompiladorPascal\extra\custapp.o">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="CompiladorPascal\extra\custapp.ppu">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="CompiladorPascal\extra\dos.o">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
