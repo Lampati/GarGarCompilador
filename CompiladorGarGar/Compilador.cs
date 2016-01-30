@@ -85,30 +85,15 @@ namespace CompiladorGargar
                 {
                     string pathCrear = null;
 
-                    if (resourceName.StartsWith("CompiladorGargar.CompiladorPascal.msg"))
+                    if (resourceName.StartsWith("CompiladorGargar.CompiladorPascal"))
                     {
                         string fileName = FileManager.ObtenerNombreArchivoDeResource(resourceName);
                         if (fileName != null)
                         {
-                            pathCrear = Path.Combine(DirectorioTemporales, "msg", fileName);
+                            pathCrear = Path.Combine(DirectorioTemporales, "CompiladorPascal", fileName);
                         }
                     }
-                    else if (resourceName.StartsWith("CompiladorGargar.CompiladorPascal.fpc"))
-                    {
-                         string fileName = FileManager.ObtenerNombreArchivoDeResource(resourceName);
-                         if (fileName != null)
-                         {
-                             pathCrear = Path.Combine(DirectorioTemporales, "fpc", fileName);
-                         }
-                    }
-                    else if (resourceName.StartsWith("CompiladorGargar.CompiladorPascal.extra"))
-                    {
-                        string fileName = FileManager.ObtenerNombreArchivoDeResource(resourceName);
-                        if (fileName != null)
-                        {
-                            pathCrear = Path.Combine(DirectorioTemporales, "extra", fileName);
-                        }
-                    }
+                   
 
                     if (pathCrear != null)
                     {
