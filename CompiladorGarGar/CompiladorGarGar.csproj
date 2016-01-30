@@ -115,69 +115,27 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <None Include="app.config" />
-    <Content Include="CompiladorPascal\crt.o">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="CompiladorPascal\crt.ppu">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="CompiladorPascal\fpintres.o">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="CompiladorPascal\fpintres.ppu">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="CompiladorPascal\math.o">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="CompiladorPascal\math.ppu">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="CompiladorPascal\objpas.o">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="CompiladorPascal\objpas.ppu">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="CompiladorPascal\sysconst.o">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="CompiladorPascal\sysconst.ppu">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="CompiladorPascal\sysinitpas.o">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="CompiladorPascal\sysinitpas.ppu">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="CompiladorPascal\system.o">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="CompiladorPascal\system.ppu">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="CompiladorPascal\sysutils.o">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="CompiladorPascal\sysutils.ppu">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="CompiladorPascal\windows.o">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="CompiladorPascal\windows.ppu">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <EmbeddedResource Include="CompiladorPascal\errore.msg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="CompiladorPascal\errores.msg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="CompiladorPascal\errorues.msg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
+    <EmbeddedResource Include="CompiladorPascal\crt.o" />
+    <EmbeddedResource Include="CompiladorPascal\crt.ppu" />
+    <EmbeddedResource Include="CompiladorPascal\fpintres.o" />
+    <EmbeddedResource Include="CompiladorPascal\fpintres.ppu" />
+    <EmbeddedResource Include="CompiladorPascal\math.o" />
+    <EmbeddedResource Include="CompiladorPascal\math.ppu" />
+    <EmbeddedResource Include="CompiladorPascal\objpas.o" />
+    <EmbeddedResource Include="CompiladorPascal\objpas.ppu" />
+    <EmbeddedResource Include="CompiladorPascal\sysconst.o" />
+    <EmbeddedResource Include="CompiladorPascal\sysconst.ppu" />
+    <EmbeddedResource Include="CompiladorPascal\sysinitpas.o" />
+    <EmbeddedResource Include="CompiladorPascal\sysinitpas.ppu" />
+    <EmbeddedResource Include="CompiladorPascal\system.o" />
+    <EmbeddedResource Include="CompiladorPascal\system.ppu" />
+    <EmbeddedResource Include="CompiladorPascal\sysutils.o" />
+    <EmbeddedResource Include="CompiladorPascal\sysutils.ppu" />
+    <EmbeddedResource Include="CompiladorPascal\windows.o" />
+    <EmbeddedResource Include="CompiladorPascal\windows.ppu" />
+    <EmbeddedResource Include="CompiladorPascal\errore.msg" />
+    <EmbeddedResource Include="CompiladorPascal\errores.msg" />
+    <EmbeddedResource Include="CompiladorPascal\errorues.msg" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -308,9 +266,7 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Configuracion\AFD_GARGAR.txt" />
-    <Content Include="CompiladorPascal\ppc386.exe">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <EmbeddedResource Include="CompiladorPascal\ppc386.exe" />
     <EmbeddedResource Include="Configuracion\Gramatica.xml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -337,11 +293,7 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="CompiladorPascal\extra\" />
-    <Folder Include="CompiladorPascal\fpc\" />
-    <Folder Include="CompiladorPascal\msg\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

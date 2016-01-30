@@ -340,7 +340,7 @@ namespace CompiladorGargar
 
                 string auxExe = string.Format("{0}{1}{0}", '"', exe);
 
-                string pathIncludes = Path.Combine(GlobalesCompilador.PathEjecucionAplicacion, GlobalesCompilador.NOMBRE_DIR_UNITS_PASCAL);
+                string pathIncludes = Path.Combine(DirectorioTemporales,  GlobalesCompilador.NOMBRE_DIR_UNITS_PASCAL);
                 pathIncludes = string.Format("{0}{1}{0}", '"', pathIncludes);
 
 
@@ -350,7 +350,8 @@ namespace CompiladorGargar
                 string argumentoChequearIndicesDeArreglos = string.Format("-Cr");
                 string argumentoNombreExe = string.Format("-o{0}", auxExe);
 
-                string resultado = EjecucionManager.EjecutarSinVentana(GlobalesCompilador.NOMBRE_ARCH_COMPILADOR_PASCAL, new List<string>() { argumentoInclude, argumentoModoCompilacion, argumentoUseAnsiStrings, argumentoChequearIndicesDeArreglos, argumentoNombreExe, archTemporalPascal });
+                string resultado = EjecucionManager.EjecutarSinVentana(Path.Combine(DirectorioTemporales, GlobalesCompilador.NOMBRE_ARCH_COMPILADOR_PASCAL),
+                    new List<string>() { argumentoInclude, argumentoModoCompilacion, argumentoUseAnsiStrings, argumentoChequearIndicesDeArreglos, argumentoNombreExe, archTemporalPascal });
                 res = new ResultadoCompilacionPascal(resultado, bindeoLineas);
                 res.NombreEjecutable = exe;
             }
