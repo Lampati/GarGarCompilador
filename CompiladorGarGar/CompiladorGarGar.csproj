@@ -121,12 +121,6 @@
     <Content Include="CompiladorPascal\extra\crt.ppu">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="CompiladorPascal\extra\dynlibs.o">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="CompiladorPascal\extra\dynlibs.ppu">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="CompiladorPascal\extra\fclel.res">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
