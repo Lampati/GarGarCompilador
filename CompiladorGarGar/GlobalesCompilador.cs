@@ -8,8 +8,8 @@ namespace CompiladorGargar
 {
     public static class GlobalesCompilador
     {
-        public const string NOMBRE_ARCH_COMPILADOR_PASCAL = @"CompiladorPascal\fpc\ppc386.exe";
-        public const string NOMBRE_DIR_UNITS_PASCAL = @"CompiladorPascal\extra";
+        public const string NOMBRE_ARCH_COMPILADOR_PASCAL = @"CompiladorPascal\ppc386.exe";
+        public const string NOMBRE_DIR_UNITS_PASCAL = @"CompiladorPascal";
         public const string NOMBRE_ARCH_CONFIG_APLICACION = @"configApp.xml";
         public const string NOMBRE_ARCH_RUTINASPREDEF_APLICACION = @"rutinasPredef.xml";
         public const string NOMBRE_ARCH_GRAMATICA =  @"Gramatica.xml";

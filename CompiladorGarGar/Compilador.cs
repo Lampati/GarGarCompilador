@@ -15,7 +15,7 @@ using System.Reflection;
 
 namespace CompiladorGargar
 {
-    public class Compilador
+    public class Compilador 
     {
         private AnalizadorSintactico analizadorSintactico;
 
@@ -29,19 +29,28 @@ namespace CompiladorGargar
 
 
         public Compilador()
-            : this(false, Path.GetTempPath(), Path.GetTempPath(), Path.GetRandomFileName())
+            : this(false, 
+            Path.Combine(Path.GetTempPath(), Path.GetRandomFileName()) ,
+           Path.Combine(Path.GetTempPath(), Path.GetRandomFileName()),
+            Path.GetRandomFileName())
         {
 
         }
 
         public Compilador(string fileName)
-            : this(false, Path.GetTempPath(), Path.GetTempPath(), fileName)
+            : this(false,
+            Path.Combine(Path.GetTempPath(), Path.GetRandomFileName()),
+            Path.Combine(Path.GetTempPath(), Path.GetRandomFileName()),
+            fileName)
         {
 
         }
 
         public Compilador(bool modo, string fileName)
-            : this(modo, Path.GetTempPath(), Path.GetTempPath(), fileName)
+            : this(modo, 
+            Path.Combine(Path.GetTempPath(), Path.GetRandomFileName()),
+            Path.Combine(Path.GetTempPath(), Path.GetRandomFileName()), 
+            fileName)
         {
 
         }
@@ -383,5 +392,20 @@ namespace CompiladorGargar
 
             return nombreArch;
         }
+
+        ~Compilador()
+        {
+            if (Directory.Exists(DirectorioTemporales))
+            {
+                Directory.Delete(DirectorioTemporales, true);
+            }
+
+            if (Directory.Exists(DirectorioEjecutables))
+            {
+                Directory.Delete(DirectorioEjecutables,true);
+            }
+        }
+
+     
     }
 }
